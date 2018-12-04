@@ -1,2 +1,8 @@
-# quilljs-markdown
-QuillJS Editor Plugin for advanced Markdown
+# Markdown Activity for Quill Editor
+
+Description...
+
+## How to use
+### Heading
+`# MyTitle`
+
