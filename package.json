@@ -1,0 +1,54 @@
+{
+  "name": "@cloverhearts/quilljs-markdown",
+  "version": "0.0.2",
+  "description": "Markdown for Quill Editor",
+  "main": "index.js",
+  "scripts": {
+    "clean": "node_modules/.bin/rimraf ./dist",
+    "docs-build": "node_modules/.bin/npm-run-all clean docs-build:*",
+    "docs-build:module": "node_modules/.bin/webpack --config webpack.config.docs.js",
+    "build": "node_modules/.bin/npm-run-all clean build:*",
+    "build:module": "node_modules/.bin/webpack --config webpack.config.js",
+    "test": "node_modules/.bin/npm-run-all test:*",
+    "test:unit-test": "node_modules/.bin/jest --config jest.config.js",
+    "test:checkstyle": "node_modules/.bin/standard --verbose | node_modules/.bin/snazzy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloverhearts/quill-markdown-activity.git"
+  },
+  "keywords": [
+    "quill",
+    "quilljs",
+    "markdown",
+    "editor"
+  ],
+  "author": "cloverhearts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cloverhearts/quill-markdown-activity/issues"
+  },
+  "homepage": "https://github.com/cloverhearts/quill-markdown-activity#readme",
+  "standard": {
+    "ignore": [
+      "tests/**",
+      "package.json",
+      "jest.config.js"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "jest": "^23.6.0",
+    "npm-run-all": "^4.1.5",
+    "quill": "^1.3.6",
+    "rimraf": "^2.6.2",
+    "snazzy": "^8.0.0",
+    "standard": "^12.0.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
