@@ -11,3 +11,6 @@ Description...
 
 ### bold
 `**Bold Text**`
+
+### Link
+`[link text](https://link_url)`
