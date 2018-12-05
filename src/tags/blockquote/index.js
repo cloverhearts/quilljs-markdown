@@ -10,13 +10,16 @@ class Blockquote {
     return {
       name: this.name,
       pattern: this.pattern,
-      action: (text, selection, pattern) => {
+      action: (text, selection, pattern, lineStart) => {
         const match = pattern.exec(text)
         if (!match) return
         const size = match[0].length
         setTimeout(() => {
           this.quillJS.formatLine(selection.index, 1, 'blockquote', true)
           this.quillJS.deleteText(selection.index - 2, 2)
+          if (lineStart + 1 === this.quillJS.editor.delta.length()) {
+            this.quillJS.format('blockquote', false)
+          }
         }, 0)
       }
     }

@@ -8,3 +8,6 @@ Description...
 
 ### Blockquote
 `> blockquote text`
+
+### bold
+`**Bold Text**`
