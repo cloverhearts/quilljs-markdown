@@ -37,7 +37,6 @@ class MarkdownActivity {
 
   onQuery () {
     const selection = this.quillJS.getSelection()
-    console.log('run query', this.quillJS, selection)
     if (!selection) return
     const [line, offset] = this.quillJS.getLine(selection.index)
     const text = line.domNode.textContent
@@ -54,7 +53,6 @@ class MarkdownActivity {
   }
 
   onExecute () {
-    console.log('run execute', this.quillJS)
     let selection = this.quillJS.getSelection()
     if (!selection) return
     const [line, offset] = this.quillJS.getLine(selection.index)
