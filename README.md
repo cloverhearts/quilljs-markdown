@@ -4,6 +4,7 @@
 QuillJS Markdown shortcut Extension.
 
 [NPM](https://www.npmjs.com/package/quilljs-markdown)
+
 [DEMO](https://cloverhearts.github.io/quilljs-markdown/)
 
 Wrote Library with ES6 and Standard Javascript Codestyle.
