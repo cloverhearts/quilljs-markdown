@@ -1,6 +1,6 @@
 {
   "name": "quilljs-markdown",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Markdown for Quill Editor",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cloverhearts/quill-markdown-activity.git"
+    "url": "git+https://github.com/cloverhearts/quilljs-markdown.git"
   },
   "keywords": [
     "quill",
@@ -26,9 +26,9 @@
   "author": "cloverhearts",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cloverhearts/quill-markdown-activity/issues"
+    "url": "https://github.com/cloverhearts/quilljs-markdown/issues"
   },
-  "homepage": "https://github.com/cloverhearts/quill-markdown-activity#readme",
+  "homepage": "https://cloverhearts.github.io/quilljs-markdown",
   "standard": {
     "ignore": [
       "tests/**",
