@@ -1,8 +1,8 @@
-class Bold {
+class inlineCode {
   constructor (quillJS) {
     this.quillJS = quillJS
-    this.name = 'bold'
-    this.pattern = /(?:\*|_){2}(.+?)(?:\*|_){2}/g
+    this.name = 'code'
+    this.pattern = /(`){1}(.+?)(`){1}/g
     this.getAction.bind(this)
   }
 
@@ -16,16 +16,16 @@ class Bold {
         const annotatedText = match[0]
         const matchedText = match[1]
         const startIndex = lineStart + match.index
-        if (text.match(/^([*_ \n]+)$/g)) return
 
         setTimeout(() => {
           this.quillJS.deleteText(startIndex, annotatedText.length)
-          this.quillJS.insertText(startIndex, matchedText, { bold: true })
-          this.quillJS.format('bold', false)
+          const message = annotatedText.replace(/`/g, '')
+          this.quillJS.insertText(startIndex, message, { code: true })
+          this.quillJS.insertText(startIndex + message.length, ' ', { code: false })
         }, 0)
       }
     }
   }
 }
 
-export default Bold
+export default inlineCode
