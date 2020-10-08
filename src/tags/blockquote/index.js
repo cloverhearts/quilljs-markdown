@@ -10,15 +10,22 @@ class Blockquote {
     return {
       name: this.name,
       pattern: this.pattern,
-      action: (text, selection, pattern, lineStart) => {
+      action: (text, selection, pattern) => {
         const match = pattern.exec(text)
-        if (!match) return
-        const size = match[0].length
+        if (!match) { return }
+        const originalText = match[0] || ''
         setTimeout(() => {
-          this.quillJS.formatLine(selection.index, 1, 'blockquote', true)
-          this.quillJS.deleteText(selection.index - 2, 2)
-          if (lineStart + 1 === this.quillJS.editor.delta.length()) {
-            this.quillJS.format('blockquote', false)
+          this.quillJS.formatText(selection.index, 1, 'blockquote', true)
+          this.quillJS.deleteText(selection.index - originalText.length, originalText.length)
+        }, 0)
+      },
+      release: () => {
+        setTimeout(() => {
+          this.quillJS.format('blockquote', false)
+          const contentIndex = this.quillJS.getSelection().index
+          const beforeLine = this.quillJS.getLine(contentIndex - 1)[0]
+          if (beforeLine.domNode.textContent === '') {
+            beforeLine.format('blockquote', false)
           }
         }, 0)
       }

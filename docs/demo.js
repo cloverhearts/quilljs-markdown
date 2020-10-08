@@ -1,13 +1,11 @@
 import Quill from 'quill'
-import MarkdownActivity from '../src/app'
-
+import QuillMarkdown from '../src/app'
 
 const options = {
   theme: 'snow'
-};
+}
 
-addEventListener('DOMContentLoaded', () => {
-  const editor = new Quill('#editor', options);
-  new MarkdownActivity(editor)
+document.addEventListener('DOMContentLoaded', () => {
+  const editor = new Quill('#editor', options)
+  new QuillMarkdown(editor)
 })
-
