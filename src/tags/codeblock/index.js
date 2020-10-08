@@ -12,27 +12,29 @@ class Codeblock {
       pattern: this.pattern,
       action: (text, selection, pattern) => {
         const match = pattern.exec(text)
-        console.log('code block')
         if (!match) { return }
         const originalText = match[0] || ''
         setTimeout(() => {
-          // this.quillJS.insertText(selection.index, 'jjjj \n', { codeBlock: true })
-          this.quillJS.formatText(selection.index, selection.index + 1, 'code-block', true)
-          // this.quillJS.insertText(selection.index, 'jjjj \n')
-          // this.quillJS.formatText(selection.index, 1, 'code-block', true)
-          // this.quillJS.deleteText(selection.index - originalText.length, originalText.length)
+          const startIndex = selection.index - originalText.length - 1
+          this.quillJS.deleteText(startIndex, originalText.length)
+          setTimeout(() => {
+            this.quillJS.insertText(startIndex, '\n')
+            const newLinePosition = startIndex + 1 + '\n'.length + 1
+            this.quillJS.insertText(newLinePosition, '\n')
+            this.quillJS.formatLine(newLinePosition - 2, 1, 'code-block', true)
+          }, 0)
         }, 0)
       },
       release: () => {
         setTimeout(() => {
-          this.quillJS.format('code-block', false)
-          const contentIndex = this.quillJS.getSelection().index
-          const beforeLine = this.quillJS.getLine(contentIndex - 1)[0]
-          if (beforeLine.domNode.textContent === '') {
-            beforeLine.format('code-block', false)
+          const cursorIndex = this.quillJS.getSelection().index
+          const block = this.quillJS.getLine(cursorIndex)[0]
+          const blockText = block.domNode.textContent
+          if (block && blockText && blockText.replace('\n', '').length <= 0) {
+            this.quillJS.format('code-block', false)
           }
         }, 0)
-      }
+      },
     }
   }
 }

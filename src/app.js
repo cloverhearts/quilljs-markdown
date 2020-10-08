@@ -18,6 +18,7 @@ class MarkdownActivity {
   }
 
   onTextChange (delta, oldContents, source) {
+    console.log('dd ', delta)
     delta.ops.filter(e => e.hasOwnProperty('insert')).forEach(e => {
       switch (e.insert) {
         case this.actionCharacters.whiteSpace:
@@ -30,6 +31,10 @@ class MarkdownActivity {
           this.onFullTextExecute.bind(this)()
           break
       }
+    })
+
+    delta.ops.filter(e => e.hasOwnProperty('delete')).forEach((e) => {
+      this.onRemoveElement(e)
     })
   }
 
@@ -68,6 +73,8 @@ class MarkdownActivity {
     const text = line.domNode.textContent + ' '
     selection.length = selection.index++
     if (this.isValid(text, line.domNode.tagName)) {
+
+      // remove block rule.
       if (typeof beforeLineText === 'string' && beforeLineText.length > 0 && text === ' ') {
         const releaseTag = this.matches.find(e => e.name === line.domNode.tagName.toLowerCase())
         if (releaseTag && releaseTag.release) {
@@ -82,6 +89,19 @@ class MarkdownActivity {
           match.action(text, selection, match.pattern, lineStart)
           return
         }
+      }
+    }
+  }
+
+  onRemoveElement(range) {
+    const selection = this.quillJS.getSelection()
+    // if removed one item before, editor need to clear item.
+    if (range && range.delete === 1) {
+      const removeItem = this.quillJS.getLine(selection.index)
+      const lineItem = removeItem[0]
+      const releaseTag = this.matches.find(e => e.name === lineItem.domNode.tagName.toLowerCase())
+      if (releaseTag && releaseTag.release) {
+        releaseTag.release(selection)
       }
     }
   }

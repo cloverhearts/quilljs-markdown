@@ -3,14 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <title>quilljs-markdown</title>
+  <meta name="keywords" content="quill, markdown, quilljs, editor, simple"/>
+  <meta name="description" content="markdown extension for quill editor"/>
+  <meta name="subject" content="quilljs-markdown">
+  <meta name="copyright"content="MIT">
+  <meta name="language" content="en">
+  <meta name="summary" content="open source, markdown extension for quill editor">
+  <meta name="google-site-verification" content="lNpyIBBVvsIatDauJyTfU6q2VtxEMP8npAGigr3gj4Q" />
   <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-  <script src="demo.js"></script>
+  <script src="./bundle/demojs.js"></script>
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kotton-css@1.0.1/dist/kotton-style.min.css">
+  <style>
+    main {
+      display: block;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    main > h1, .description, .badges  {
+      text-align: center;
+    }
+
+    main > h1 {
+      font-size: 4rem;
+    }
+
+    article h2 {
+      font-size: 2rem;
+    }
+    article section header h3 {
+      color: #777;
+    }
+
+  </style>
 </head>
 <body>
 <!-- Create the editor container -->
-<div id="editor">
-  <p>Quill Markdown</p>
+  <main>
+    <h1>
+      Markdown extension for Quilljs
+    </h1>
+    <div class="badges">
+      <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/cloverhearts/quilljs-markdown?style=plastic">
+      <a href="https://github.com/cloverhearts/quilljs-markdown/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/cloverhearts/quilljs-markdown?style=plastic"></a>
+      <a href="https://badge.fury.io/js/quilljs-markdown"><img src="https://badge.fury.io/js/quilljs-markdown.svg" alt="npm version" height="18"></a>
+    </div>
+    <div class="description">
+      <p>
+        <a href="https://quilljs.com">QuillJS</a> is rich text editor based on ES6+
+      </p>
+      <p>
+        This module support to markdown for QuillJS Editor.
+      </p>
+      <p>
+        <a href="https://github.com/cloverhearts/quilljs-markdown" target="_blank">Github repository is here</a>
+      </p>
+    </div>
+    <h2>
+      Playground
+    </h2>
+    <div id="editor">
+      <p>&nbsp;</p>
+      <h3>Quill Markdown</h3>
+      <p>You can test it, here</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+    <article class="kotton-css">
+      <header>
+        <h2>Feature</h2>
+      </header>
+      <section>
+        <header>
+          <h3>Heading</h3>
+        </header>
+        <pre>
+          # MyTitle
+          ## MyTitle
+          ### MyTitle
+          #### MyTitle
+          ##### MyTitle
+        </pre>
+      </section>
+      <section>
+        <header>
+          <h3>Blockquote</h3>
+        </header>
+        <pre>
+          > blockquote text
+        </pre>
+      </section>
+      <section>
+        <header>
+          <h3>bold</h3>
+        </header>
+        <pre>
+          **Bold Text**
+        </pre>
+      </section>
+      <section>
+        <header>
+          <h3>Link</h3>
+        </header>
+        <pre>
+          [Go to Repository](https://github.com/cloverhearts/quilljs-markdown)
+        </pre>
+      </section>
+      <section>
+        <header>
+          <h3>inline code</h3>
+        </header>
+        <pre>
+          `inline code block`
+        </pre>
+      </section>
+      <section>
+        <header>
+          <h3>Code block</h3>
+        </header>
+        <pre>
+          ```
+            Code block
+          ```
+        </pre>
+      </section>
+    </article>
+  </main>
 </div>
 </body>
 </html>

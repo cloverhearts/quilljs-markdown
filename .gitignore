@@ -61,5 +61,4 @@ typings/
 .next
 
 .idea/**
-dist/**
 .cache

@@ -1,6 +1,6 @@
 {
   "name": "quilljs-markdown",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Markdown for Quill Editor",
   "main": "index.js",
   "scripts": {
@@ -42,7 +42,7 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
     "babel-loader": "^8.1.0",
-    "jest": "^23.6.0",
+    "jest": "^26.5.2",
     "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.4",
     "quill": "^1.3.7",

@@ -1,3 +1,7 @@
-import QuillMarkdownActivity from './src/app'
+import QuillMarkdown from './src/app'
 
-export default QuillMarkdownActivity
+if (typeof window !== 'undefined') {
+  window.QuillMarkdown = QuillMarkdown
+}
+
+export default QuillMarkdown
