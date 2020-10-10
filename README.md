@@ -88,3 +88,20 @@ or
 code block<br>
 &#96;&#96;&#96;<br>
 
+### List
+
+```
+1. one
+2. two
+3. three
+
+* one
+* two
+* three
+```
+
+### Strikethrough
+
+```
+~~Strikethrough~~
+```
