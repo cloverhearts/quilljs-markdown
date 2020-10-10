@@ -4,6 +4,7 @@ import Bold from './bold'
 import InlineCode from './inlinecode'
 import Link from './link'
 import Codeblock from './codeblock'
+import Strikethrough from './strikethrough'
 
 class TagsOperators {
   constructor (quillJS) {
@@ -15,7 +16,8 @@ class TagsOperators {
       new Bold(this.quillJS).getAction(),
       new Link(this.quillJS).getAction(),
       new Codeblock(this.quillJS).getAction(),
-      new InlineCode(this.quillJS).getAction()
+      new InlineCode(this.quillJS).getAction(),
+      new Strikethrough(this.quillJS).getAction()
     ]
   }
 
