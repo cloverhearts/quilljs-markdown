@@ -10,7 +10,8 @@ class MarkdownActivity {
       newLine: '\n',
       asterisk: '*',
       rightParenthesis: ')',
-      grave: '`'
+      grave: '`',
+      tilde: '~'
     }
     this.ignoreTags = ['PRE']
     this.tags = new TagsOperators(this.quillJS)
@@ -18,7 +19,6 @@ class MarkdownActivity {
   }
 
   onTextChange (delta, oldContents, source) {
-    console.log('dd ', delta)
     delta.ops.filter(e => e.hasOwnProperty('insert')).forEach(e => {
       switch (e.insert) {
         case this.actionCharacters.whiteSpace:
@@ -28,6 +28,7 @@ class MarkdownActivity {
         case this.actionCharacters.rightParenthesis:
         case this.actionCharacters.grave:
         case this.actionCharacters.newLine:
+        case this.actionCharacters.tilde:
           this.onFullTextExecute.bind(this)()
           break
       }
