@@ -13,8 +13,7 @@ class inlineCode {
       action: (text, selection, pattern, lineStart) => {
         let match = pattern.exec(text)
 
-        const annotatedText = match[0]
-        const matchedText = match[1]
+        const [annotatedText] = match
         const startIndex = lineStart + match.index
 
         setTimeout(() => {

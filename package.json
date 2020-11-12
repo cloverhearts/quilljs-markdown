@@ -1,18 +1,19 @@
 {
   "name": "quilljs-markdown",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Markdown for Quill Editor",
   "main": "index.js",
   "scripts": {
     "clean": "node_modules/.bin/rimraf ./dist",
     "watch": "parcel ./docs/index.html",
-    "build": "npm-run-all clean build:* docs-build:*",
+    "build": "npm-run-all clean fix:checkstyle build:* docs-build:*",
     "build:module": "webpack --config webpack.config.js",
     "docs-build": "npm-run-all clean docs-build:*",
     "docs-build:module": "webpack --config webpack.config.docs.js",
+    "fix:checkstyle": "standard --fix",
     "test": "npm-run-all test:*",
     "test:unit-test": "jest --config jest.config.js",
-    "test:checkstyle": "standard --verbose | node_modules/.bin/snazzy"
+    "test:checkstyle": "standard --verbose"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,9 @@
     "ignore": [
       "tests/**",
       "package.json",
-      "jest.config.js"
+      "jest.config.js",
+      "docs/**",
+      "dist/**"
     ]
   },
   "devDependencies": {
