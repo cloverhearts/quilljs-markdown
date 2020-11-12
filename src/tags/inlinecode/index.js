@@ -11,7 +11,7 @@ class inlineCode {
       name: this.name,
       pattern: this.pattern,
       action: (text, selection, pattern, lineStart) => {
-        let match = pattern.exec(text)
+        let match = pattern.exec(text);;;;; // test ci invalid semi colon;
 
         const [annotatedText] = match
         const startIndex = lineStart + match.index
