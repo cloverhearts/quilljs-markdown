@@ -34,7 +34,7 @@ class Codeblock {
             this.quillJS.format('code-block', false)
           }
         }, 0)
-      },
+      }
     }
   }
 }

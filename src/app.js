@@ -74,7 +74,6 @@ class MarkdownActivity {
     const text = line.domNode.textContent + ' '
     selection.length = selection.index++
     if (this.isValid(text, line.domNode.tagName)) {
-
       // remove block rule.
       if (typeof beforeLineText === 'string' && beforeLineText.length > 0 && text === ' ') {
         const releaseTag = this.matches.find(e => e.name === line.domNode.tagName.toLowerCase())
@@ -94,7 +93,7 @@ class MarkdownActivity {
     }
   }
 
-  onRemoveElement(range) {
+  onRemoveElement (range) {
     const selection = this.quillJS.getSelection()
     // if removed one item before, editor need to clear item.
     if (range && range.delete === 1) {
