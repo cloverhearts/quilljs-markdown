@@ -105,3 +105,10 @@ code block<br>
 ```
 ~~Strikethrough~~
 ```
+
+### Checkbox
+
+```
+[ ] checkbox
+[x] checked
+```
