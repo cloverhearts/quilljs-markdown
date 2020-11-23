@@ -24,7 +24,7 @@ or
 
 
 ## How to use
-```
+```javascript
 import Quill from 'quill'
 import QuillMakrdown from 'quilljs-markdown'
 
@@ -35,7 +35,7 @@ new QuillMarkdown(editor)
 
 or 
 
-```
+```html
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown.js"><script>
@@ -53,7 +53,7 @@ or
 ```
 
 ### Heading
-```
+```markdown
 # MyTitle
 ## MyTitle
 ### MyTitle
@@ -62,29 +62,29 @@ or
 ```
 
 ### Blockquote
-```
+```markdown
 > blockquote text
 ```
 
 ### bold
-```
+```markdown
 **Bold Text**
 __Bold Text__
 ```
 
 ### Italic
-```
+```markdown
 *Italics Text*
 _Italics Text_
 ```
 
 ### Link
-```
+```markdown
 [link text](https://link_url)
 ```
 
 ### inline code
-```
+```markdown
 `inline code block`
 ```
 
@@ -97,7 +97,7 @@ code block<br>
 
 ### List
 
-```
+```markdown
 1. one
 2. two
 3. three
@@ -109,13 +109,13 @@ code block<br>
 
 ### Strikethrough
 
-```
+```markdown
 ~~Strikethrough~~
 ```
 
 ### Checkbox
 
-```
+```markdown
 [ ] checkbox
 [x] checked
 ```
