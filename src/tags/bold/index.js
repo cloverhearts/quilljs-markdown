@@ -2,7 +2,7 @@ class Bold {
   constructor (quillJS) {
     this.quillJS = quillJS
     this.name = 'bold'
-    this.pattern = /(?:\*|_){2}(.+?)(?:\*|_){2}/g
+    this.pattern = /(\*|_){2}(.+?)(?:\1){2}/g
     this.getAction.bind(this)
   }
 
@@ -13,8 +13,7 @@ class Bold {
       action: (text, selection, pattern, lineStart) => {
         let match = pattern.exec(text)
 
-        const annotatedText = match[0]
-        const matchedText = match[1]
+        const [annotatedText, , matchedText] = match
         const startIndex = lineStart + match.index
         if (text.match(/^([*_ \n]+)$/g)) return
 

@@ -11,19 +11,22 @@ class Bold {
       name: this.name,
       pattern: this.pattern,
       action: (text, selection, pattern, lineStart) => {
-        console.log('italic!')
+        let match = pattern.exec(text)
 
-        // ignore to **text**, only *text*
-        if (/(?:\*|_){2}(.+?)(?:\*|_){2}/g.test(text)) {
+        if (!match) {
           return
         }
 
-        let match = pattern.exec(text)
+        const [annotatedText, matchedToken, matchedText] = match
+        const firstToken = (this.quillJS.getText())[lineStart + match.index]
+        const secondToken = (this.quillJS.getText())[lineStart + match.index + 1]
 
-        const annotatedText = match[0]
-        const matchedText = match[1]
+        if (matchedToken === firstToken && firstToken === secondToken) {
+          // duplicated match string tag. ** or __
+          return
+        }
+
         const startIndex = lineStart + match.index
-        if (text.match(/^([~_ \n]+)$/g)) return
 
         setTimeout(() => {
           this.quillJS.deleteText(startIndex, annotatedText.length)

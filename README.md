@@ -69,6 +69,13 @@ or
 ### bold
 ```
 **Bold Text**
+__Bold Text__
+```
+
+### Italic
+```
+*Italics Text*
+_Italics Text_
 ```
 
 ### Link
