@@ -26,7 +26,7 @@ or
 ## How to use
 ```javascript
 import Quill from 'quill'
-import QuillMakrdown from 'quilljs-markdown'
+import QuillMarkdown from 'quilljs-markdown'
 
 const editor = new Quill('#editor', options)
 new QuillMarkdown(editor)
