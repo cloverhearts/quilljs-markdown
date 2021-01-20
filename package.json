@@ -1,6 +1,6 @@
 {
   "name": "quilljs-markdown",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Markdown for Quill Editor",
   "main": "index.js",
   "scripts": {
@@ -55,5 +55,9 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "regenerator-runtime": "^0.13.7"
   }
 }

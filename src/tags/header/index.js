@@ -12,12 +12,15 @@ class Header {
       pattern: this.pattern,
       action: (text, selection, pattern) => {
         const match = pattern.exec(text)
-        if (!match) return
+        if (!match) return false
         const size = match[0].length
+        const [line] = this.quillJS.getLine(selection.index)
+        const index = this.quillJS.getIndex(line)
         setTimeout(() => {
-          this.quillJS.formatLine(selection.index, 0, 'header', size - 1)
-          this.quillJS.deleteText(selection.index - size, size)
+          this.quillJS.formatLine(index, 0, 'header', size - 1)
+          this.quillJS.deleteText(index, size)
         }, 0)
+        return true
       }
     }
   }

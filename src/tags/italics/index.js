@@ -14,7 +14,7 @@ class Bold {
         let match = pattern.exec(text)
 
         if (!match) {
-          return
+          return false
         }
 
         const [annotatedText, matchedToken, matchedText] = match
@@ -23,7 +23,7 @@ class Bold {
 
         if (matchedToken === firstToken && firstToken === secondToken) {
           // duplicated match string tag. ** or __
-          return
+          return false
         }
 
         const startIndex = lineStart + match.index
@@ -33,6 +33,7 @@ class Bold {
           this.quillJS.insertText(startIndex, matchedText, { italic: true })
           this.quillJS.format('italic', false)
         }, 0)
+        return true
       }
     }
   }

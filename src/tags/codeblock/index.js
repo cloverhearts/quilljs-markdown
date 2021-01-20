@@ -12,7 +12,7 @@ class Codeblock {
       pattern: this.pattern,
       action: (text, selection, pattern) => {
         const match = pattern.exec(text)
-        if (!match) { return }
+        if (!match) { return false }
         const originalText = match[0] || ''
         setTimeout(() => {
           const startIndex = selection.index - originalText.length - 1
@@ -24,6 +24,7 @@ class Codeblock {
             this.quillJS.formatLine(newLinePosition - 2, 1, 'code-block', true)
           }, 0)
         }, 0)
+        return true
       },
       release: () => {
         setTimeout(() => {

@@ -1,3 +1,5 @@
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 import TagsOperators from './tags'
 
 class MarkdownActivity {
@@ -20,6 +22,43 @@ class MarkdownActivity {
   }
 
   onTextChange (delta, oldContents, source) {
+    if (source !== 'user') return
+    const cursorOffset = (delta.ops[0] && delta.ops[0].retain) || 0
+    const inputText = delta.ops[0].insert || delta.ops[1].insert
+
+    if (inputText.length > 1) {
+      window._quill = this.quillJS
+      const repeatExecuteFullCommand = (textOffset) => new Promise((resolve) => {
+        const repeatHandler = setInterval(() => {
+          const [line] = this.quillJS.getLine(textOffset)
+          if (!line) {
+            clearInterval(repeatHandler)
+            return 0
+          }
+          const firstIndex = this.quillJS.getIndex(line)
+          if (!this.onFullTextExecute.bind(this)({ index: firstIndex, length: 0 })) {
+            clearInterval(repeatHandler)
+            const [line] = this.quillJS.getLine(textOffset)
+            const firstIndex = this.quillJS.getIndex(line)
+            if (!line || !(line.domNode)) { resolve(0) }
+            const text = line.domNode.textContent || ''
+            resolve(firstIndex + text.length + 1)
+          }
+        }, 10)
+      })
+
+      setTimeout(async () => {
+        const cursorOffsetFixed = cursorOffset
+        const tokens = inputText.split('\n')
+        let _offset = cursorOffsetFixed
+        // eslint-disable-next-line no-unused-vars
+        for (let v of tokens) {
+          _offset = await repeatExecuteFullCommand(_offset)
+        }
+      }, 0)
+      return
+    }
+
     delta.ops.filter(e => e.hasOwnProperty('insert')).forEach(e => {
       switch (e.insert) {
         case this.actionCharacters.whiteSpace:
@@ -66,10 +105,13 @@ class MarkdownActivity {
     }
   }
 
-  onFullTextExecute () {
-    let selection = this.quillJS.getSelection()
+  onFullTextExecute (virtualSelection) {
+    let selection = virtualSelection || this.quillJS.getSelection()
     if (!selection) return
     const [line, offset] = this.quillJS.getLine(selection.index)
+
+    if (!line || offset < 0) return
+
     const lineStart = selection.index - offset
     const beforeNode = this.quillJS.getLine(lineStart - 1)[0]
     const beforeLineText = beforeNode && beforeNode.domNode.textContent
@@ -88,8 +130,7 @@ class MarkdownActivity {
       for (let match of this.matches) {
         const matchedText = text.match(match.pattern)
         if (matchedText) {
-          match.action(text, selection, match.pattern, lineStart)
-          return
+          return match.action(text, selection, match.pattern, lineStart)
         }
       }
     }

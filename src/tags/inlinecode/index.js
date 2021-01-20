@@ -13,6 +13,8 @@ class inlineCode {
       action: (text, selection, pattern, lineStart) => {
         let match = pattern.exec(text)
 
+        if (!match) return false
+
         const [annotatedText] = match
         const startIndex = lineStart + match.index
 
@@ -22,6 +24,7 @@ class inlineCode {
           this.quillJS.insertText(startIndex, message, { code: true })
           this.quillJS.insertText(startIndex + message.length, ' ', { code: false })
         }, 0)
+        return true
       }
     }
   }

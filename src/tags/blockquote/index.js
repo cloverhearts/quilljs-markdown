@@ -13,7 +13,7 @@ class Blockquote {
       action: (text, selection, pattern) => {
         const match = pattern.exec(text)
         if (!match) {
-          return
+          return false
         }
         const originalText = match[0] || ''
         setTimeout(() => {
@@ -23,6 +23,7 @@ class Blockquote {
             originalText.length
           )
         }, 0)
+        return true
       },
       release: () => {
         setTimeout(() => {

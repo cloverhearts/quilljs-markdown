@@ -16,13 +16,16 @@ class Bold {
         const annotatedText = match[0]
         const matchedText = match[1]
         const startIndex = lineStart + match.index
-        if (text.match(/^([~_ \n]+)$/g)) return
+
+        if (text.match(/^([~_ \n]+)$/g)) return false
 
         setTimeout(() => {
           this.quillJS.deleteText(startIndex, annotatedText.length)
           this.quillJS.insertText(startIndex, matchedText, { strike: true })
           this.quillJS.format('strike', false)
         }, 0)
+
+        return true
       }
     }
   }

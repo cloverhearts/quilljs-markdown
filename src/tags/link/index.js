@@ -22,7 +22,9 @@ class Link {
             this.quillJS.insertText(start, hrefText.slice(1, hrefText.length - 1),
               'link', hrefLink.slice(1, hrefLink.length - 1))
           }, 0)
+          return true
         }
+        return false
       }
     }
   }
