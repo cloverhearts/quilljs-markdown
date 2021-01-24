@@ -19,6 +19,7 @@ class MarkdownActivity {
     this.ignoreTags = ['PRE']
     this.tags = new TagsOperators(this.quillJS)
     this.matches = this.tags.getOperatorsAll()
+    this.fullMatches = this.tags.getFullTextOperatorsAll()
   }
 
   onTextChange (delta, oldContents, source) {
@@ -121,7 +122,7 @@ class MarkdownActivity {
     if (this.isValid(text, line.domNode.tagName)) {
       // remove block rule.
       if (typeof beforeLineText === 'string' && beforeLineText.length > 0 && text === ' ') {
-        const releaseTag = this.matches.find(e => e.name === line.domNode.tagName.toLowerCase())
+        const releaseTag = this.fullMatches.find(e => e.name === line.domNode.tagName.toLowerCase())
         if (releaseTag && releaseTag.release) {
           releaseTag.release(selection)
           return
@@ -129,7 +130,7 @@ class MarkdownActivity {
       }
 
       console.log('check for ', text)
-      for (let match of this.matches) {
+      for (let match of this.fullMatches) {
         const matchedText = text.match(match.pattern)
         console.log('pattern ', match.pattern, text, matchedText)
         if (matchedText) {

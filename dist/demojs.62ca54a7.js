@@ -274,8 +274,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = g && g.prototype,
       m = a.Uint8ClampedArray,
       w = m && m.prototype,
-      _ = g && p(g),
-      x = b && p(b),
+      x = g && p(g),
+      _ = b && p(b),
       O = Object.prototype,
       E = O.isPrototypeOf,
       A = y("toStringTag"),
@@ -307,15 +307,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     a[r] || (k = !1);
   }
 
-  if ((!k || "function" != typeof _ || _ === Function.prototype) && (_ = function _() {
+  if ((!k || "function" != typeof x || x === Function.prototype) && (x = function x() {
     throw TypeError("Incorrect invocation");
   }, k)) for (r in j) {
-    a[r] && d(a[r], _);
+    a[r] && d(a[r], x);
   }
-  if ((!k || !x || x === O) && (x = _.prototype, k)) for (r in j) {
-    a[r] && d(a[r].prototype, x);
+  if ((!k || !_ || _ === O) && (_ = x.prototype, k)) for (r in j) {
+    a[r] && d(a[r].prototype, _);
   }
-  if (k && p(w) !== x && d(w, x), i && !l(x, A)) for (r in T = !0, h(x, A, {
+  if (k && p(w) !== _ && d(w, _), i && !l(_, A)) for (r in T = !0, h(_, A, {
     get: function get() {
       return u(this) ? this[S] : void 0;
     }
@@ -331,7 +331,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     },
     aTypedArrayConstructor: function aTypedArrayConstructor(t) {
       if (d) {
-        if (E.call(_, t)) return t;
+        if (E.call(x, t)) return t;
       } else for (var e in j) {
         if (l(j, r)) {
           var n = a[e];
@@ -347,7 +347,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           var o = a[r];
           o && l(o.prototype, t) && delete o.prototype[t];
         }
-        x[t] && !n || f(x, t, n ? e : k && b[t] || e);
+        _[t] && !n || f(_, t, n ? e : k && b[t] || e);
       }
     },
     exportTypedArrayStaticMethod: function exportTypedArrayStaticMethod(t, e, n) {
@@ -358,10 +358,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (n) for (r in j) {
             (o = a[r]) && l(o, t) && delete o[t];
           }
-          if (_[t] && !n) return;
+          if (x[t] && !n) return;
 
           try {
-            return f(_, t, n ? e : k && g[t] || e);
+            return f(x, t, n ? e : k && g[t] || e);
           } catch (t) {}
         }
 
@@ -376,8 +376,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return "DataView" === e || l(j, e) || l(N, e);
     },
     isTypedArray: P,
-    TypedArray: _,
-    TypedArrayPrototype: x
+    TypedArray: x,
+    TypedArrayPrototype: _
   };
 }, function (t, e, n) {
   var r = n(5),
@@ -420,8 +420,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         h = 7 == t,
         p = 5 == t || f;
     return function (d, y, v, g) {
-      for (var b, m, w = i(d), _ = o(w), x = r(y, v, 3), O = a(_.length), E = 0, A = g || u, S = e ? A(d, O) : n || h ? A(d, 0) : void 0; O > E; E++) {
-        if ((p || E in _) && (m = x(b = _[E], E, w), t)) if (e) S[E] = m;else if (m) switch (t) {
+      for (var b, m, w = i(d), x = o(w), _ = r(y, v, 3), O = a(x.length), E = 0, A = g || u, S = e ? A(d, O) : n || h ? A(d, 0) : void 0; O > E; E++) {
+        if ((p || E in x) && (m = _(b = x[E], E, w), t)) if (e) S[E] = m;else if (m) switch (t) {
           case 3:
             return !0;
 
@@ -773,8 +773,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = n(3),
       m = n(30),
       w = n(38),
-      _ = n(42).f,
-      x = n(149),
+      x = n(42).f,
+      _ = n(149),
       O = n(12).forEach,
       E = n(47),
       A = n(9),
@@ -809,26 +809,26 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
     });
   },
-      V = function V(t) {
+      J = function J(t) {
     var e;
     return t instanceof C || "ArrayBuffer" == (e = g(t)) || "SharedArrayBuffer" == e;
   },
-      K = function K(t, e) {
+      V = function V(t, e) {
     return z(t) && "symbol" != _typeof(e) && e in t && String(+e) == String(e);
   },
-      J = function J(t, e) {
-    return K(t, e = y(e, !0)) ? c(2, t[e]) : q(t, e);
+      K = function K(t, e) {
+    return V(t, e = y(e, !0)) ? c(2, t[e]) : q(t, e);
   },
       W = function W(t, e, n) {
-    return !(K(t, e = y(e, !0)) && b(n) && v(n, "value")) || v(n, "get") || v(n, "set") || n.configurable || v(n, "writable") && !n.writable || v(n, "enumerable") && !n.enumerable ? P(t, e, n) : (t[e] = n.value, t);
+    return !(V(t, e = y(e, !0)) && b(n) && v(n, "value")) || v(n, "get") || v(n, "set") || n.configurable || v(n, "writable") && !n.writable || v(n, "enumerable") && !n.enumerable ? P(t, e, n) : (t[e] = n.value, t);
   };
 
-  i ? (M || (S.f = J, A.f = W, Y(D, "buffer"), Y(D, "byteOffset"), Y(D, "byteLength"), Y(D, "length")), r({
+  i ? (M || (S.f = K, A.f = W, Y(D, "buffer"), Y(D, "byteOffset"), Y(D, "byteLength"), Y(D, "length")), r({
     target: "Object",
     stat: !0,
     forced: !M
   }, {
-    getOwnPropertyDescriptor: J,
+    getOwnPropertyDescriptor: K,
     defineProperty: W
   }), t.exports = function (t, e, n) {
     var i = t.match(/\d+$/)[0] / 8,
@@ -858,8 +858,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
 
     M ? a && (v = e(function (t, e, n, r) {
-      return s(t, v, u), T(b(e) ? V(e) ? void 0 !== r ? new y(e, d(n, i), r) : void 0 !== n ? new y(e, d(n, i)) : new y(e) : z(e) ? H(v, e) : x.call(v, e) : new y(p(e)), t, v);
-    }), w && w(v, U), O(_(y), function (t) {
+      return s(t, v, u), T(b(e) ? J(e) ? void 0 !== r ? new y(e, d(n, i), r) : void 0 !== n ? new y(e, d(n, i)) : new y(e) : z(e) ? H(v, e) : _.call(v, e) : new y(p(e)), t, v);
+    }), w && w(v, U), O(x(y), function (t) {
       t in v || f(v, t, y[t]);
     }), v.prototype = g) : (v = e(function (t, e, n, r) {
       s(t, v, u);
@@ -870,7 +870,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           f = 0;
 
       if (b(e)) {
-        if (!V(e)) return z(e) ? H(v, e) : x.call(v, e);
+        if (!J(e)) return z(e) ? H(v, e) : _.call(v, e);
         o = e, f = d(n, i);
         var y = e.byteLength;
 
@@ -977,12 +977,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         b = !(!n || !n.AS_ENTRIES),
         m = !(!n || !n.IS_ITERATOR),
         w = !(!n || !n.INTERRUPTED),
-        _ = a(e, g, 1 + b + w),
-        x = function x(t) {
+        x = a(e, g, 1 + b + w),
+        _ = function _(t) {
       return c && l(c), new s(!0, t);
     },
         O = function O(t) {
-      return b ? (r(t), w ? _(t[0], t[1], x) : _(t[0], t[1])) : w ? _(t, x) : _(t);
+      return b ? (r(t), w ? x(t[0], t[1], _) : x(t[0], t[1])) : w ? x(t, _) : x(t);
     };
 
     if (m) c = t;else {
@@ -1669,8 +1669,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         b = o[t],
         m = b && b.prototype,
         w = b,
-        _ = {},
-        x = function x(t) {
+        x = {},
+        _ = function _(t) {
       var e = m[t];
       a(m, t, "add" == t ? function (t) {
         return e.call(this, 0 === t ? 0 : t), this;
@@ -1710,12 +1710,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           that: r,
           AS_ENTRIES: y
         }), r;
-      })).prototype = m, m.constructor = w), (A || k) && (x("delete"), x("has"), y && x("get")), (k || E) && x(g), v && m.clear && delete m.clear;
+      })).prototype = m, m.constructor = w), (A || k) && (_("delete"), _("has"), y && _("get")), (k || E) && _(g), v && m.clear && delete m.clear;
     }
-    return _[t] = w, r({
+    return x[t] = w, r({
       global: !0,
       forced: w != b
-    }, _), p(w, t), v || n.setStrong(w, t, y), w;
+    }, x), p(w, t), v || n.setStrong(w, t, y), w;
   };
 }, function (t, e, n) {
   "use strict";
@@ -1738,8 +1738,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = n(98),
       m = n(29),
       w = n(17),
-      _ = w.get,
-      x = w.set,
+      x = w.get,
+      _ = w.set,
       O = r.ArrayBuffer,
       _E2 = O,
       _A = r.DataView,
@@ -1769,29 +1769,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       M = function M(t, e) {
     g(t.prototype, e, {
       get: function get() {
-        return _(this)[e];
+        return x(this)[e];
       }
     });
   },
       B = function B(t, e, n, r) {
     var o = h(n),
-        i = _(t);
-
+        i = x(t);
     if (o + e > i.byteLength) throw T("Wrong index");
-
-    var a = _(i.buffer).bytes,
+    var a = x(i.buffer).bytes,
         u = o + i.byteOffset,
         l = a.slice(u, u + e);
-
     return r ? l : l.reverse();
   },
       U = function U(t, e, n, r, o, i) {
     var a = h(n),
-        u = _(t);
-
+        u = x(t);
     if (a + e > u.byteLength) throw T("Wrong index");
 
-    for (var l = _(u.buffer).bytes, s = a + u.byteOffset, c = r(+o), f = 0; f < e; f++) {
+    for (var l = x(u.buffer).bytes, s = a + u.byteOffset, c = r(+o), f = 0; f < e; f++) {
       l[s + f] = c[i ? f : e - f - 1];
     }
   };
@@ -1815,13 +1811,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     y && d(S) !== k && y(S, k);
     var Y = new _A(new _E2(2)),
-        V = S.setInt8;
+        J = S.setInt8;
     Y.setInt8(0, 2147483648), Y.setInt8(1, 2147483649), !Y.getInt8(0) && Y.getInt8(1) || u(S, {
       setInt8: function setInt8(t, e) {
-        V.call(this, t, e << 24 >> 24);
+        J.call(this, t, e << 24 >> 24);
       },
       setUint8: function setUint8(t, e) {
-        V.call(this, t, e << 24 >> 24);
+        J.call(this, t, e << 24 >> 24);
       }
     }, {
       unsafe: !0
@@ -1829,19 +1825,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   } else _E2 = function _E(t) {
     s(this, _E2, "ArrayBuffer");
     var e = h(t);
-    x(this, {
+    _(this, {
       bytes: b.call(new Array(e), 0),
       byteLength: e
     }), o || (this.byteLength = e);
   }, _A = function A(t, e, n) {
     s(this, _A, "DataView"), s(t, _E2, "DataView");
-
-    var r = _(t).byteLength,
+    var r = x(t).byteLength,
         i = c(e);
-
     if (i < 0 || i > r) throw T("Wrong offset");
     if (i + (n = void 0 === n ? r - i : f(n)) > r) throw T("Wrong length");
-    x(this, {
+    _(this, {
       buffer: t,
       byteLength: n,
       byteOffset: i
@@ -2038,8 +2032,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     o(n, e, c);
 
     var w,
-        _,
         x,
+        _,
         O = function O(t) {
       if (t === p && T) return T;
       if (!y && t in S) return S[t];
@@ -2066,18 +2060,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     if (j && (w = i(j.call(new t())), d !== Object.prototype && w.next && (f || i(w) === d || (a ? a(w, d) : "function" != typeof w[v] && l(w, v, g)), u(w, E, !0, !0), f && (h[E] = g))), "values" == p && k && "values" !== k.name && (A = !0, T = function T() {
       return k.call(this);
-    }), f && !m || S[v] === T || l(S, v, T), h[e] = T, p) if (_ = {
+    }), f && !m || S[v] === T || l(S, v, T), h[e] = T, p) if (x = {
       values: O("values"),
       keys: b ? T : O("keys"),
       entries: O("entries")
-    }, m) for (x in _) {
-      (y || A || !(x in S)) && s(S, x, _[x]);
+    }, m) for (_ in x) {
+      (y || A || !(_ in S)) && s(S, _, x[_]);
     } else r({
       target: e,
       proto: !0,
       forced: y || A
-    }, _);
-    return _;
+    }, x);
+    return x;
   };
 }, function (t, e, n) {
   "use strict";
@@ -2203,19 +2197,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = a.Dispatch,
       m = 0,
       w = {},
-      _ = function _(t) {
+      x = function x(t) {
     if (w.hasOwnProperty(t)) {
       var e = w[t];
       delete w[t], e();
     }
   },
-      x = function x(t) {
+      _ = function _(t) {
     return function () {
-      _(t);
+      x(t);
     };
   },
       O = function O(t) {
-    _(t.data);
+    x(t.data);
   },
       E = function E(t) {
     a.postMessage(t + "", p.protocol + "//" + p.host);
@@ -2232,15 +2226,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }, y = function y(t) {
     delete w[t];
   }, h ? r = function r(t) {
-    v.nextTick(x(t));
+    v.nextTick(_(t));
   } : b && b.now ? r = function r(t) {
-    b.now(x(t));
+    b.now(_(t));
   } : g && !f ? (i = (o = new g()).port2, o.port1.onmessage = O, r = l(i.postMessage, i, 1)) : a.addEventListener && "function" == typeof postMessage && !a.importScripts && p && "file:" !== p.protocol && !u(E) ? (r = E, a.addEventListener("message", O, !1)) : r = "onreadystatechange" in c("script") ? function (t) {
     s.appendChild(c("script")).onreadystatechange = function () {
-      s.removeChild(this), _(t);
+      s.removeChild(this), x(t);
     };
   } : function (t) {
-    setTimeout(x(t), 0);
+    setTimeout(_(t), 0);
   }), t.exports = {
     set: d,
     clear: y
@@ -2758,10 +2752,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = f.document,
       m = f.process,
       w = f.Promise,
-      _ = h(f, "queueMicrotask"),
-      x = _ && _.value;
+      x = h(f, "queueMicrotask"),
+      _ = x && x.value;
 
-  x || (r = function r() {
+  _ || (r = function r() {
     var t, e;
 
     for (v && (t = m.domain) && t.exit(); o;) {
@@ -2785,7 +2779,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     characterData: !0
   }), a = function a() {
     l.data = u = !u;
-  })), t.exports = x || function (t) {
+  })), t.exports = _ || function (t) {
     var e = {
       fn: t,
       next: void 0
@@ -3156,10 +3150,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = n(31),
       m = n(386),
       w = n(60),
-      _ = n(6),
-      x = o("fetch"),
+      x = n(6),
+      _ = o("fetch"),
       O = o("Headers"),
-      E = _("iterator"),
+      E = x("iterator"),
       A = c.set,
       S = c.getterFor("URLSearchParams"),
       k = c.getterFor("URLSearchParamsIterator"),
@@ -3374,7 +3368,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     forced: !i
   }, {
     URLSearchParams: F
-  }), i || "function" != typeof x || "function" != typeof O || r({
+  }), i || "function" != typeof _ || "function" != typeof O || r({
     global: !0,
     enumerable: !0,
     forced: !0
@@ -3387,7 +3381,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return arguments.length > 1 && (v(e = arguments[1]) && (n = e.body, "URLSearchParams" === d(n) && ((r = e.headers ? new O(e.headers) : new O()).has("content-type") || r.set("content-type", "application/x-www-form-urlencoded;charset=UTF-8"), e = g(e, {
         body: b(0, String(n)),
         headers: b(0, r)
-      }))), o.push(e)), x.apply(this, o);
+      }))), o.push(e)), _.apply(this, o);
     }
   }), t.exports = {
     URLSearchParams: F,
@@ -4100,7 +4094,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           function t(e) {
             var n = this,
                 r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
-            if (b(this, t), this.options = _(e, r), this.container = this.options.container, null == this.container) return m.error("Invalid Quill container", e);
+            if (b(this, t), this.options = x(e, r), this.container = this.options.container, null == this.container) return m.error("Invalid Quill container", e);
             this.options.debug && t.debug(this.options.debug);
             var o = this.container.innerHTML.trim();
             this.container.classList.add("ql-container"), this.container.innerHTML = "", this.container.__quill = this, this.root = this.addContainer("ql-editor"), this.root.classList.add("ql-blank"), this.root.setAttribute("data-gramm", !1), this.scrollingContainer = this.options.scrollingContainer || this.root, this.emitter = new l.default(), this.scroll = c.default.create(this.root, {
@@ -4111,7 +4105,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             }), this.emitter.on(l.default.events.SCROLL_UPDATE, function (t, e) {
               var r = n.selection.lastRange,
                   o = r && 0 === r.length ? r.index : void 0;
-              x.call(n, function () {
+
+              _.call(n, function () {
                 return n.editor.update(null, e, o);
               }, t);
             });
@@ -4170,7 +4165,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               var r = this,
                   i = O(t, e, n),
                   a = o(i, 4);
-              return t = a[0], e = a[1], n = a[3], x.call(this, function () {
+              return t = a[0], e = a[1], n = a[3], _.call(this, function () {
                 return r.editor.deleteText(t, e);
               }, n, t, -1 * e);
             }
@@ -4196,7 +4191,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             value: function value(t, e) {
               var n = this,
                   r = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : l.default.sources.API;
-              return x.call(this, function () {
+              return _.call(this, function () {
                 var r = n.getSelection(!0),
                     o = new a.default();
                 if (null == r) return o;
@@ -4214,7 +4209,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   u = this,
                   l = O(t, e, n, r, i),
                   s = o(l, 4);
-              return t = s[0], e = s[1], a = s[2], i = s[3], x.call(this, function () {
+              return t = s[0], e = s[1], a = s[2], i = s[3], _.call(this, function () {
                 return u.editor.formatLine(t, e, a);
               }, i, t, 0);
             }
@@ -4225,7 +4220,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   u = this,
                   l = O(t, e, n, r, i),
                   s = o(l, 4);
-              return t = s[0], e = s[1], a = s[2], i = s[3], x.call(this, function () {
+              return t = s[0], e = s[1], a = s[2], i = s[3], _.call(this, function () {
                 return u.editor.formatText(t, e, a);
               }, i, t, 0);
             }
@@ -4318,7 +4313,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             value: function value(e, n, r) {
               var o = this,
                   i = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : t.sources.API;
-              return x.call(this, function () {
+              return _.call(this, function () {
                 return o.editor.insertEmbed(e, n, r);
               }, i, e);
             }
@@ -4329,7 +4324,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   u = this,
                   l = O(t, 0, n, r, i),
                   s = o(l, 4);
-              return t = s[0], a = s[2], i = s[3], x.call(this, function () {
+              return t = s[0], a = s[2], i = s[3], _.call(this, function () {
                 return u.editor.insertText(t, e, a);
               }, i, t, e.length);
             }
@@ -4364,7 +4359,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               var r = this,
                   i = O(t, e, n),
                   a = o(i, 4);
-              return t = a[0], e = a[1], n = a[3], x.call(this, function () {
+              return t = a[0], e = a[1], n = a[3], _.call(this, function () {
                 return r.editor.removeFormat(t, e);
               }, n, t);
             }
@@ -4378,7 +4373,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             value: function value(t) {
               var e = this,
                   n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : l.default.sources.API;
-              return x.call(this, function () {
+              return _.call(this, function () {
                 t = new a.default(t);
                 var n = e.getLength(),
                     r = e.editor.deleteText(0, n),
@@ -4415,14 +4410,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             value: function value(t) {
               var e = this,
                   n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : l.default.sources.API;
-              return x.call(this, function () {
+              return _.call(this, function () {
                 return t = new a.default(t), e.editor.applyDelta(t, n);
               }, n, !0);
             }
           }]), t;
         }();
 
-        function _(t, e) {
+        function x(t, e) {
           if ((e = (0, p.default)(!0, {
             container: t,
             modules: {
@@ -4455,7 +4450,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }, {}), e;
         }
 
-        function x(t, e, n, r) {
+        function _(t, e, n, r) {
           if (this.options.strict && !this.isEnabled() && e === l.default.sources.USER) return new a.default();
           var o = null == n ? null : this.getSelection(),
               i = this.editor.delta,
@@ -4512,7 +4507,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           parchment: c.default,
           "core/module": s.default,
           "core/theme": y.default
-        }, e.expandConfig = _, e.overload = O, e.default = w;
+        }, e.expandConfig = x, e.overload = O, e.default = w;
       }, function (t, e, n) {
         "use strict";
 
@@ -5199,15 +5194,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
                     if (g instanceof h.default) {
                       var w = g.descendant(l.default.Leaf, b),
-                          _ = o(w, 1)[0];
-                      m = (0, v.default)(m, (0, f.bubbleFormats)(_));
+                          x = o(w, 1)[0];
+                      m = (0, v.default)(m, (0, f.bubbleFormats)(x));
                     }
 
                     c = u.default.attributes.diff(m, c) || {};
                   } else if ("object" === r(a.insert)) {
-                    var x = Object.keys(a.insert)[0];
-                    if (null == x) return t;
-                    e.scroll.insertAt(t, x, a.insert[x]);
+                    var _ = Object.keys(a.insert)[0];
+                    if (null == _) return t;
+                    e.scroll.insertAt(t, _, a.insert[_]);
                   }
 
                   i += s;
@@ -6247,11 +6242,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
 
               if (Object.getOwnPropertySymbols) {
-                var _ = Object.getOwnPropertySymbols(s);
+                var x = Object.getOwnPropertySymbols(s);
 
-                for (m = 0; m < _.length; m++) {
-                  var x = _[m];
-                  (!(E = Object.getOwnPropertyDescriptor(s, x)) || E.enumerable || f) && (v[x] = a(s[x], y - 1), E.enumerable || Object.defineProperty(v, x, {
+                for (m = 0; m < x.length; m++) {
+                  var _ = x[m];
+                  (!(E = Object.getOwnPropertyDescriptor(s, _)) || E.enumerable || f) && (v[_] = a(s[_], y - 1), E.enumerable || Object.defineProperty(v, _, {
                     enumerable: !1
                   }));
                 }
@@ -6625,21 +6620,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               key: e.keys.BACKSPACE
             }, {
               collapsed: !0
-            }, _), r.addBinding({
+            }, x), r.addBinding({
               key: e.keys.DELETE
             }, {
               collapsed: !0
-            }, x)) : (r.addBinding({
+            }, _)) : (r.addBinding({
               key: e.keys.BACKSPACE
             }, {
               collapsed: !0,
               prefix: /^.?$/
-            }, _), r.addBinding({
+            }, x), r.addBinding({
               key: e.keys.DELETE
             }, {
               collapsed: !0,
               suffix: /^.?$/
-            }, x)), r.addBinding({
+            }, _)), r.addBinding({
               key: e.keys.BACKSPACE
             }, {
               collapsed: !1
@@ -6656,7 +6651,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             }, {
               collapsed: !0,
               offset: 0
-            }, _), r.listen(), r;
+            }, x), r.listen(), r;
           }
 
           return function (t, e) {
@@ -6715,17 +6710,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                           b = 0 === l.length ? [v, g] : t.quill.getLeaf(l.index + l.length),
                           m = o(b, 2),
                           w = m[0],
-                          _ = m[1],
-                          x = v instanceof f.default.Text ? v.value().slice(0, g) : "",
-                          O = w instanceof f.default.Text ? w.value().slice(_) : "",
+                          x = m[1],
+                          _ = v instanceof f.default.Text ? v.value().slice(0, g) : "",
+                          O = w instanceof f.default.Text ? w.value().slice(x) : "",
                           E = {
                         collapsed: 0 === l.length,
                         empty: 0 === l.length && h.length() <= 1,
                         format: t.quill.getFormat(l),
                         offset: p,
-                        prefix: x,
+                        prefix: _,
                         suffix: O
                       };
+
                       a.some(function (e) {
                         if (null != e.collapsed && e.collapsed !== E.collapsed) return !1;
                         if (null != e.empty && e.empty !== E.empty) return !1;
@@ -6764,7 +6760,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }), n;
         }
 
-        function _(t, e) {
+        function x(t, e) {
           if (!(0 === t.index || this.quill.getLength() <= 1)) {
             var n = this.quill.getLine(t.index),
                 r = o(n, 1)[0],
@@ -6786,7 +6782,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         }
 
-        function x(t, e) {
+        function _(t, e) {
           var n = /^[\uD800-\uDBFF][\uDC00-\uDFFF]/.test(e.suffix) ? 2 : 1;
 
           if (!(t.index >= this.quill.getLength() - n)) {
@@ -8449,8 +8445,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             b = ["#000000", "#e60000", "#ff9900", "#ffff00", "#008a00", "#0066cc", "#9933ff", "#ffffff", "#facccc", "#ffebcc", "#ffffcc", "#cce8cc", "#cce0f5", "#ebd6ff", "#bbbbbb", "#f06666", "#ffc266", "#ffff66", "#66b966", "#66a3e0", "#c285ff", "#888888", "#a10000", "#b26b00", "#b2b200", "#006100", "#0047b2", "#6b24b2", "#444444", "#5c0000", "#663d00", "#666600", "#003700", "#002966", "#3d1466"],
             m = [!1, "serif", "monospace"],
             w = ["1", "2", "3", !1],
-            _ = ["small", !1, "large", "huge"],
-            x = function (t) {
+            x = ["small", !1, "large", "huge"],
+            _ = function (t) {
           function e(t, n) {
             d(this, e);
             var r = y(this, (e.__proto__ || Object.getPrototypeOf(e)).call(this, t, n));
@@ -8505,7 +8501,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   return null == t.querySelector("option") && E(t, b, "background" === n ? "#ffffff" : "#000000"), new s.default(t, e[n]);
                 }
 
-                return null == t.querySelector("option") && (t.classList.contains("ql-font") ? E(t, m) : t.classList.contains("ql-header") ? E(t, w) : t.classList.contains("ql-size") && E(t, _)), new f.default(t);
+                return null == t.querySelector("option") && (t.classList.contains("ql-font") ? E(t, m) : t.classList.contains("ql-header") ? E(t, w) : t.classList.contains("ql-size") && E(t, x)), new f.default(t);
               }), this.quill.on(a.default.events.EDITOR_CHANGE, function () {
                 n.pickers.forEach(function (t) {
                   t.update();
@@ -8515,7 +8511,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }]), e;
         }(l.default);
 
-        x.DEFAULTS = (0, o.default)(!0, {}, l.default.DEFAULTS, {
+        _.DEFAULTS = (0, o.default)(!0, {}, l.default.DEFAULTS, {
           modules: {
             toolbar: {
               handlers: {
@@ -8618,7 +8614,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           });
         }
 
-        e.BaseTooltip = O, e.default = x;
+        e.BaseTooltip = O, e.default = _;
       }, function (t, e, n) {
         "use strict";
 
@@ -9096,20 +9092,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   }
 
                   if (l[m] = A, A > n) d += 2;else if (w > o) p += 2;else if (h && (O = a + f - b) >= 0 && O < u && -1 != s[O]) {
-                    var _ = n - s[O];
-
-                    if (A >= _) return r(t, e, A, w);
+                    var x = n - s[O];
+                    if (A >= x) return r(t, e, A, w);
                   }
                 }
 
-                for (var x = -g + y; x <= g - v; x += 2) {
-                  for (var O = a + x, E = (_ = x == -g || x != g && s[O - 1] < s[O + 1] ? s[O + 1] : s[O - 1] + 1) - x; _ < n && E < o && t.charAt(n - _ - 1) == e.charAt(o - E - 1);) {
-                    _++, E++;
+                for (var _ = -g + y; _ <= g - v; _ += 2) {
+                  for (var O = a + _, E = (x = _ == -g || _ != g && s[O - 1] < s[O + 1] ? s[O + 1] : s[O - 1] + 1) - _; x < n && E < o && t.charAt(n - x - 1) == e.charAt(o - E - 1);) {
+                    x++, E++;
                   }
 
-                  if (s[O] = _, _ > n) v += 2;else if (E > o) y += 2;else if (!h && (m = a + f - x) >= 0 && m < u && -1 != l[m]) {
+                  if (s[O] = x, x > n) v += 2;else if (E > o) y += 2;else if (!h && (m = a + f - _) >= 0 && m < u && -1 != l[m]) {
                     var A = l[m];
-                    if (w = a + A - m, A >= (_ = n - _)) return r(t, e, A, w);
+                    if (w = a + A - m, A >= (x = n - x)) return r(t, e, A, w);
                   }
                 }
               }
@@ -9486,8 +9481,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }) : t[e] = n, t;
         }
 
-        var _ = (0, c.default)("quill:clipboard"),
-            x = "__ql-matcher",
+        var x = (0, c.default)("quill:clipboard"),
+            _ = "__ql-matcher",
             O = [[Node.TEXT_NODE, I], [Node.TEXT_NODE, R], ["br", function (t, e) {
           return j(e, "\n") || e.insert("\n"), e;
         }], [Node.ELEMENT_NODE, R], [Node.ELEMENT_NODE, L], [Node.ELEMENT_NODE, C], [Node.ELEMENT_NODE, q], [Node.ELEMENT_NODE, function (t, e) {
@@ -9570,13 +9565,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   var a = t(i, n, r);
                   return i.nodeType === e.ELEMENT_NODE && (a = n.reduce(function (t, e) {
                     return e(i, t);
-                  }, a), a = (i[x] || []).reduce(function (t, e) {
+                  }, a), a = (i[_] || []).reduce(function (t, e) {
                     return e(i, t);
                   }, a)), o.concat(a);
                 }, new u.default()) : new u.default();
               }(this.container, a, l);
 
-              return j(s, "\n") && null == s.ops[s.ops.length - 1].attributes && (s = s.compose(new u.default().retain(s.length() - 1).delete(1))), _.log("convert", this.container.innerHTML, s), this.container.innerHTML = "", s;
+              return j(s, "\n") && null == s.ops[s.ops.length - 1].attributes && (s = s.compose(new u.default().retain(s.length() - 1).delete(1))), x.log("convert", this.container.innerHTML, s), this.container.innerHTML = "", s;
             }
           }, {
             key: "dangerouslyPasteHTML",
@@ -9623,7 +9618,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
                   default:
                     [].forEach.call(t.container.querySelectorAll(a), function (t) {
-                      t[x] = t[x] || [], t[x].push(u);
+                      t[_] = t[_] || [], t[_].push(u);
                     });
                 }
               }), [e, n];
@@ -10455,8 +10450,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             b = C(n(69)),
             m = C(n(70)),
             w = C(n(71)),
-            _ = C(n(72)),
-            x = C(n(73)),
+            x = C(n(72)),
+            _ = C(n(73)),
             O = n(13),
             E = C(O),
             A = C(n(74)),
@@ -10509,8 +10504,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           "formats/script": b.default,
           "formats/strike": m.default,
           "formats/underline": w.default,
-          "formats/image": _.default,
-          "formats/video": x.default,
+          "formats/image": x.default,
+          "formats/video": _.default,
           "formats/list/item": s.ListItem,
           "modules/formula": A.default,
           "modules/syntax": S.default,
@@ -11958,7 +11953,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return z(D(e, t.length - n), t, n, r);
     }
 
-    function _(t, e, n, r) {
+    function x(t, e, n, r) {
       return z(function (t) {
         for (var e = [], n = 0; n < t.length; ++n) {
           e.push(255 & t.charCodeAt(n));
@@ -11968,8 +11963,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }(e), t, n, r);
     }
 
-    function x(t, e, n, r) {
-      return _(t, e, n, r);
+    function _(t, e, n, r) {
+      return x(t, e, n, r);
     }
 
     function O(t, e, n, r) {
@@ -12191,11 +12186,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             return w(this, t, e, n);
 
           case "ascii":
-            return _(this, t, e, n);
+            return x(this, t, e, n);
 
           case "latin1":
           case "binary":
-            return x(this, t, e, n);
+            return _(this, t, e, n);
 
           case "base64":
             return O(this, t, e, n);
@@ -12708,8 +12703,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = n(31),
       m = n(30),
       w = n(57),
-      _ = n(42),
-      x = n(119),
+      x = n(42),
+      _ = n(119),
       O = n(92),
       E = n(13),
       A = n(9),
@@ -12732,10 +12727,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       z = M.getterFor("Symbol"),
       H = Object.prototype,
       _Y = o.Symbol,
-      V = i("JSON", "stringify"),
-      K = E.f,
-      J = A.f,
-      W = x.f,
+      J = i("JSON", "stringify"),
+      V = E.f,
+      K = A.f,
+      W = _.f,
       G = S.f,
       Z = j("symbols"),
       $ = j("op-symbols"),
@@ -12745,17 +12740,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       et = o.QObject,
       nt = !et || !et.prototype || !et.prototype.findChild,
       rt = u && c(function () {
-    return 7 != m(J({}, "a", {
+    return 7 != m(K({}, "a", {
       get: function get() {
-        return J(this, "a", {
+        return K(this, "a", {
           value: 7
         }).a;
       }
     })).a;
   }) ? function (t, e, n) {
-    var r = K(H, e);
-    r && delete H[e], J(t, e, n), r && t !== H && J(H, e, r);
-  } : J,
+    var r = V(H, e);
+    r && delete H[e], K(t, e, n), r && t !== H && K(H, e, r);
+  } : K,
       ot = function ot(t, e) {
     var n = Z[t] = m(_Y.prototype);
     return F(n, {
@@ -12774,7 +12769,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     var r = g(e, !0);
     return d(n), f(Z, r) ? (n.enumerable ? (f(t, U) && t[U][r] && (t[U][r] = !1), n = m(n, {
       enumerable: b(0, !1)
-    })) : (f(t, U) || J(t, U, b(1, {})), t[U][r] = !0), rt(t, r, n)) : J(t, r, n);
+    })) : (f(t, U) || K(t, U, b(1, {})), t[U][r] = !0), rt(t, r, n)) : K(t, r, n);
   },
       ut = function ut(t, e) {
     d(t);
@@ -12794,7 +12789,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         r = g(e, !0);
 
     if (n !== H || !f(Z, r) || f($, r)) {
-      var o = K(n, r);
+      var o = V(n, r);
       return !o || !f(Z, r) || f(n, U) && n[U][r] || (o.enumerable = !0), o;
     }
   },
@@ -12831,9 +12826,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return z(this).tag;
   }), T(_Y, "withoutSetter", function (t) {
     return ot(q(t), t);
-  }), S.f = lt, A.f = at, E.f = st, _.f = x.f = ct, O.f = ft, R.f = function (t) {
+  }), S.f = lt, A.f = at, E.f = st, x.f = _.f = ct, O.f = ft, R.f = function (t) {
     return ot(L(t), t);
-  }, u && (J(_Y.prototype, "description", {
+  }, u && (K(_Y.prototype, "description", {
     configurable: !0,
     get: function get() {
       return z(this).description;
@@ -12901,15 +12896,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     getOwnPropertySymbols: function getOwnPropertySymbols(t) {
       return O.f(y(t));
     }
-  }), V) && r({
+  }), J) && r({
     target: "JSON",
     stat: !0,
     forced: !l || c(function () {
       var t = _Y();
 
-      return "[null]" != V([t]) || "{}" != V({
+      return "[null]" != J([t]) || "{}" != J({
         a: t
-      }) || "{}" != V(Object(t));
+      }) || "{}" != J(Object(t));
     })
   }, {
     stringify: function stringify(t, e, n) {
@@ -12919,7 +12914,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       if (r = e, (p(e) || void 0 !== t) && !it(t)) return h(e) || (e = function e(t, _e) {
         if ("function" == typeof r && (_e = r.call(this, t, _e)), !it(_e)) return _e;
-      }), o[1] = e, V.apply(null, o);
+      }), o[1] = e, J.apply(null, o);
     }
   });
   _Y.prototype[D] || k(_Y.prototype, D, _Y.prototype.valueOf), I(_Y, "Symbol"), P[U] = !0;
@@ -14167,9 +14162,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = n(25),
       m = d("matchAll"),
       w = g.set,
-      _ = g.getterFor("RegExp String Iterator"),
-      x = RegExp.prototype,
-      O = x.exec,
+      x = g.getterFor("RegExp String Iterator"),
+      _ = RegExp.prototype,
+      O = _.exec,
       E = "".matchAll,
       A = !!E && !p(function () {
     "a".matchAll(/./);
@@ -14184,8 +14179,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       done: !1
     });
   }, "RegExp String", function () {
-    var t = _(this);
-
+    var t = x(this);
     if (t.done) return {
       value: void 0,
       done: !0
@@ -14225,7 +14219,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         u,
         s = l(this),
         c = String(t);
-    return e = y(s, RegExp), void 0 === (n = s.flags) && s instanceof RegExp && !("flags" in x) && (n = f.call(s)), r = void 0 === n ? "" : String(n), o = new e(e === RegExp ? s.source : s, r), i = !!~r.indexOf("g"), u = !!~r.indexOf("u"), o.lastIndex = a(s.lastIndex), new S(o, c, i, u);
+    return e = y(s, RegExp), void 0 === (n = s.flags) && s instanceof RegExp && !("flags" in _) && (n = f.call(s)), r = void 0 === n ? "" : String(n), o = new e(e === RegExp ? s.source : s, r), i = !!~r.indexOf("g"), u = !!~r.indexOf("u"), o.lastIndex = a(s.lastIndex), new S(o, c, i, u);
   };
 
   r({
@@ -14240,14 +14234,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           o = i(this);
 
       if (null != t) {
-        if (c(t) && !~String(i("flags" in x ? t.flags : f.call(t))).indexOf("g")) throw TypeError("`.matchAll` does not allow non-global regexes");
+        if (c(t) && !~String(i("flags" in _ ? t.flags : f.call(t))).indexOf("g")) throw TypeError("`.matchAll` does not allow non-global regexes");
         if (A) return E.apply(o, arguments);
         if (void 0 === (n = t[m]) && b && "RegExp" == s(t) && (n = k), null != n) return u(n).call(t, o);
       } else if (A) return E.apply(o, arguments);
 
       return e = String(o), r = new RegExp(t, "g"), b ? k.call(r, e) : r[m](e);
     }
-  }), b || m in x || h(x, m, k);
+  }), b || m in _ || h(_, m, k);
 }, function (t, e, n) {
   "use strict";
 
@@ -14321,21 +14315,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         v.lastIndex = 0;
       }
 
-      for (var _ = [];;) {
-        var x = c(v, g);
-        if (null === x) break;
-        if (_.push(x), !m) break;
-        "" === String(x[0]) && (v.lastIndex = l(g, i(v.lastIndex), w));
+      for (var x = [];;) {
+        var _ = c(v, g);
+
+        if (null === _) break;
+        if (x.push(_), !m) break;
+        "" === String(_[0]) && (v.lastIndex = l(g, i(v.lastIndex), w));
       }
 
-      for (var O, E = "", A = 0, S = 0; S < _.length; S++) {
-        x = _[S];
+      for (var O, E = "", A = 0, S = 0; S < x.length; S++) {
+        _ = x[S];
 
-        for (var k = String(x[0]), T = f(h(a(x.index), g.length), 0), j = [], N = 1; N < x.length; N++) {
-          j.push(void 0 === (O = x[N]) ? O : String(O));
+        for (var k = String(_[0]), T = f(h(a(_.index), g.length), 0), j = [], N = 1; N < _.length; N++) {
+          j.push(void 0 === (O = _[N]) ? O : String(O));
         }
 
-        var P = x.groups;
+        var P = _.groups;
 
         if (b) {
           var q = [k].concat(j, T, g);
@@ -14424,22 +14419,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       if (0 === m) return [];
       if (0 === h.length) return null === c(b, h) ? [h] : [];
 
-      for (var w = 0, _ = 0, x = []; _ < h.length;) {
-        b.lastIndex = y ? _ : 0;
+      for (var w = 0, x = 0, _ = []; x < h.length;) {
+        b.lastIndex = y ? x : 0;
         var O,
-            E = c(b, y ? h : h.slice(_));
-        if (null === E || (O = d(s(b.lastIndex + (y ? 0 : _)), h.length)) === w) _ = l(h, _, v);else {
-          if (x.push(h.slice(w, _)), x.length === m) return x;
+            E = c(b, y ? h : h.slice(x));
+        if (null === E || (O = d(s(b.lastIndex + (y ? 0 : x)), h.length)) === w) x = l(h, x, v);else {
+          if (_.push(h.slice(w, x)), _.length === m) return _;
 
           for (var A = 1; A <= E.length - 1; A++) {
-            if (x.push(E[A]), x.length === m) return x;
+            if (_.push(E[A]), _.length === m) return _;
           }
 
-          _ = w = O;
+          x = w = O;
         }
       }
 
-      return x.push(h.slice(w)), x;
+      return _.push(h.slice(w)), _;
     }];
   }, !y);
 }, function (t, e, n) {
@@ -14731,8 +14726,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           b,
           m = o(this),
           w = 0,
-          _ = 0,
-          x = "";
+          x = 0,
+          _ = "";
 
       if (null != t) {
         if ((n = i(t)) && !~String(o("flags" in f ? t.flags : a.call(t))).indexOf("g")) throw TypeError("`.replaceAll` does not allow non-global regexes");
@@ -14741,10 +14736,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
 
       for (l = String(m), d = String(t), (y = "function" == typeof e) || (e = String(e)), v = d.length, g = h(1, v), w = p(l, d, 0); -1 !== w;) {
-        b = y ? String(e(d, w, l)) : u(d, l, w, [], void 0, e), x += l.slice(_, w) + b, _ = w + v, w = p(l, d, w + g);
+        b = y ? String(e(d, w, l)) : u(d, l, w, [], void 0, e), _ += l.slice(x, w) + b, x = w + v, w = p(l, d, w + g);
       }
 
-      return _ < l.length && (x += l.slice(_)), x;
+      return x < l.length && (_ += l.slice(x)), _;
     }
   });
 }, function (t, e, n) {
@@ -14766,10 +14761,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = g.prototype,
       m = /a/g,
       w = /a/g,
-      _ = new g(m) !== m,
-      x = f.UNSUPPORTED_Y;
+      x = new g(m) !== m,
+      _ = f.UNSUPPORTED_Y;
 
-  if (r && i("RegExp", !_ || x || p(function () {
+  if (r && i("RegExp", !x || _ || p(function () {
     return w[v] = !1, g(m) != m || g(w) == w || "/a/i" != g(m, "i");
   }))) {
     for (var O = function O(t, e) {
@@ -14778,9 +14773,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           o = s(t),
           i = void 0 === e;
       if (!r && o && t.constructor === O && i) return t;
-      _ ? o && !i && (t = t.source) : t instanceof O && (i && (e = c.call(t)), t = t.source), x && (n = !!e && e.indexOf("y") > -1) && (e = e.replace(/y/g, ""));
-      var u = a(_ ? new g(t, e) : g(t, e), r ? this : b, O);
-      return x && n && d(u, {
+      x ? o && !i && (t = t.source) : t instanceof O && (i && (e = c.call(t)), t = t.source), _ && (n = !!e && e.indexOf("y") > -1) && (e = e.replace(/y/g, ""));
+      var u = a(x ? new g(t, e) : g(t, e), r ? this : b, O);
+      return _ && n && d(u, {
         sticky: n
       }), u;
     }, E = function E(t) {
@@ -14949,17 +14944,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   };
 
   if (i("Number", !g(" 0o1") || !g("0b1") || g("+0x1"))) {
-    for (var _, x = function x(t) {
+    for (var x, _ = function _(t) {
       var e = arguments.length < 1 ? 0 : t,
           n = this;
-      return n instanceof x && (m ? f(function () {
+      return n instanceof _ && (m ? f(function () {
         b.valueOf.call(n);
-      }) : "Number" != l(n)) ? s(new g(w(e)), n, x) : w(e);
+      }) : "Number" != l(n)) ? s(new g(w(e)), n, _) : w(e);
     }, O = r ? p(g) : "MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger,fromString,range".split(","), E = 0; O.length > E; E++) {
-      u(g, _ = O[E]) && !u(x, _) && y(x, _, d(g, _));
+      u(g, x = O[E]) && !u(_, x) && y(_, x, d(g, x));
     }
 
-    x.prototype = b, b.constructor = x, a(o, "Number", x);
+    _.prototype = b, b.constructor = _, a(o, "Number", _);
   }
 }, function (t, e, n) {
   n(0)({
@@ -15520,8 +15515,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = n(41),
       m = n(87),
       w = n(39),
-      _ = n(69),
-      x = n(34),
+      x = n(69),
+      _ = n(34),
       O = n(108).set,
       E = n(143),
       A = n(144),
@@ -15544,13 +15539,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       z = s.process,
       H = c("fetch"),
       Y = k.f,
-      V = Y,
-      K = !!(F && F.createEvent && s.dispatchEvent),
-      J = "function" == typeof PromiseRejectionEvent,
+      J = Y,
+      V = !!(F && F.createEvent && s.dispatchEvent),
+      K = "function" == typeof PromiseRejectionEvent,
       W = N(C, function () {
     if (!(m(_U) !== String(_U))) {
       if (66 === L) return !0;
-      if (!q && !J) return !0;
+      if (!q && !K) return !0;
     }
 
     if (l && !_U.prototype.finally) return !0;
@@ -15563,7 +15558,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
     return (t.constructor = {})[R] = e, !(t.then(function () {}) instanceof e);
   }),
-      G = W || !_(function (t) {
+      G = W || !x(function (t) {
     _U.all(t).catch(function () {});
   }),
       Z = function Z(t) {
@@ -15598,10 +15593,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   },
       X = function X(t, e, n) {
     var r, o;
-    K ? ((r = F.createEvent("Event")).promise = e, r.reason = n, r.initEvent(t, !1, !0), s.dispatchEvent(r)) : r = {
+    V ? ((r = F.createEvent("Event")).promise = e, r.reason = n, r.initEvent(t, !1, !0), s.dispatchEvent(r)) : r = {
       promise: e,
       reason: n
-    }, !J && (o = s["on" + t]) ? o(r) : "unhandledrejection" === t && S("Unhandled promise rejection", n);
+    }, !K && (o = s["on" + t]) ? o(r) : "unhandledrejection" === t && S("Unhandled promise rejection", n);
   },
       Q = function Q(t) {
     O.call(s, function () {
@@ -15679,7 +15674,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }).prototype = p(_U.prototype, {
     then: function then(t, e) {
       var n = B(this),
-          r = Y(x(this, _U));
+          r = Y(_(this, _U));
       return r.ok = "function" != typeof t || t, r.fail = "function" == typeof e && e, r.domain = q ? z.domain : void 0, n.parent = !0, n.reactions.push(r), 0 != n.state && $(n, !1), r.promise;
     },
     catch: function _catch(t) {
@@ -15690,7 +15685,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         e = I(t);
     this.promise = t, this.resolve = nt(ot, e), this.reject = nt(rt, e);
   }, k.f = Y = function Y(t) {
-    return t === _U || t === i ? new o(t) : V(t);
+    return t === _U || t === i ? new o(t) : J(t);
   }, l || "function" != typeof f || (a = f.prototype.then, h(f.prototype, "then", function (t, e) {
     var n = this;
     return new _U(function (t, e) {
@@ -16879,8 +16874,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       b = n(17),
       m = u.URL,
       w = g.URLSearchParams,
-      _ = g.getState,
-      x = b.set,
+      x = g.getState,
+      _ = b.set,
       O = b.getterFor("URL"),
       E = Math.floor,
       A = Math.pow,
@@ -16902,7 +16897,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       if ("]" != e.charAt(e.length - 1)) return "Invalid host";
       if (!(n = U(e.slice(1, -1)))) return "Invalid host";
       t.host = n;
-    } else if (J(t)) {
+    } else if (K(t)) {
       if (e = y(e), L.test(e)) return "Invalid host";
       if (null === (n = B(e))) return "Invalid host";
       t.host = n;
@@ -16910,7 +16905,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       if (R.test(e)) return "Invalid host";
 
       for (n = "", r = p(e), o = 0; o < r.length; o++) {
-        n += V(r[o], F);
+        n += J(r[o], F);
       }
 
       t.host = n;
@@ -17074,11 +17069,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     "^": 1,
     "|": 1
   }),
-      V = function V(t, e) {
+      J = function J(t, e) {
     var n = d(t, 0);
     return n > 32 && n < 127 && !f(e, t) ? t : encodeURIComponent(t);
   },
-      K = {
+      V = {
     ftp: 21,
     file: null,
     http: 80,
@@ -17086,8 +17081,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     ws: 80,
     wss: 443
   },
-      J = function J(t) {
-    return f(K, t.scheme);
+      K = function K(t) {
+    return f(V, t.scheme);
   },
       W = function W(t) {
     return "" != t.username || "" != t.password;
@@ -17132,7 +17127,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       bt = {},
       mt = {},
       wt = {},
-      _t = function _t(t, e, n, o) {
+      xt = function xt(t, e, n, o) {
     var i,
         a,
         u,
@@ -17165,9 +17160,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               continue;
             }
 
-            if (n && (J(t) != f(K, d) || "file" == d && (W(t) || null !== t.port) || "file" == t.scheme && !t.host)) return;
-            if (t.scheme = d, n) return void (J(t) && K[t.scheme] == t.port && (t.port = null));
-            d = "", "file" == t.scheme ? c = pt : J(t) && o && o.scheme == t.scheme ? c = rt : J(t) ? c = ut : "/" == i[h + 1] ? (c = ot, h++) : (t.cannotBeABaseURL = !0, t.path.push(""), c = bt);
+            if (n && (K(t) != f(V, d) || "file" == d && (W(t) || null !== t.port) || "file" == t.scheme && !t.host)) return;
+            if (t.scheme = d, n) return void (K(t) && V[t.scheme] == t.port && (t.port = null));
+            d = "", "file" == t.scheme ? c = pt : K(t) && o && o.scheme == t.scheme ? c = rt : K(t) ? c = ut : "/" == i[h + 1] ? (c = ot, h++) : (t.cannotBeABaseURL = !0, t.path.push(""), c = bt);
           }
           break;
 
@@ -17201,7 +17196,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           continue;
 
         case it:
-          if (t.scheme = o.scheme, a == r) t.username = o.username, t.password = o.password, t.host = o.host, t.port = o.port, t.path = o.path.slice(), t.query = o.query;else if ("/" == a || "\\" == a && J(t)) c = at;else if ("?" == a) t.username = o.username, t.password = o.password, t.host = o.host, t.port = o.port, t.path = o.path.slice(), t.query = "", c = mt;else {
+          if (t.scheme = o.scheme, a == r) t.username = o.username, t.password = o.password, t.host = o.host, t.port = o.port, t.path = o.path.slice(), t.query = o.query;else if ("/" == a || "\\" == a && K(t)) c = at;else if ("?" == a) t.username = o.username, t.password = o.password, t.host = o.host, t.port = o.port, t.path = o.path.slice(), t.query = "", c = mt;else {
             if ("#" != a) {
               t.username = o.username, t.password = o.password, t.host = o.host, t.port = o.port, t.path = o.path.slice(), t.path.pop(), c = gt;
               continue;
@@ -17212,7 +17207,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           break;
 
         case at:
-          if (!J(t) || "/" != a && "\\" != a) {
+          if (!K(t) || "/" != a && "\\" != a) {
             if ("/" != a) {
               t.username = o.username, t.password = o.password, t.host = o.host, t.port = o.port, c = gt;
               continue;
@@ -17244,13 +17239,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               var m = u[b];
 
               if (":" != m || g) {
-                var w = V(m, Y);
+                var w = J(m, Y);
                 g ? t.password += w : t.username += w;
               } else g = !0;
             }
 
             d = "";
-          } else if (a == r || "/" == a || "?" == a || "#" == a || "\\" == a && J(t)) {
+          } else if (a == r || "/" == a || "?" == a || "#" == a || "\\" == a && K(t)) {
             if (y && "" == d) return "Invalid authority";
             h -= p(d).length + 1, d = "", c = ct;
           } else d += a;
@@ -17265,8 +17260,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
 
           if (":" != a || v) {
-            if (a == r || "/" == a || "?" == a || "#" == a || "\\" == a && J(t)) {
-              if (J(t) && "" == d) return "Invalid host";
+            if (a == r || "/" == a || "?" == a || "#" == a || "\\" == a && K(t)) {
+              if (K(t) && "" == d) return "Invalid host";
               if (n && "" == d && (W(t) || null !== t.port)) return;
               if (l = M(t, d)) return l;
               if (d = "", c = vt, n) return;
@@ -17284,12 +17279,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
         case ht:
           if (!T.test(a)) {
-            if (a == r || "/" == a || "?" == a || "#" == a || "\\" == a && J(t) || n) {
+            if (a == r || "/" == a || "?" == a || "#" == a || "\\" == a && K(t) || n) {
               if ("" != d) {
-                var _ = parseInt(d, 10);
-
-                if (_ > 65535) return "Invalid port";
-                t.port = J(t) && _ === K[t.scheme] ? null : _, d = "";
+                var x = parseInt(d, 10);
+                if (x > 65535) return "Invalid port";
+                t.port = K(t) && x === V[t.scheme] ? null : x, d = "";
               }
 
               if (n) return;
@@ -17347,7 +17341,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           break;
 
         case vt:
-          if (J(t)) {
+          if (K(t)) {
             if (c = gt, "/" != a && "\\" != a) continue;
           } else if (n || "?" != a) {
             if (n || "#" != a) {
@@ -17358,50 +17352,49 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           break;
 
         case gt:
-          if (a == r || "/" == a || "\\" == a && J(t) || !n && ("?" == a || "#" == a)) {
-            if (".." === (s = (s = d).toLowerCase()) || "%2e." === s || ".%2e" === s || "%2e%2e" === s ? (X(t), "/" == a || "\\" == a && J(t) || t.path.push("")) : Q(d) ? "/" == a || "\\" == a && J(t) || t.path.push("") : ("file" == t.scheme && !t.path.length && Z(d) && (t.host && (t.host = ""), d = d.charAt(0) + ":"), t.path.push(d)), d = "", "file" == t.scheme && (a == r || "?" == a || "#" == a)) for (; t.path.length > 1 && "" === t.path[0];) {
+          if (a == r || "/" == a || "\\" == a && K(t) || !n && ("?" == a || "#" == a)) {
+            if (".." === (s = (s = d).toLowerCase()) || "%2e." === s || ".%2e" === s || "%2e%2e" === s ? (X(t), "/" == a || "\\" == a && K(t) || t.path.push("")) : Q(d) ? "/" == a || "\\" == a && K(t) || t.path.push("") : ("file" == t.scheme && !t.path.length && Z(d) && (t.host && (t.host = ""), d = d.charAt(0) + ":"), t.path.push(d)), d = "", "file" == t.scheme && (a == r || "?" == a || "#" == a)) for (; t.path.length > 1 && "" === t.path[0];) {
               t.path.shift();
             }
             "?" == a ? (t.query = "", c = mt) : "#" == a && (t.fragment = "", c = wt);
-          } else d += V(a, H);
+          } else d += J(a, H);
 
           break;
 
         case bt:
-          "?" == a ? (t.query = "", c = mt) : "#" == a ? (t.fragment = "", c = wt) : a != r && (t.path[0] += V(a, F));
+          "?" == a ? (t.query = "", c = mt) : "#" == a ? (t.fragment = "", c = wt) : a != r && (t.path[0] += J(a, F));
           break;
 
         case mt:
-          n || "#" != a ? a != r && ("'" == a && J(t) ? t.query += "%27" : t.query += "#" == a ? "%23" : V(a, F)) : (t.fragment = "", c = wt);
+          n || "#" != a ? a != r && ("'" == a && K(t) ? t.query += "%27" : t.query += "#" == a ? "%23" : J(a, F)) : (t.fragment = "", c = wt);
           break;
 
         case wt:
-          a != r && (t.fragment += V(a, z));
+          a != r && (t.fragment += J(a, z));
       }
 
       h++;
     }
   },
-      xt = function xt(t) {
+      _t = function _t(t) {
     var e,
         n,
-        r = c(this, xt, "URL"),
+        r = c(this, _t, "URL"),
         o = arguments.length > 1 ? arguments[1] : void 0,
         a = String(t),
-        u = x(r, {
+        u = _(r, {
       type: "URL"
     });
-    if (void 0 !== o) if (o instanceof xt) e = O(o);else if (n = _t(e = {}, String(o))) throw TypeError(n);
-    if (n = _t(u, a, null, e)) throw TypeError(n);
 
+    if (void 0 !== o) if (o instanceof _t) e = O(o);else if (n = xt(e = {}, String(o))) throw TypeError(n);
+    if (n = xt(u, a, null, e)) throw TypeError(n);
     var l = u.searchParams = new w(),
-        s = _(l);
-
+        s = x(l);
     s.updateSearchParams(u.query), s.updateURL = function () {
       u.query = String(l) || null;
     }, i || (r.href = Et.call(r), r.origin = At.call(r), r.protocol = St.call(r), r.username = kt.call(r), r.password = Tt.call(r), r.host = jt.call(r), r.hostname = Nt.call(r), r.port = Pt.call(r), r.pathname = qt.call(r), r.search = Lt.call(r), r.searchParams = Rt.call(r), r.hash = Ct.call(r));
   },
-      Ot = xt.prototype,
+      Ot = _t.prototype,
       Et = function Et() {
     var t = O(this),
         e = t.scheme,
@@ -17424,7 +17417,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     } catch (t) {
       return "null";
     }
-    return "file" != e && J(t) ? e + "://" + D(t.host) + (null !== n ? ":" + n : "") : "null";
+    return "file" != e && K(t) ? e + "://" + D(t.host) + (null !== n ? ":" + n : "") : "null";
   },
       St = function St() {
     return O(this).scheme + ":";
@@ -17478,17 +17471,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     href: It(Et, function (t) {
       var e = O(this),
           n = String(t),
-          r = _t(e, n);
-
+          r = xt(e, n);
       if (r) throw TypeError(r);
-
-      _(e.searchParams).updateSearchParams(e.query);
+      x(e.searchParams).updateSearchParams(e.query);
     }),
     origin: It(At),
     protocol: It(St, function (t) {
       var e = O(this);
-
-      _t(e, String(t) + ":", tt);
+      xt(e, String(t) + ":", tt);
     }),
     username: It(kt, function (t) {
       var e = O(this),
@@ -17498,7 +17488,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         e.username = "";
 
         for (var r = 0; r < n.length; r++) {
-          e.username += V(n[r], Y);
+          e.username += J(n[r], Y);
         }
       }
     }),
@@ -17510,34 +17500,34 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         e.password = "";
 
         for (var r = 0; r < n.length; r++) {
-          e.password += V(n[r], Y);
+          e.password += J(n[r], Y);
         }
       }
     }),
     host: It(jt, function (t) {
       var e = O(this);
-      e.cannotBeABaseURL || _t(e, String(t), ct);
+      e.cannotBeABaseURL || xt(e, String(t), ct);
     }),
     hostname: It(Nt, function (t) {
       var e = O(this);
-      e.cannotBeABaseURL || _t(e, String(t), ft);
+      e.cannotBeABaseURL || xt(e, String(t), ft);
     }),
     port: It(Pt, function (t) {
       var e = O(this);
-      G(e) || ("" == (t = String(t)) ? e.port = null : _t(e, t, ht));
+      G(e) || ("" == (t = String(t)) ? e.port = null : xt(e, t, ht));
     }),
     pathname: It(qt, function (t) {
       var e = O(this);
-      e.cannotBeABaseURL || (e.path = [], _t(e, t + "", vt));
+      e.cannotBeABaseURL || (e.path = [], xt(e, t + "", vt));
     }),
     search: It(Lt, function (t) {
       var e = O(this);
-      "" == (t = String(t)) ? e.query = null : ("?" == t.charAt(0) && (t = t.slice(1)), e.query = "", _t(e, t, mt)), _(e.searchParams).updateSearchParams(e.query);
+      "" == (t = String(t)) ? e.query = null : ("?" == t.charAt(0) && (t = t.slice(1)), e.query = "", xt(e, t, mt)), x(e.searchParams).updateSearchParams(e.query);
     }),
     searchParams: It(Rt),
     hash: It(Ct, function (t) {
       var e = O(this);
-      "" != (t = String(t)) ? ("#" == t.charAt(0) && (t = t.slice(1)), e.fragment = "", _t(e, t, wt)) : e.fragment = null;
+      "" != (t = String(t)) ? ("#" == t.charAt(0) && (t = t.slice(1)), e.fragment = "", xt(e, t, wt)) : e.fragment = null;
     })
   }), s(Ot, "toJSON", function () {
     return Et.call(this);
@@ -17550,19 +17540,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }), m) {
     var Mt = m.createObjectURL,
         Bt = m.revokeObjectURL;
-    Mt && s(xt, "createObjectURL", function (t) {
+    Mt && s(_t, "createObjectURL", function (t) {
       return Mt.apply(m, arguments);
-    }), Bt && s(xt, "revokeObjectURL", function (t) {
+    }), Bt && s(_t, "revokeObjectURL", function (t) {
       return Bt.apply(m, arguments);
     });
   }
 
-  v(xt, "URL"), o({
+  v(_t, "URL"), o({
     global: !0,
     forced: !a,
     sham: !i
   }, {
-    URL: xt
+    URL: _t
   });
 }, function (t, e, n) {
   "use strict";
@@ -17628,11 +17618,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           for (var g = f, b = 36;; b += 36) {
             var m = b <= h ? 1 : b >= h + 26 ? 26 : b - h;
             if (g < m) break;
-
             var w = g - m,
-                _ = 36 - m;
-
-            r.push(u(l(m + w % _))), g = a(w / _);
+                x = 36 - m;
+            r.push(u(l(m + w % x))), g = a(w / x);
           }
 
           r.push(u(l(g))), h = s(f, v, d == p), f = 0, ++d;
@@ -17845,14 +17833,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return o ? o.done ? (e[t.resultName] = o.value, e.next = t.nextLoc, "return" !== e.method && (e.method = "next", e.arg = void 0), e.delegate = null, c) : o : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, c);
     }
 
-    function _(t) {
+    function x(t) {
       var e = {
         tryLoc: t[0]
       };
       1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e);
     }
 
-    function x(t) {
+    function _(t) {
       var e = t.completion || {};
       e.type = "normal", delete e.arg, t.completion = e;
     }
@@ -17860,7 +17848,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     function O(t) {
       this.tryEntries = [{
         tryLoc: "root"
-      }], t.forEach(_, this), this.reset(!0);
+      }], t.forEach(x, this), this.reset(!0);
     }
 
     function E(t) {
@@ -17934,7 +17922,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }, t.values = E, O.prototype = {
       constructor: O,
       reset: function reset(t) {
-        if (this.prev = 0, this.next = 0, this.sent = this._sent = void 0, this.done = !1, this.delegate = null, this.method = "next", this.arg = void 0, this.tryEntries.forEach(x), !t) for (var e in this) {
+        if (this.prev = 0, this.next = 0, this.sent = this._sent = void 0, this.done = !1, this.delegate = null, this.method = "next", this.arg = void 0, this.tryEntries.forEach(_), !t) for (var e in this) {
           "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = void 0);
         }
       },
@@ -17994,7 +17982,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       finish: function finish(t) {
         for (var e = this.tryEntries.length - 1; e >= 0; --e) {
           var n = this.tryEntries[e];
-          if (n.finallyLoc === t) return this.complete(n.completion, n.afterLoc), x(n), c;
+          if (n.finallyLoc === t) return this.complete(n.completion, n.afterLoc), _(n), c;
         }
       },
       catch: function _catch(t) {
@@ -18006,7 +17994,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
             if ("throw" === r.type) {
               var o = r.arg;
-              x(n);
+
+              _(n);
             }
 
             return o;
@@ -18385,7 +18374,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }]) && m(e.prototype, n), r && m(e, r), t;
   }();
 
-  function _(t, e) {
+  function x(t, e) {
     return function (t) {
       if (Array.isArray(t)) return t;
     }(t) || function (t, e) {
@@ -18412,17 +18401,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return n;
     }(t, e) || function (t, e) {
       if (!t) return;
-      if ("string" == typeof t) return x(t, e);
+      if ("string" == typeof t) return _(t, e);
       var n = Object.prototype.toString.call(t).slice(8, -1);
       "Object" === n && t.constructor && (n = t.constructor.name);
       if ("Map" === n || "Set" === n) return Array.from(t);
-      if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return x(t, e);
+      if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _(t, e);
     }(t, e) || function () {
       throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
     }();
   }
 
-  function x(t, e) {
+  function _(t, e) {
     (null == e || e > t.length) && (e = t.length);
 
     for (var n = 0, r = new Array(e); n < e; n++) {
@@ -18457,14 +18446,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           action: function action(e, n, r, o) {
             var i = r.exec(e);
             if (!i) return !1;
-
-            var a = _(i, 3),
+            var a = x(i, 3),
                 u = a[0],
                 l = a[1],
                 s = a[2],
                 c = t.quillJS.getText()[o + i.index],
                 f = t.quillJS.getText()[o + i.index + 1];
-
             if (l === c && c === f) return !1;
             var h = o + i.index;
             return setTimeout(function () {
@@ -18601,13 +18588,98 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   function P(t, e) {
+    return function (t) {
+      if (Array.isArray(t)) return t;
+    }(t) || function (t, e) {
+      if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(t))) return;
+      var n = [],
+          r = !0,
+          o = !1,
+          i = void 0;
+
+      try {
+        for (var a, u = t[Symbol.iterator](); !(r = (a = u.next()).done) && (n.push(a.value), !e || n.length !== e); r = !0) {
+          ;
+        }
+      } catch (t) {
+        o = !0, i = t;
+      } finally {
+        try {
+          r || null == u.return || u.return();
+        } finally {
+          if (o) throw i;
+        }
+      }
+
+      return n;
+    }(t, e) || function (t, e) {
+      if (!t) return;
+      if ("string" == typeof t) return q(t, e);
+      var n = Object.prototype.toString.call(t).slice(8, -1);
+      "Object" === n && t.constructor && (n = t.constructor.name);
+      if ("Map" === n || "Set" === n) return Array.from(t);
+      if ("Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return q(t, e);
+    }(t, e) || function () {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }();
+  }
+
+  function q(t, e) {
+    (null == e || e > t.length) && (e = t.length);
+
+    for (var n = 0, r = new Array(e); n < e; n++) {
+      r[n] = t[n];
+    }
+
+    return r;
+  }
+
+  function L(t, e) {
     for (var n = 0; n < e.length; n++) {
       var r = e[n];
       r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(t, r.key, r);
     }
   }
 
-  var q = function () {
+  var R = function () {
+    function t(e) {
+      !function (t, e) {
+        if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+      }(this, t), this.quillJS = e, this.name = "list", this.pattern = /^(-)+\s/g, this.getAction.bind(this);
+    }
+
+    var e, n, r;
+    return e = t, (n = [{
+      key: "getAction",
+      value: function value() {
+        var t = this;
+        return {
+          name: this.name,
+          pattern: this.pattern,
+          action: function action(e, n, r) {
+            if (!r.exec(e)) return !1;
+            var o = P(t.quillJS.getLine(n.index), 1)[0],
+                i = t.quillJS.getIndex(o);
+            window.quillJS = t.quillJS, setTimeout(function () {
+              var n = e.split("- ").splice(1, 1).join("");
+              t.quillJS.insertText(i, n), t.quillJS.deleteText(i + n.length - 1, e.length), setTimeout(function () {
+                t.quillJS.formatLine(i, 0, "list", "bullet");
+              });
+            }, 0);
+          }
+        };
+      }
+    }]) && L(e.prototype, n), r && L(e, r), t;
+  }();
+
+  function C(t, e) {
+    for (var n = 0; n < e.length; n++) {
+      var r = e[n];
+      r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(t, r.key, r);
+    }
+  }
+
+  var I = function () {
     function t(e) {
       !function (t, e) {
         if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
@@ -18645,17 +18717,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         };
       }
-    }]) && P(e.prototype, n), r && P(e, r), t;
+    }]) && C(e.prototype, n), r && C(e, r), t;
   }();
 
-  function L(t, e) {
+  function M(t, e) {
     for (var n = 0; n < e.length; n++) {
       var r = e[n];
       r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(t, r.key, r);
     }
   }
 
-  var R = function () {
+  var B = function () {
     function t(e) {
       !function (t, e) {
         if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
@@ -18683,21 +18755,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           }
         };
       }
-    }]) && L(e.prototype, n), r && L(e, r), t;
+    }]) && M(e.prototype, n), r && M(e, r), t;
   }();
 
-  function C(t, e) {
+  function U(t, e) {
     for (var n = 0; n < e.length; n++) {
       var r = e[n];
       r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(t, r.key, r);
     }
   }
 
-  var I = function () {
+  var D = function () {
     function t(e) {
       !function (t, e) {
         if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-      }(this, t), this.quillJS = e, this.getOperatorsAll.bind(this), this.tags = [new l(this.quillJS).getAction(), new h(this.quillJS).getAction(), new v(this.quillJS).getAction(), new S(this.quillJS).getAction(), new q(this.quillJS).getAction(), new w(this.quillJS).getAction(), new N(this.quillJS).getAction(), new R(this.quillJS).getAction(), new E(this.quillJS).getAction()];
+      }(this, t), this.quillJS = e, this.getOperatorsAll.bind(this), this.tags = [new l(this.quillJS).getAction(), new h(this.quillJS).getAction(), new v(this.quillJS).getAction(), new S(this.quillJS).getAction(), new I(this.quillJS).getAction(), new w(this.quillJS).getAction(), new B(this.quillJS).getAction(), new E(this.quillJS).getAction()], this.fullTextTags = [new l(this.quillJS).getAction(), new h(this.quillJS).getAction(), new v(this.quillJS).getAction(), new S(this.quillJS).getAction(), new I(this.quillJS).getAction(), new w(this.quillJS).getAction(), new N(this.quillJS).getAction(), new R(this.quillJS).getAction(), new B(this.quillJS).getAction(), new E(this.quillJS).getAction()];
     }
 
     var e, n, r;
@@ -18706,14 +18778,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       value: function value() {
         return this.tags;
       }
-    }]) && C(e.prototype, n), r && C(e, r), t;
+    }, {
+      key: "getFullTextOperatorsAll",
+      value: function value() {
+        return this.fullTextTags;
+      }
+    }]) && U(e.prototype, n), r && U(e, r), t;
   }();
 
-  function M(t, e) {
+  function F(t, e) {
     var _n;
 
     if ("undefined" == typeof Symbol || null == t[Symbol.iterator]) {
-      if (Array.isArray(t) || (_n = F(t)) || e && t && "number" == typeof t.length) {
+      if (Array.isArray(t) || (_n = J(t)) || e && t && "number" == typeof t.length) {
         _n && (t = _n);
 
         var r = 0,
@@ -18764,7 +18841,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   }
 
-  function B(t, e, n, r, o, i, a) {
+  function z(t, e, n, r, o, i, a) {
     try {
       var u = t[i](a),
           l = u.value;
@@ -18775,7 +18852,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     u.done ? e(l) : Promise.resolve(l).then(r, o);
   }
 
-  function U(t) {
+  function H(t) {
     return function () {
       var e = this,
           n = arguments;
@@ -18783,11 +18860,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var i = t.apply(e, n);
 
         function a(t) {
-          B(i, r, o, a, u, "next", t);
+          z(i, r, o, a, u, "next", t);
         }
 
         function u(t) {
-          B(i, r, o, a, u, "throw", t);
+          z(i, r, o, a, u, "throw", t);
         }
 
         a(void 0);
@@ -18795,7 +18872,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   }
 
-  function D(t, e) {
+  function Y(t, e) {
     return function (t) {
       if (Array.isArray(t)) return t;
     }(t) || function (t, e) {
@@ -18820,20 +18897,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
 
       return n;
-    }(t, e) || F(t, e) || function () {
+    }(t, e) || J(t, e) || function () {
       throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
     }();
   }
 
-  function F(t, e) {
+  function J(t, e) {
     if (t) {
-      if ("string" == typeof t) return z(t, e);
+      if ("string" == typeof t) return V(t, e);
       var n = Object.prototype.toString.call(t).slice(8, -1);
-      return "Object" === n && t.constructor && (n = t.constructor.name), "Map" === n || "Set" === n ? Array.from(t) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? z(t, e) : void 0;
+      return "Object" === n && t.constructor && (n = t.constructor.name), "Map" === n || "Set" === n ? Array.from(t) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? V(t, e) : void 0;
     }
   }
 
-  function z(t, e) {
+  function V(t, e) {
     (null == e || e > t.length) && (e = t.length);
 
     for (var n = 0, r = new Array(e); n < e; n++) {
@@ -18843,14 +18920,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     return r;
   }
 
-  function H(t, e) {
+  function K(t, e) {
     for (var n = 0; n < e.length; n++) {
       var r = e[n];
       r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(t, r.key, r);
     }
   }
 
-  var Y = function () {
+  var W = function () {
     function t(e, n) {
       !function (t, e) {
         if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
@@ -18862,7 +18939,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         grave: "`",
         tilde: "~",
         underscore: "_"
-      }, this.ignoreTags = ["PRE"], this.tags = new I(this.quillJS), this.matches = this.tags.getOperatorsAll();
+      }, this.ignoreTags = ["PRE"], this.tags = new D(this.quillJS), this.matches = this.tags.getOperatorsAll(), this.fullMatches = this.tags.getFullTextOperatorsAll();
     }
 
     var e, n, r;
@@ -18880,7 +18957,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             var a = function a(t) {
               return new Promise(function (e) {
                 var n = setInterval(function () {
-                  var o = D(r.quillJS.getLine(t), 1)[0];
+                  var o = Y(r.quillJS.getLine(t), 1)[0];
                   if (!o) return clearInterval(n), 0;
                   var i = r.quillJS.getIndex(o);
 
@@ -18889,7 +18966,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                     length: 0
                   })) {
                     clearInterval(n);
-                    var a = D(r.quillJS.getLine(t), 1)[0],
+                    var a = Y(r.quillJS.getLine(t), 1)[0],
                         u = r.quillJS.getIndex(a);
                     a && a.domNode || e(0);
                     var l = a.domNode.textContent || "";
@@ -18899,13 +18976,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               });
             };
 
-            setTimeout(U(regeneratorRuntime.mark(function t() {
+            setTimeout(H(regeneratorRuntime.mark(function t() {
               var e, n, r, u, l;
               return regeneratorRuntime.wrap(function (t) {
                 for (;;) {
                   switch (t.prev = t.next) {
                     case 0:
-                      e = o, n = i.split("\n"), r = e, u = M(n), t.prev = 4, u.s();
+                      e = o, n = i.split("\n"), r = e, u = F(n), t.prev = 4, u.s();
 
                     case 6:
                       if ((l = u.n()).done) {
@@ -18975,7 +19052,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var t = this.quillJS.getSelection();
 
         if (t) {
-          var e = D(this.quillJS.getLine(t.index), 2),
+          var e = Y(this.quillJS.getLine(t.index), 2),
               n = e[0],
               r = e[1],
               o = n.domNode.textContent,
@@ -18983,7 +19060,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           if (this.isValid(o, n.domNode.tagName)) {
             var a,
-                u = M(this.matches);
+                u = F(this.matches);
 
             try {
               for (u.s(); !(a = u.n()).done;) {
@@ -19004,7 +19081,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var e = t || this.quillJS.getSelection();
 
         if (e) {
-          var n = D(this.quillJS.getLine(e.index), 2),
+          var n = Y(this.quillJS.getLine(e.index), 2),
               r = n[0],
               o = n[1];
 
@@ -19016,7 +19093,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
             if (e.length = e.index++, this.isValid(l, r.domNode.tagName)) {
               if ("string" == typeof u && u.length > 0 && " " === l) {
-                var s = this.matches.find(function (t) {
+                var s = this.fullMatches.find(function (t) {
                   return t.name === r.domNode.tagName.toLowerCase();
                 });
                 if (s && s.release) return void s.release(e);
@@ -19024,7 +19101,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
               console.log("check for ", l);
               var c,
-                  f = M(this.matches);
+                  f = F(this.fullMatches);
 
               try {
                 for (f.s(); !(c = f.n()).done;) {
@@ -19054,15 +19131,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           r && r.release && r.release(e);
         }
       }
-    }]) && H(e.prototype, n), r && H(e, r), t;
+    }]) && K(e.prototype, n), r && K(e, r), t;
   }(),
-      V = {
+      G = {
     theme: "snow"
   };
 
   document.addEventListener("DOMContentLoaded", function () {
-    var t = new o.a("#editor", V);
-    new Y(t);
+    var t = new o.a("#editor", G);
+    new W(t);
   });
 }]);
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -19093,7 +19170,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58270" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58908" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
