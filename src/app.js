@@ -24,7 +24,9 @@ class MarkdownActivity {
   onTextChange (delta, oldContents, source) {
     if (source !== 'user') return
     const cursorOffset = (delta.ops[0] && delta.ops[0].retain) || 0
-    const inputText = delta.ops[0].insert || delta.ops[1].insert
+    const inputText = delta.ops[0].insert || (delta.ops[1] && delta.ops[1].insert)
+
+    if (!inputText) return
 
     if (inputText.length > 1) {
       window._quill = this.quillJS
@@ -111,7 +113,6 @@ class MarkdownActivity {
     const [line, offset] = this.quillJS.getLine(selection.index)
 
     if (!line || offset < 0) return
-
     const lineStart = selection.index - offset
     const beforeNode = this.quillJS.getLine(lineStart - 1)[0]
     const beforeLineText = beforeNode && beforeNode.domNode.textContent
@@ -127,8 +128,10 @@ class MarkdownActivity {
         }
       }
 
+      console.log('check for ', text)
       for (let match of this.matches) {
         const matchedText = text.match(match.pattern)
+        console.log('pattern ', match.pattern, text, matchedText)
         if (matchedText) {
           return match.action(text, selection, match.pattern, lineStart)
         }
