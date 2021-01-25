@@ -1,6 +1,8 @@
 import Header from './header'
 import Blockquote from './blockquote'
 import Bold from './bold'
+import CheckBoxChecked from './checkbox-checked'
+import CheckBoxUnchecked from './checkbox-unchecked'
 import InlineCode from './inlinecode'
 import Italics from './italics'
 import Link from './link'
@@ -28,6 +30,8 @@ class TagsOperators {
       new Header(this.quillJS).getAction(),
       new Blockquote(this.quillJS).getAction(),
       new Bold(this.quillJS).getAction(),
+      new CheckBoxChecked(this.quillJS).getAction(),
+      new CheckBoxUnchecked(this.quillJS).getAction(),
       new Link(this.quillJS).getAction(),
       new Codeblock(this.quillJS).getAction(),
       new InlineCode(this.quillJS).getAction(),
