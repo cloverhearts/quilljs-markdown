@@ -17,10 +17,8 @@ class Codeblock {
         const [line] = this.quillJS.getLine(selection.index)
         setTimeout(() => {
           const startIndex = this.quillJS.getIndex(line)
-          // const startIndex = selection.index - originalText.length - 1
           this.quillJS.deleteText(startIndex, originalText.length + 1)
           setTimeout(() => {
-            // const newLinePosition = startIndex + 1 + '\n'.length + 1
             let line = this.quillJS.getLine(startIndex)[0]
             while (line) {
               const lineOffset = this.quillJS.getIndex(line)

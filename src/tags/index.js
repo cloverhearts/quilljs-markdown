@@ -1,15 +1,17 @@
 import Header from './header'
 import Blockquote from './blockquote'
+import BlockquoteFulltext from './blockquote/fulltext'
 import Bold from './bold'
-import CheckBoxChecked from './checkbox-checked'
-import CheckBoxUnchecked from './checkbox-unchecked'
+import CheckBoxChecked from './checkbox/fulltext-checked'
+import CheckBoxUnchecked from './checkbox/fulltext-unchecked'
 import InlineCode from './inlinecode'
 import Italics from './italics'
 import Link from './link'
-import ListOfNumber from './listn'
-import ListOfBullet from './listb'
+import LinkFullText from './link/fulltext'
+import ListOfNumber from './listn/fulltext'
+import ListOfBullet from './listb/fulltext'
 import Codeblock from './codeblock'
-import CodeblockFullText from './codeblock-fulltext'
+import CodeblockFullText from './codeblock/fulltext'
 import Strikethrough from './strikethrough'
 
 class TagsOperators {
@@ -29,11 +31,11 @@ class TagsOperators {
 
     this.fullTextTags = [
       new Header(this.quillJS).getAction(),
-      new Blockquote(this.quillJS).getAction(),
+      new BlockquoteFulltext(this.quillJS).getAction(),
       new Bold(this.quillJS).getAction(),
       new CheckBoxChecked(this.quillJS).getAction(),
       new CheckBoxUnchecked(this.quillJS).getAction(),
-      new Link(this.quillJS).getAction(),
+      new LinkFullText(this.quillJS).getAction(),
       new CodeblockFullText(this.quillJS).getAction(),
       new InlineCode(this.quillJS).getAction(),
       new ListOfNumber(this.quillJS).getAction(),

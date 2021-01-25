@@ -30,7 +30,6 @@ class MarkdownActivity {
     if (!inputText) return
 
     if (inputText.length > 1) {
-      window._quill = this.quillJS
       const repeatExecuteFullCommand = (textOffset) => new Promise((resolve) => {
         const repeatHandler = setInterval(() => {
           const [line] = this.quillJS.getLine(textOffset)
