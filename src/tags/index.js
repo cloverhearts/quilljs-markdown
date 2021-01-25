@@ -9,6 +9,7 @@ import Link from './link'
 import ListOfNumber from './listn'
 import ListOfBullet from './listb'
 import Codeblock from './codeblock'
+import CodeblockFullText from './codeblock-fulltext'
 import Strikethrough from './strikethrough'
 
 class TagsOperators {
@@ -33,7 +34,7 @@ class TagsOperators {
       new CheckBoxChecked(this.quillJS).getAction(),
       new CheckBoxUnchecked(this.quillJS).getAction(),
       new Link(this.quillJS).getAction(),
-      new Codeblock(this.quillJS).getAction(),
+      new CodeblockFullText(this.quillJS).getAction(),
       new InlineCode(this.quillJS).getAction(),
       new ListOfNumber(this.quillJS).getAction(),
       new ListOfBullet(this.quillJS).getAction(),

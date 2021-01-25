@@ -15,7 +15,6 @@ class Link {
         if (!match) return false
         const [line] = this.quillJS.getLine(selection.index)
         const index = this.quillJS.getIndex(line)
-        window.quillJS = this.quillJS
         setTimeout(() => {
           const replaceText = text.split('. ').splice(1, 1).join('')
           this.quillJS.insertText(index, replaceText)

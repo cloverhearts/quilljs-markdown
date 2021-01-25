@@ -97,6 +97,11 @@ class MarkdownActivity {
     const [line, offset] = this.quillJS.getLine(selection.index)
     const text = line.domNode.textContent
     const lineStart = selection.index - offset
+    const format = this.quillJS.getFormat(lineStart)
+    if (format['code-block']) {
+      // if exists text in code-block, to skip.
+      return
+    }
     if (this.isValid(text, line.domNode.tagName)) {
       for (let match of this.matches) {
         const matchedText = text.match(match.pattern)
@@ -115,6 +120,11 @@ class MarkdownActivity {
 
     if (!line || offset < 0) return
     const lineStart = selection.index - offset
+    const format = this.quillJS.getFormat(lineStart)
+    if (format['code-block']) {
+      // if exists text in code-block, to skip.
+      return
+    }
     const beforeNode = this.quillJS.getLine(lineStart - 1)[0]
     const beforeLineText = beforeNode && beforeNode.domNode.textContent
     const text = line.domNode.textContent + ' '
@@ -129,10 +139,8 @@ class MarkdownActivity {
         }
       }
 
-      console.log('check for ', text)
       for (let match of this.fullMatches) {
         const matchedText = text.match(match.pattern)
-        console.log('pattern ', match.pattern, text, matchedText)
         if (matchedText) {
           return match.action(text, selection, match.pattern, lineStart)
         }
