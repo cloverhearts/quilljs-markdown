@@ -33,6 +33,12 @@
     }
     article section header h3 {
       color: #777;
+    }
+
+    .code-line {
+      margin-left: 2rem;
+      margin-bottom: 3rem;
+      font-size: 0.9rem;
     }</style>
 </head>
 <body>
@@ -72,82 +78,112 @@
         <header>
           <h3>Paste support for Markdown format. (copy and paste from below code)</h3>
         </header>
-        <code style="border-radius: 1rem; background: #eee; padding: 1rem">
-          Official Repository is [here](https://github.com/cloverhearts/quilljs-markdown)
-        </code>
+        <div style="border-radius: 1rem; background: #eee; padding: 1rem">
+          # paste for markdown<br>
+          <br>
+          You can paste with `Ctrl + Shift + v` from copies.<br>
+          <br>
+          1. 1 DEPTH<br>
+          2. 2 DEPTH<br>
+          1. 2 DEPTH<br>
+          2. 2 DEPTH<br>
+          <br>
+          string to **strong** and string to `hightlight`<br>
+          <br>
+          ```
+          <br>
+          # HEADER<br>
+          <br>
+          This is ~~code-block~~<br>
+          <br>
+          TODO<br>
+          <br>
+          [x] Sleep<br>
+          [ ] More sleep<br>
+          <br>
+          <br>
+          ```<br>
+          <br>
+          ## TODO<br>
+          [x] bug fix.<br>
+          [ ] play with friends.<br>
+          <br>
+          Have a ~~super~~ nice day
+          <br>
+        </div>
       </section>
       <br>
       <section>
         <header>
           <h3>Heading</h3>
         </header>
-        <pre>
-          # MyTitle
-          ## MyTitle
-          ### MyTitle
-          #### MyTitle
-          ##### MyTitle
-        </pre>
+        <div class="code-line">
+          # MyTitle<br>
+          ## MyTitle<br>
+          ### MyTitle<br>
+          #### MyTitle<br>
+          ##### MyTitle<br>
+        </div>
       </section>
       <section>
         <header>
           <h3>Blockquote</h3>
         </header>
-        <pre>
-          > blockquote text
-        </pre>
+        <div class="code-line">
+          > blockquote text<br>
+        </div>
       </section>
       <section>
         <header>
           <h3>bold</h3>
         </header>
-        <pre>
-          **Bold Text**
-          or
-          __Bold Text__
-        </pre>
+        <div class="code-line">
+          **Bold Text**<br>
+          or<br>
+          __Bold Text__<br>
+        </div>
       </section>
       <section>
         <header>
           <h3>Italics</h3>
         </header>
-        <pre>
-          *Italics Text*
-          or
-          _Italics Text_
-        </pre>
+        <div class="code-line">
+          *Italics Text*<br>
+          or<br>
+          _Italics Text_<br>
+        </div>
       </section>
       <section>
         <header>
           <h3>Link</h3>
         </header>
-        <pre>
+        <div class="code-line">
           [Go to Repository](https://github.com/cloverhearts/quilljs-markdown)
-        </pre>
+        </div>
       </section>
       <section>
         <header>
           <h3>inline code</h3>
         </header>
-        <pre>
+        <div class="code-line">
           `inline code block`
-        </pre>
+        </div>
       </section>
       <section>
         <header>
           <h3>Code block</h3>
         </header>
-        <pre>
-          ```
-            Code block
-          ```
-        </pre>
+        <div class="code-line">
+          ```<br>
+            Code block<br>
+          ```<br>
+        </div>
       </section>
       <section>
         <header>
           <h3>List</h3>
         </header>
-        <pre>
+        <div class="code-line">
           1. one<br>
           2. two<br>
           3. three<br>
@@ -155,31 +191,30 @@
           * one<br>
           * two<br>
           * three<br>
-        </pre>
+        </div>
       </section>
       <section>
         <header>
           <h3>Strikethrough</h3>
         </header>
-        <pre>
-          <pre>
+        <div class="code-line">
+          <div class="code-line">
             ~~Strikethrough Message~~
-          </pre>
-        </pre>
+          </div>
+        </div>
       </section>
       <section>
         <header>
           <h3>Checkbox</h3>
         </header>
-        <pre>
-          <pre>
-            [ ] checkbox
-            [x] checked
-          </pre>
-        </pre>
+        <div class="code-line">
+          <div class="code-line">
+            [ ] checkbox<br>
+            [x] checked<br>
+          </div>
+        </div>
       </section>
     </article>
   </main>
-
 </body>
 </html>

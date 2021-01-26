@@ -2,7 +2,7 @@ class Link {
   constructor (quillJS) {
     this.quillJS = quillJS
     this.name = 'list'
-    this.pattern = /^(-|\*)+\s/g
+    this.pattern = /^\s{0,9}(-|\*)+\s/g
     this.getAction.bind(this)
   }
 
@@ -20,13 +20,15 @@ class Link {
 
         const [line] = this.quillJS.getLine(selection.index)
         const index = this.quillJS.getIndex(line)
+
         setTimeout(() => {
-          let replaceText = text.split('- ').length > 1 ? text.split('- ').splice(1, 1).join('') : text
-          replaceText = replaceText.split('* ').length > 1 ? replaceText.split('* ').splice(1, 1).join('') : replaceText
+          let offsetText = `${text}`.replace(/\*/gi, '-')
+          const depth = offsetText.split('- ')[0].split('').filter(e => /\s/gi.test(e)).length
+          let replaceText = offsetText.split('- ').length > 1 ? offsetText.split('- ').splice(1, 1).join('') : offsetText
           this.quillJS.insertText(index, replaceText)
           this.quillJS.deleteText(index + replaceText.length - 1, text.length)
           setTimeout(() => {
-            this.quillJS.formatLine(index, 0, 'list', 'bullet')
+            this.quillJS.formatLine(index, 0, { list: 'bullet', indent: depth })
           })
         }, 0)
       }

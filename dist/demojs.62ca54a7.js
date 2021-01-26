@@ -18805,7 +18805,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     function t(e) {
       !function (t, e) {
         if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-      }(this, t), this.quillJS = e, this.name = "list", this.pattern = /^(\d)+\.\s/g, this.getAction.bind(this);
+      }(this, t), this.quillJS = e, this.name = "list", this.pattern = /^\s{0,9}(\d)+\.\s/g, this.getAction.bind(this);
     }
 
     var e, n, r;
@@ -18820,10 +18820,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             if (!r.exec(e)) return !1;
             var o = U(t.quillJS.getLine(n.index), 1)[0],
                 i = t.quillJS.getIndex(o);
-            setTimeout(function () {
-              var n = e.split(". ").splice(1, 1).join("");
-              t.quillJS.insertText(i, n), t.quillJS.deleteText(i + n.length - 1, e.length), setTimeout(function () {
-                t.quillJS.formatLine(i, 0, "list", "ordered");
+            window.quillJS = t.quillJS, setTimeout(function () {
+              var n = e.split(". ")[0].split("").filter(function (t) {
+                return /\s/gi.test(t);
+              }).length,
+                  r = e.split(". ").splice(1, 1).join("");
+              window.t = e, t.quillJS.insertText(i, r), t.quillJS.deleteText(i + r.length - 1, e.length), setTimeout(function () {
+                t.quillJS.formatLine(i, 0, {
+                  list: "ordered",
+                  indent: n
+                });
               });
             }, 0);
           }
@@ -18890,7 +18896,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     function t(e) {
       !function (t, e) {
         if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-      }(this, t), this.quillJS = e, this.name = "list", this.pattern = /^(-|\*)+\s/g, this.getAction.bind(this);
+      }(this, t), this.quillJS = e, this.name = "list", this.pattern = /^\s{0,9}(-|\*)+\s/g, this.getAction.bind(this);
     }
 
     var e, n, r;
@@ -18908,9 +18914,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               var o = z(t.quillJS.getLine(n.index), 1)[0],
                   i = t.quillJS.getIndex(o);
               setTimeout(function () {
-                var n = e.split("- ").length > 1 ? e.split("- ").splice(1, 1).join("") : e;
-                n = n.split("* ").length > 1 ? n.split("* ").splice(1, 1).join("") : n, t.quillJS.insertText(i, n), t.quillJS.deleteText(i + n.length - 1, e.length), setTimeout(function () {
-                  t.quillJS.formatLine(i, 0, "list", "bullet");
+                var n = "".concat(e).replace(/\*/gi, "-"),
+                    r = n.split("- ")[0].split("").filter(function (t) {
+                  return /\s/gi.test(t);
+                }).length,
+                    o = n.split("- ").length > 1 ? n.split("- ").splice(1, 1).join("") : n;
+                t.quillJS.insertText(i, o), t.quillJS.deleteText(i + o.length - 1, e.length), setTimeout(function () {
+                  t.quillJS.formatLine(i, 0, {
+                    list: "bullet",
+                    indent: r
+                  });
                 });
               }, 0);
             }
@@ -19517,7 +19530,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62117" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50886" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
