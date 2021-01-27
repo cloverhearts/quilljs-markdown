@@ -10,9 +10,12 @@ class Link {
     return {
       name: this.name,
       pattern: this.pattern,
-      action: (text, selection, pattern) => {
+      action: (text, selection, pattern) => new Promise((resolve) => {
         const match = pattern.exec(text)
-        if (!match) return false
+        if (!match) {
+          resolve(false)
+          return
+        }
         const [line] = this.quillJS.getLine(selection.index)
         const index = this.quillJS.getIndex(line)
         setTimeout(() => {
@@ -21,9 +24,10 @@ class Link {
           this.quillJS.deleteText(index + replaceText.length - 1, text.length)
           setTimeout(() => {
             this.quillJS.formatLine(index, 0, 'list', 'checked')
+            resolve(true)
           })
         }, 0)
-      }
+      })
     }
   }
 }

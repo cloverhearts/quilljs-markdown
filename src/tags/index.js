@@ -8,8 +8,8 @@ import InlineCode from './inlinecode'
 import Italics from './italics'
 import Link from './link'
 import LinkFullText from './link/fulltext'
-import ListOfNumber from './listn/fulltext'
-import ListOfBullet from './listb/fulltext'
+import ListOfNumberFulltext from './listn/fulltext'
+import ListOfBulletFulltext from './listb/fulltext'
 import Codeblock from './codeblock'
 import CodeblockFullText from './codeblock/fulltext'
 import Strikethrough from './strikethrough'
@@ -31,15 +31,15 @@ class TagsOperators {
 
     this.fullTextTags = [
       new Header(this.quillJS).getAction(),
-      new BlockquoteFulltext(this.quillJS).getAction(),
-      new Bold(this.quillJS).getAction(),
       new CheckBoxChecked(this.quillJS).getAction(),
       new CheckBoxUnchecked(this.quillJS).getAction(),
-      new LinkFullText(this.quillJS).getAction(),
+      new ListOfNumberFulltext(this.quillJS).getAction(),
+      new ListOfBulletFulltext(this.quillJS).getAction(),
+      new BlockquoteFulltext(this.quillJS).getAction(),
       new CodeblockFullText(this.quillJS).getAction(),
+      new Bold(this.quillJS).getAction(),
+      new LinkFullText(this.quillJS).getAction(),
       new InlineCode(this.quillJS).getAction(),
-      new ListOfNumber(this.quillJS).getAction(),
-      new ListOfBullet(this.quillJS).getAction(),
       new Strikethrough(this.quillJS).getAction(),
       new Italics(this.quillJS).getAction()
     ]

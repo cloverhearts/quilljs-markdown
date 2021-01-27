@@ -30,32 +30,36 @@ class MarkdownActivity {
     if (!inputText) return
 
     if (inputText.length > 1) {
-      const repeatExecuteFullCommand = (textOffset) => new Promise((resolve) => {
-        const repeatHandler = setInterval(() => {
-          const [line] = this.quillJS.getLine(textOffset)
-          if (!line) {
-            clearInterval(repeatHandler)
-            return 0
-          }
-          const firstIndex = this.quillJS.getIndex(line)
-          if (!this.onFullTextExecute.bind(this)({ index: firstIndex, length: 0 })) {
-            clearInterval(repeatHandler)
-            const [line] = this.quillJS.getLine(textOffset)
-            const firstIndex = this.quillJS.getIndex(line)
-            if (!line || !(line.domNode)) { resolve(0) }
-            const text = line.domNode.textContent || ''
-            resolve(firstIndex + text.length + 1)
-          }
-        }, 10)
-      })
-
       setTimeout(async () => {
         const cursorOffsetFixed = cursorOffset
         const tokens = inputText.split('\n')
         let _offset = cursorOffsetFixed
         // eslint-disable-next-line no-unused-vars
         for (let v of tokens) {
-          _offset = await repeatExecuteFullCommand(_offset)
+          const [line] = this.quillJS.getLine(_offset)
+          if (!line) {
+            return 0
+          }
+          const firstIndex = this.quillJS.getIndex(line)
+          let _targetText = ''
+          let result = await this.onFullTextExecute.bind(this)({ index: firstIndex, length: 0 })
+
+          if (result) {
+            while (result) {
+              const [line] = this.quillJS.getLine(_offset)
+              const firstIndex = this.quillJS.getIndex(line)
+              if (!line || !(line.domNode)) {
+                result = false
+                break
+              }
+
+              _targetText = line.domNode.textContent || ''
+              result = await this.onFullTextExecute.bind(this)({ index: firstIndex, length: 0 })
+            }
+          } else {
+            _targetText = line.domNode.textContent || ''
+          }
+          _offset += _targetText.length + 1
         }
       }, 0)
       return
@@ -112,17 +116,17 @@ class MarkdownActivity {
     }
   }
 
-  onFullTextExecute (virtualSelection) {
+  async onFullTextExecute (virtualSelection) {
     let selection = virtualSelection || this.quillJS.getSelection()
-    if (!selection) return
+    if (!selection) return false
     const [line, offset] = this.quillJS.getLine(selection.index)
 
-    if (!line || offset < 0) return
+    if (!line || offset < 0) return false
     const lineStart = selection.index - offset
     const format = this.quillJS.getFormat(lineStart)
     if (format['code-block']) {
       // if exists text in code-block, to skip.
-      return
+      return false
     }
     const beforeNode = this.quillJS.getLine(lineStart - 1)[0]
     const beforeLineText = beforeNode && beforeNode.domNode.textContent
@@ -134,17 +138,19 @@ class MarkdownActivity {
         const releaseTag = this.fullMatches.find(e => e.name === line.domNode.tagName.toLowerCase())
         if (releaseTag && releaseTag.release) {
           releaseTag.release(selection)
-          return
+          return false
         }
       }
 
       for (let match of this.fullMatches) {
         const matchedText = text.match(match.pattern)
         if (matchedText) {
-          return match.action(text, selection, match.pattern, lineStart)
+          // eslint-disable-next-line no-return-await
+          return await match.action(text, selection, match.pattern, lineStart)
         }
       }
     }
+    return false
   }
 
   onRemoveElement (range) {

@@ -10,9 +10,12 @@ class Codeblock {
     return {
       name: this.name,
       pattern: this.pattern,
-      action: (text, selection, pattern) => {
+      action: (text, selection, pattern) => new Promise((resolve) => {
         const match = pattern.exec(text)
-        if (!match) { return false }
+        if (!match) {
+          resolve(false)
+          return
+        }
         const originalText = match[0] || ''
         setTimeout(() => {
           const startIndex = selection.index - originalText.length - 1
@@ -22,10 +25,10 @@ class Codeblock {
             const newLinePosition = startIndex + 1 + '\n'.length + 1
             this.quillJS.insertText(newLinePosition, '\n')
             this.quillJS.formatLine(newLinePosition - 2, 1, 'code-block', true)
+            resolve(true)
           }, 0)
         }, 0)
-        return true
-      },
+      }),
       release: () => {
         setTimeout(() => {
           const cursorIndex = this.quillJS.getSelection().index

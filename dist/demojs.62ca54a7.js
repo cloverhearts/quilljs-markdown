@@ -18097,14 +18097,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            var o = r.exec(e);
-            if (!o) return !1;
-            var a = o[0].length,
-                u = i(t.quillJS.getLine(n.index), 1)[0],
-                l = t.quillJS.getIndex(u);
-            return setTimeout(function () {
-              t.quillJS.formatLine(l, 0, "header", a - 1), t.quillJS.deleteText(l, a);
-            }, 0), !0;
+            return new Promise(function (o) {
+              var a = r.exec(e);
+
+              if (a) {
+                var u = a[0].length,
+                    l = i(t.quillJS.getLine(n.index), 1)[0],
+                    s = t.quillJS.getIndex(l);
+                setTimeout(function () {
+                  t.quillJS.formatLine(s, 0, "header", u - 1), t.quillJS.deleteText(s, u), o(!0);
+                }, 0);
+              } else o(!1);
+            });
           }
         };
       }
@@ -18181,12 +18185,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            var o = r.exec(e);
-            if (!o) return !1;
-            var i = o[0] || "";
-            return setTimeout(function () {
-              t.quillJS.formatText(n.index, 1, "blockquote", !0), t.quillJS.deleteText(n.index - i.length, i.length);
-            }, 0), !0;
+            return new Promise(function (o) {
+              var i = r.exec(e);
+
+              if (i) {
+                var a = i[0] || "";
+                setTimeout(function () {
+                  t.quillJS.formatText(n.index, 1, "blockquote", !0), t.quillJS.deleteText(n.index - a.length, a.length), o(!0);
+                }, 0);
+              } else o(!1);
+            });
           },
           release: function release() {
             setTimeout(function () {
@@ -18210,7 +18218,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     function t(e) {
       !function (t, e) {
         if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-      }(this, t), this.quillJS = e, this.name = "blockquote", this.pattern = /^(>)\s/g, this.getAction.bind(this);
+      }(this, t), this.quillJS = e, this.name = "blockquote", this.pattern = /^\s{0,99}(>)\s/g, this.getAction.bind(this);
     }
 
     var e, n, r;
@@ -18222,15 +18230,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            var o = r.exec(e);
-            if (!o) return !1;
-            var i = o[0] || "";
-            return setTimeout(function () {
-              var e = n.index - 1;
-              t.quillJS.deleteText(e, 2), setTimeout(function () {
-                t.quillJS.formatLine(e, i.length - 3, "blockquote", !0);
-              }, 0);
-            }, 0), !0;
+            return new Promise(function (o) {
+              var i = r.exec(e);
+
+              if (i) {
+                var a = i[0] || "";
+                setTimeout(function () {
+                  var e = n.index - 1;
+                  t.quillJS.deleteText(e, 2), setTimeout(function () {
+                    t.quillJS.formatLine(e, a.length - 3, "blockquote", !0), o(!0);
+                  }, 0);
+                }, 0);
+              } else o(!1);
+            });
           }
         };
       }
@@ -18307,16 +18319,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r, o) {
-            var i = r.exec(e),
-                a = y(i, 3),
-                u = a[0],
-                l = a[2],
-                s = o + i.index;
-            return !e.match(/^([*_ \n]+)$/g) && (setTimeout(function () {
-              t.quillJS.deleteText(s, u.length), t.quillJS.insertText(s, l, {
-                bold: !0
-              }), t.quillJS.format("bold", !1);
-            }, 0), !0);
+            return new Promise(function (n) {
+              var i = r.exec(e),
+                  a = y(i, 3),
+                  u = a[0],
+                  l = a[2],
+                  s = o + i.index;
+              e.match(/^([*_ \n]+)$/g) ? n(!1) : setTimeout(function () {
+                t.quillJS.deleteText(s, u.length), setTimeout(function () {
+                  t.quillJS.insertText(s, l, {
+                    bold: !0
+                  }), t.quillJS.format("bold", !1), n(!0);
+                });
+              }, 0);
+            });
           }
         };
       }
@@ -18393,15 +18409,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            if (!r.exec(e)) return !1;
-            var o = m(t.quillJS.getLine(n.index), 1)[0],
-                i = t.quillJS.getIndex(o);
-            setTimeout(function () {
-              var n = e.split("[x] ").splice(1, 1).join("");
-              t.quillJS.insertText(i, n), t.quillJS.deleteText(i + n.length - 1, e.length), setTimeout(function () {
-                t.quillJS.formatLine(i, 0, "list", "checked");
-              });
-            }, 0);
+            return new Promise(function (o) {
+              if (r.exec(e)) {
+                var i = m(t.quillJS.getLine(n.index), 1)[0],
+                    a = t.quillJS.getIndex(i);
+                setTimeout(function () {
+                  var n = e.split("[x] ").splice(1, 1).join("");
+                  t.quillJS.insertText(a, n), t.quillJS.deleteText(a + n.length - 1, e.length), setTimeout(function () {
+                    t.quillJS.formatLine(a, 0, "list", "checked"), o(!0);
+                  });
+                }, 0);
+              } else o(!1);
+            });
           }
         };
       }
@@ -18478,15 +18497,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            if (!r.exec(e)) return !1;
-            var o = O(t.quillJS.getLine(n.index), 1)[0],
-                i = t.quillJS.getIndex(o);
-            setTimeout(function () {
-              var n = e.split("[ ] ").length > 1 ? e.split("[ ] ").splice(1, 1).join("") : e;
-              n = n.split("[] ").length > 1 ? n.split("[] ").splice(1, 1).join("") : n, t.quillJS.insertText(i, n), t.quillJS.deleteText(i + n.length - 1, e.length), setTimeout(function () {
-                t.quillJS.formatLine(i, 0, "list", "unchecked");
-              });
-            }, 0);
+            return new Promise(function (o) {
+              if (r.exec(e)) {
+                var i = O(t.quillJS.getLine(n.index), 1)[0],
+                    a = t.quillJS.getIndex(i);
+                setTimeout(function () {
+                  var n = e.split("[ ] ").length > 1 ? e.split("[ ] ").splice(1, 1).join("") : e;
+                  n = n.split("[] ").length > 1 ? n.split("[] ").splice(1, 1).join("") : n, t.quillJS.insertText(a, n), t.quillJS.deleteText(a + n.length - 1, e.length), setTimeout(function () {
+                    t.quillJS.formatLine(a, 0, "list", "unchecked"), o(!0);
+                  });
+                }, 0);
+              } else o(!1);
+            });
           }
         };
       }
@@ -18563,19 +18585,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r, o) {
-            var i = r.exec(e);
-            if (!i) return !1;
-            var a = k(i, 1)[0],
-                u = o + i.index;
-            return setTimeout(function () {
-              t.quillJS.deleteText(u, a.length);
-              var e = a.replace(/`/g, "");
-              t.quillJS.insertText(u, e, {
-                code: !0
-              }), t.quillJS.insertText(u + e.length, " ", {
-                code: !1
-              });
-            }, 0), !0;
+            return new Promise(function (n) {
+              var i = r.exec(e);
+
+              if (i) {
+                var a = k(i, 1)[0],
+                    u = o + i.index;
+                setTimeout(function () {
+                  t.quillJS.deleteText(u, a.length), setTimeout(function () {
+                    var e = a.replace(/`/g, "");
+                    t.quillJS.insertText(u, e, {
+                      code: !0
+                    }), t.quillJS.insertText(u + e.length, "", {
+                      code: !1
+                    }), n(!0);
+                  }, 0);
+                }, 0);
+              } else n(!1);
+            });
           }
         };
       }
@@ -18652,21 +18679,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r, o) {
-            var i = r.exec(e);
-            if (!i) return !1;
-            var a = P(i, 3),
-                u = a[0],
-                l = a[1],
-                s = a[2],
-                c = t.quillJS.getText()[o + i.index],
-                f = t.quillJS.getText()[o + i.index + 1];
-            if (l === c && c === f) return !1;
-            var h = o + i.index;
-            return setTimeout(function () {
-              t.quillJS.deleteText(h, u.length), t.quillJS.insertText(h, s, {
-                italic: !0
-              }), t.quillJS.format("italic", !1);
-            }, 0), !0;
+            return new Promise(function (n) {
+              var i = r.exec(e);
+
+              if (i) {
+                var a = P(i, 3),
+                    u = a[0],
+                    l = a[1],
+                    s = a[2],
+                    c = t.quillJS.getText()[o + i.index],
+                    f = t.quillJS.getText()[o + i.index + 1];
+
+                if (l !== c || c !== f) {
+                  var h = o + i.index;
+                  setTimeout(function () {
+                    t.quillJS.deleteText(h, u.length), t.quillJS.insertText(h, s, {
+                      italic: !0
+                    }), t.quillJS.format("italic", !1), n(!0);
+                  }, 0);
+                } else n(!1);
+              } else n(!1);
+            });
           }
         };
       }
@@ -18696,14 +18729,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            var o = e.search(r),
-                i = e.match(r)[0],
-                a = e.match(/(?:\[(.*?)\])/g)[0],
-                u = e.match(/(?:\((.*?)\))/g)[0],
-                l = n.index - i.length - 1;
-            return -1 !== o && (setTimeout(function () {
-              t.quillJS.deleteText(l, i.length), t.quillJS.insertText(l, a.slice(1, a.length - 1), "link", u.slice(1, u.length - 1));
-            }, 0), !0);
+            return new Promise(function (o) {
+              var i = e.search(r),
+                  a = e.match(r)[0],
+                  u = e.match(/(?:\[(.*?)\])/g)[0],
+                  l = e.match(/(?:\((.*?)\))/g)[0],
+                  s = n.index - a.length - 1;
+              -1 !== i ? setTimeout(function () {
+                t.quillJS.deleteText(s, a.length), t.quillJS.insertText(s, u.slice(1, u.length - 1), "link", l.slice(1, l.length - 1)), o(!0);
+              }, 0) : o(!1);
+            });
           }
         };
       }
@@ -18733,14 +18768,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            var o = e.search(r),
-                i = e.match(r)[0],
-                a = e.match(/(?:\[(.*?)\])/g)[0],
-                u = e.match(/(?:\((.*?)\))/g)[0],
-                l = n.index - 1 + o;
-            return -1 !== o && (setTimeout(function () {
-              t.quillJS.deleteText(l, i.length), t.quillJS.insertText(l, a.slice(1, a.length - 1), "link", u.slice(1, u.length - 1));
-            }, 0), !0);
+            return new Promise(function (o) {
+              var i = e.search(r),
+                  a = e.match(r)[0],
+                  u = e.match(/(?:\[(.*?)\])/g)[0],
+                  l = e.match(/(?:\((.*?)\))/g)[0],
+                  s = n.index - 1 + i;
+              -1 !== i ? setTimeout(function () {
+                t.quillJS.deleteText(s, a.length), t.quillJS.insertText(s, u.slice(1, u.length - 1), "link", l.slice(1, l.length - 1)), o(!0);
+              }, 0) : o(!1);
+            });
           }
         };
       }
@@ -18817,21 +18854,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            if (!r.exec(e)) return !1;
-            var o = U(t.quillJS.getLine(n.index), 1)[0],
-                i = t.quillJS.getIndex(o);
-            window.quillJS = t.quillJS, setTimeout(function () {
-              var n = e.split(". ")[0].split("").filter(function (t) {
-                return /\s/gi.test(t);
-              }).length,
-                  r = e.split(". ").splice(1, 1).join("");
-              window.t = e, t.quillJS.insertText(i, r), t.quillJS.deleteText(i + r.length - 1, e.length), setTimeout(function () {
-                t.quillJS.formatLine(i, 0, {
-                  list: "ordered",
-                  indent: n
-                });
-              });
-            }, 0);
+            return new Promise(function (o) {
+              if (r.exec(e)) {
+                var i = U(t.quillJS.getLine(n.index), 1)[0],
+                    a = t.quillJS.getIndex(i);
+                setTimeout(function () {
+                  var n = e.split(". ")[0].split("").filter(function (t) {
+                    return /\s/gi.test(t);
+                  }).length,
+                      r = e.split(". ").splice(1, 1).join("");
+                  t.quillJS.insertText(a, r), t.quillJS.deleteText(a + r.length - 1, e.length), setTimeout(function () {
+                    t.quillJS.formatLine(a, 0, {
+                      list: "ordered",
+                      indent: n
+                    }), o(!0);
+                  }, 0);
+                }, 0);
+              } else o(!1);
+            });
           }
         };
       }
@@ -18896,7 +18936,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     function t(e) {
       !function (t, e) {
         if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-      }(this, t), this.quillJS = e, this.name = "list", this.pattern = /^\s{0,9}(-|\*)+\s/g, this.getAction.bind(this);
+      }(this, t), this.quillJS = e, this.name = "list", this.pattern = /^\s{0,9}(-|\*){1}\s/, this.getAction.bind(this);
     }
 
     var e, n, r;
@@ -18908,25 +18948,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            if (!r.exec(e)) return !1;
-
-            if (e.split("- ")[1] || e.split("* ")[1]) {
-              var o = z(t.quillJS.getLine(n.index), 1)[0],
-                  i = t.quillJS.getIndex(o);
-              setTimeout(function () {
-                var n = "".concat(e).replace(/\*/gi, "-"),
-                    r = n.split("- ")[0].split("").filter(function (t) {
-                  return /\s/gi.test(t);
-                }).length,
-                    o = n.split("- ").length > 1 ? n.split("- ").splice(1, 1).join("") : n;
-                t.quillJS.insertText(i, o), t.quillJS.deleteText(i + o.length - 1, e.length), setTimeout(function () {
-                  t.quillJS.formatLine(i, 0, {
-                    list: "bullet",
-                    indent: r
-                  });
-                });
-              }, 0);
-            }
+            return new Promise(function (o) {
+              if (r.exec(e)) {
+                if (e.split("- ")[1] || e.split("* ")[1]) {
+                  var i = z(t.quillJS.getLine(n.index), 1)[0],
+                      a = t.quillJS.getIndex(i);
+                  setTimeout(function () {
+                    var n = /^\s{0,9}(\*){1}\s/.test(e) ? e.replace("*", "-") : e,
+                        r = n.split("- ")[0].split("").filter(function (t) {
+                      return /\s/gi.test(t);
+                    }).length,
+                        i = n.split("- ").length > 1 ? n.split("- ").splice(1, 1).join("") : n;
+                    t.quillJS.insertText(a, i), t.quillJS.deleteText(a + i.length - 1, e.length), setTimeout(function () {
+                      t.quillJS.formatLine(a, 0, {
+                        list: "bullet",
+                        indent: r
+                      }), o(!0);
+                    }, 0);
+                  }, 0);
+                } else o(!1);
+              } else o(!1);
+            });
           }
         };
       }
@@ -18956,17 +18998,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            var o = r.exec(e);
-            if (!o) return !1;
-            var i = o[0] || "";
-            return setTimeout(function () {
-              var e = n.index - i.length - 1;
-              t.quillJS.deleteText(e, i.length), setTimeout(function () {
-                t.quillJS.insertText(e, "\n");
-                var n = e + 1 + "\n".length + 1;
-                t.quillJS.insertText(n, "\n"), t.quillJS.formatLine(n - 2, 1, "code-block", !0);
-              }, 0);
-            }, 0), !0;
+            return new Promise(function (o) {
+              var i = r.exec(e);
+
+              if (i) {
+                var a = i[0] || "";
+                setTimeout(function () {
+                  var e = n.index - a.length - 1;
+                  t.quillJS.deleteText(e, a.length), setTimeout(function () {
+                    t.quillJS.insertText(e, "\n");
+                    var n = e + 1 + "\n".length + 1;
+                    t.quillJS.insertText(n, "\n"), t.quillJS.formatLine(n - 2, 1, "code-block", !0), o(!0);
+                  }, 0);
+                }, 0);
+              } else o(!1);
+            });
           },
           release: function release() {
             setTimeout(function () {
@@ -19051,22 +19097,28 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r) {
-            var o = r.exec(e);
-            if (!o) return !1;
-            var i = o[0] || "",
-                a = G(t.quillJS.getLine(n.index), 1)[0];
-            return setTimeout(function () {
-              var e = t.quillJS.getIndex(a);
-              t.quillJS.deleteText(e, i.length + 1), setTimeout(function () {
-                for (var n = t.quillJS.getLine(e)[0]; n;) {
-                  var r = t.quillJS.getIndex(n),
-                      o = n.domNode.textContent,
-                      i = n.domNode.textContent.length;
-                  if (t.pattern.test(o)) return void t.quillJS.deleteText(r, o.length);
-                  t.quillJS.formatLine(r, 0, "code-block", !0), n = t.quillJS.getLine(r + i + 1)[0];
-                }
-              }, 0);
-            }, 0), !0;
+            return new Promise(function (o) {
+              var i = r.exec(e);
+
+              if (i) {
+                var a = i[0] || "",
+                    u = G(t.quillJS.getLine(n.index), 1)[0];
+                setTimeout(function () {
+                  var e = t.quillJS.getIndex(u);
+                  t.quillJS.deleteText(e, a.length + 1), setTimeout(function () {
+                    for (var n = t.quillJS.getLine(e)[0]; n;) {
+                      var r = t.quillJS.getIndex(n),
+                          i = n.domNode.textContent,
+                          a = n.domNode.textContent.length;
+                      if (t.pattern.test(i)) return t.quillJS.deleteText(r, i.length), void o(!0);
+                      t.quillJS.formatLine(r, 0, "code-block", !0), n = t.quillJS.getLine(r + a + 1)[0];
+                    }
+
+                    o(!0);
+                  }, 0);
+                }, 0);
+              } else o(!1);
+            });
           },
           release: function release() {
             setTimeout(function () {
@@ -19104,15 +19156,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           name: this.name,
           pattern: this.pattern,
           action: function action(e, n, r, o) {
-            var i = r.exec(e),
-                a = i[0],
-                u = i[1],
-                l = o + i.index;
-            return !e.match(/^([~_ \n]+)$/g) && (setTimeout(function () {
-              t.quillJS.deleteText(l, a.length), t.quillJS.insertText(l, u, {
-                strike: !0
-              }), t.quillJS.format("strike", !1);
-            }, 0), !0);
+            return new Promise(function (n) {
+              var i = r.exec(e),
+                  a = i[0],
+                  u = i[1],
+                  l = o + i.index;
+              e.match(/^([~_ \n]+)$/g) ? n(!1) : setTimeout(function () {
+                t.quillJS.deleteText(l, a.length), t.quillJS.insertText(l, u, {
+                  strike: !0
+                }), t.quillJS.format("strike", !1), n(!0);
+              }, 0);
+            });
           }
         };
       }
@@ -19130,7 +19184,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     function t(e) {
       !function (t, e) {
         if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
-      }(this, t), this.quillJS = e, this.getOperatorsAll.bind(this), this.tags = [new l(this.quillJS).getAction(), new h(this.quillJS).getAction(), new b(this.quillJS).getAction(), new I(this.quillJS).getAction(), new W(this.quillJS).getAction(), new N(this.quillJS).getAction(), new tt(this.quillJS).getAction(), new C(this.quillJS).getAction()], this.fullTextTags = [new l(this.quillJS).getAction(), new d(this.quillJS).getAction(), new b(this.quillJS).getAction(), new _(this.quillJS).getAction(), new S(this.quillJS).getAction(), new B(this.quillJS).getAction(), new X(this.quillJS).getAction(), new N(this.quillJS).getAction(), new J(this.quillJS).getAction(), new V(this.quillJS).getAction(), new tt(this.quillJS).getAction(), new C(this.quillJS).getAction()];
+      }(this, t), this.quillJS = e, this.getOperatorsAll.bind(this), this.tags = [new l(this.quillJS).getAction(), new h(this.quillJS).getAction(), new b(this.quillJS).getAction(), new I(this.quillJS).getAction(), new W(this.quillJS).getAction(), new N(this.quillJS).getAction(), new tt(this.quillJS).getAction(), new C(this.quillJS).getAction()], this.fullTextTags = [new l(this.quillJS).getAction(), new _(this.quillJS).getAction(), new S(this.quillJS).getAction(), new J(this.quillJS).getAction(), new V(this.quillJS).getAction(), new d(this.quillJS).getAction(), new X(this.quillJS).getAction(), new b(this.quillJS).getAction(), new B(this.quillJS).getAction(), new N(this.quillJS).getAction(), new tt(this.quillJS).getAction(), new C(this.quillJS).getAction()];
     }
 
     var e, n, r;
@@ -19148,10 +19202,40 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }();
 
   function rt(t, e) {
+    return function (t) {
+      if (Array.isArray(t)) return t;
+    }(t) || function (t, e) {
+      if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(t))) return;
+      var n = [],
+          r = !0,
+          o = !1,
+          i = void 0;
+
+      try {
+        for (var a, u = t[Symbol.iterator](); !(r = (a = u.next()).done) && (n.push(a.value), !e || n.length !== e); r = !0) {
+          ;
+        }
+      } catch (t) {
+        o = !0, i = t;
+      } finally {
+        try {
+          r || null == u.return || u.return();
+        } finally {
+          if (o) throw i;
+        }
+      }
+
+      return n;
+    }(t, e) || it(t, e) || function () {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }();
+  }
+
+  function ot(t, e) {
     var _n;
 
     if ("undefined" == typeof Symbol || null == t[Symbol.iterator]) {
-      if (Array.isArray(t) || (_n = ut(t)) || e && t && "number" == typeof t.length) {
+      if (Array.isArray(t) || (_n = it(t)) || e && t && "number" == typeof t.length) {
         _n && (t = _n);
 
         var r = 0,
@@ -19202,7 +19286,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
   }
 
-  function ot(t, e, n, r, o, i, a) {
+  function it(t, e) {
+    if (t) {
+      if ("string" == typeof t) return at(t, e);
+      var n = Object.prototype.toString.call(t).slice(8, -1);
+      return "Object" === n && t.constructor && (n = t.constructor.name), "Map" === n || "Set" === n ? Array.from(t) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? at(t, e) : void 0;
+    }
+  }
+
+  function at(t, e) {
+    (null == e || e > t.length) && (e = t.length);
+
+    for (var n = 0, r = new Array(e); n < e; n++) {
+      r[n] = t[n];
+    }
+
+    return r;
+  }
+
+  function ut(t, e, n, r, o, i, a) {
     try {
       var u = t[i](a),
           l = u.value;
@@ -19213,7 +19315,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     u.done ? e(l) : Promise.resolve(l).then(r, o);
   }
 
-  function it(t) {
+  function lt(t) {
     return function () {
       var e = this,
           n = arguments;
@@ -19221,64 +19323,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var i = t.apply(e, n);
 
         function a(t) {
-          ot(i, r, o, a, u, "next", t);
+          ut(i, r, o, a, u, "next", t);
         }
 
         function u(t) {
-          ot(i, r, o, a, u, "throw", t);
+          ut(i, r, o, a, u, "throw", t);
         }
 
         a(void 0);
       });
     };
-  }
-
-  function at(t, e) {
-    return function (t) {
-      if (Array.isArray(t)) return t;
-    }(t) || function (t, e) {
-      if ("undefined" == typeof Symbol || !(Symbol.iterator in Object(t))) return;
-      var n = [],
-          r = !0,
-          o = !1,
-          i = void 0;
-
-      try {
-        for (var a, u = t[Symbol.iterator](); !(r = (a = u.next()).done) && (n.push(a.value), !e || n.length !== e); r = !0) {
-          ;
-        }
-      } catch (t) {
-        o = !0, i = t;
-      } finally {
-        try {
-          r || null == u.return || u.return();
-        } finally {
-          if (o) throw i;
-        }
-      }
-
-      return n;
-    }(t, e) || ut(t, e) || function () {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-    }();
-  }
-
-  function ut(t, e) {
-    if (t) {
-      if ("string" == typeof t) return lt(t, e);
-      var n = Object.prototype.toString.call(t).slice(8, -1);
-      return "Object" === n && t.constructor && (n = t.constructor.name), "Map" === n || "Set" === n ? Array.from(t) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? lt(t, e) : void 0;
-    }
-  }
-
-  function lt(t, e) {
-    (null == e || e > t.length) && (e = t.length);
-
-    for (var n = 0, r = new Array(e); n < e; n++) {
-      r[n] = t[n];
-    }
-
-    return r;
   }
 
   function st(t, e) {
@@ -19303,7 +19357,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }, this.ignoreTags = ["PRE"], this.tags = new nt(this.quillJS), this.matches = this.tags.getOperatorsAll(), this.fullMatches = this.tags.getFullTextOperatorsAll();
     }
 
-    var e, n, r;
+    var e, n, r, o;
     return e = t, (n = [{
       key: "onTextChange",
       value: function value(t, e, n) {
@@ -19312,70 +19366,93 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if ("user" === n) {
           var o = t.ops[0] && t.ops[0].retain || 0,
               i = t.ops[0].insert || t.ops[1] && t.ops[1].insert;
-          if (i) if (i.length > 1) {
-            var a = function a(t) {
-              return new Promise(function (e) {
-                var n = setInterval(function () {
-                  var o = at(r.quillJS.getLine(t), 1)[0];
-                  if (!o) return clearInterval(n), 0;
-                  var i = r.quillJS.getIndex(o);
+          i && (i.length > 1 ? setTimeout(lt(regeneratorRuntime.mark(function t() {
+            var e, n, a, u, l, s, c, f, h, p, d, y, v, g, b;
+            return regeneratorRuntime.wrap(function (t) {
+              for (;;) {
+                switch (t.prev = t.next) {
+                  case 0:
+                    e = o, n = i.split("\n"), a = e, u = ot(n), t.prev = 4, u.s();
 
-                  if (!r.onFullTextExecute.bind(r)({
-                    index: i,
-                    length: 0
-                  })) {
-                    clearInterval(n);
-                    var a = at(r.quillJS.getLine(t), 1)[0],
-                        u = r.quillJS.getIndex(a);
-                    a && a.domNode || e(0);
-                    var l = a.domNode.textContent || "";
-                    e(u + l.length + 1);
-                  }
-                }, 10);
-              });
-            };
-
-            setTimeout(it(regeneratorRuntime.mark(function t() {
-              var e, n, r, u, l;
-              return regeneratorRuntime.wrap(function (t) {
-                for (;;) {
-                  switch (t.prev = t.next) {
-                    case 0:
-                      e = o, n = i.split("\n"), r = e, u = rt(n), t.prev = 4, u.s();
-
-                    case 6:
-                      if ((l = u.n()).done) {
-                        t.next = 13;
-                        break;
-                      }
-
-                      return l.value, t.next = 10, a(r);
-
-                    case 10:
-                      r = t.sent;
-
-                    case 11:
-                      t.next = 6;
+                  case 6:
+                    if ((l = u.n()).done) {
+                      t.next = 35;
                       break;
+                    }
 
-                    case 13:
-                      t.next = 18;
+                    if (l.value, s = r.quillJS.getLine(a), c = rt(s, 1), f = c[0]) {
+                      t.next = 11;
                       break;
+                    }
 
-                    case 15:
-                      t.prev = 15, t.t0 = t.catch(4), u.e(t.t0);
+                    return t.abrupt("return", 0);
 
-                    case 18:
-                      return t.prev = 18, u.f(), t.finish(18);
+                  case 11:
+                    return h = r.quillJS.getIndex(f), p = "", t.next = 15, r.onFullTextExecute.bind(r)({
+                      index: h,
+                      length: 0
+                    });
 
-                    case 21:
-                    case "end":
-                      return t.stop();
-                  }
+                  case 15:
+                    if (!(d = t.sent)) {
+                      t.next = 31;
+                      break;
+                    }
+
+                  case 17:
+                    if (!d) {
+                      t.next = 29;
+                      break;
+                    }
+
+                    if (y = r.quillJS.getLine(a), v = rt(y, 1), g = v[0], b = r.quillJS.getIndex(g), g && g.domNode) {
+                      t.next = 23;
+                      break;
+                    }
+
+                    return d = !1, t.abrupt("break", 29);
+
+                  case 23:
+                    return p = g.domNode.textContent || "", t.next = 26, r.onFullTextExecute.bind(r)({
+                      index: b,
+                      length: 0
+                    });
+
+                  case 26:
+                    d = t.sent, t.next = 17;
+                    break;
+
+                  case 29:
+                    t.next = 32;
+                    break;
+
+                  case 31:
+                    p = f.domNode.textContent || "";
+
+                  case 32:
+                    a += p.length + 1;
+
+                  case 33:
+                    t.next = 6;
+                    break;
+
+                  case 35:
+                    t.next = 40;
+                    break;
+
+                  case 37:
+                    t.prev = 37, t.t0 = t.catch(4), u.e(t.t0);
+
+                  case 40:
+                    return t.prev = 40, u.f(), t.finish(40);
+
+                  case 43:
+                  case "end":
+                    return t.stop();
                 }
-              }, t, null, [[4, 15, 18, 21]]);
-            })), 0);
-          } else t.ops.filter(function (t) {
+              }
+            }, t, null, [[4, 37, 40, 43]]);
+          })), 0) : (t.ops.filter(function (t) {
             return t.hasOwnProperty("insert");
           }).forEach(function (t) {
             switch (t.insert) {
@@ -19395,7 +19472,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             return t.hasOwnProperty("delete");
           }).forEach(function (t) {
             r.onRemoveElement(t);
-          });
+          })));
         }
       }
     }, {
@@ -19411,7 +19488,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         var t = this.quillJS.getSelection();
 
         if (t) {
-          var e = at(this.quillJS.getLine(t.index), 2),
+          var e = rt(this.quillJS.getLine(t.index), 2),
               n = e[0],
               r = e[1],
               o = n.domNode.textContent,
@@ -19419,7 +19496,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
           if (!this.quillJS.getFormat(i)["code-block"] && this.isValid(o, n.domNode.tagName)) {
             var a,
-                u = rt(this.matches);
+                u = ot(this.matches);
 
             try {
               for (u.s(); !(a = u.n()).done;) {
@@ -19436,48 +19513,100 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       }
     }, {
       key: "onFullTextExecute",
-      value: function value(t) {
-        var e = t || this.quillJS.getSelection();
-
-        if (e) {
-          var n = at(this.quillJS.getLine(e.index), 2),
-              r = n[0],
-              o = n[1];
-
-          if (r && !(o < 0)) {
-            var i = e.index - o;
-
-            if (!this.quillJS.getFormat(i)["code-block"]) {
-              var a = this.quillJS.getLine(i - 1)[0],
-                  u = a && a.domNode.textContent,
-                  l = r.domNode.textContent + " ";
-
-              if (e.length = e.index++, this.isValid(l, r.domNode.tagName)) {
-                if ("string" == typeof u && u.length > 0 && " " === l) {
-                  var s = this.fullMatches.find(function (t) {
-                    return t.name === r.domNode.tagName.toLowerCase();
-                  });
-                  if (s && s.release) return void s.release(e);
+      value: (o = lt(regeneratorRuntime.mark(function t(e) {
+        var n, r, o, i, a, u, l, s, c, f, h, p, d;
+        return regeneratorRuntime.wrap(function (t) {
+          for (;;) {
+            switch (t.prev = t.next) {
+              case 0:
+                if (n = e || this.quillJS.getSelection()) {
+                  t.next = 3;
+                  break;
                 }
 
-                var c,
-                    f = rt(this.fullMatches);
+                return t.abrupt("return", !1);
 
-                try {
-                  for (f.s(); !(c = f.n()).done;) {
-                    var h = c.value;
-                    if (l.match(h.pattern)) return h.action(l, e, h.pattern, i);
-                  }
-                } catch (t) {
-                  f.e(t);
-                } finally {
-                  f.f();
+              case 3:
+                if (r = this.quillJS.getLine(n.index), o = rt(r, 2), i = o[0], a = o[1], i && !(a < 0)) {
+                  t.next = 6;
+                  break;
                 }
-              }
+
+                return t.abrupt("return", !1);
+
+              case 6:
+                if (u = n.index - a, !this.quillJS.getFormat(u)["code-block"]) {
+                  t.next = 10;
+                  break;
+                }
+
+                return t.abrupt("return", !1);
+
+              case 10:
+                if (l = this.quillJS.getLine(u - 1)[0], s = l && l.domNode.textContent, c = i.domNode.textContent + " ", n.length = n.index++, !this.isValid(c, i.domNode.tagName)) {
+                  t.next = 40;
+                  break;
+                }
+
+                if (!("string" == typeof s && s.length > 0 && " " === c)) {
+                  t.next = 20;
+                  break;
+                }
+
+                if (!(f = this.fullMatches.find(function (t) {
+                  return t.name === i.domNode.tagName.toLowerCase();
+                })) || !f.release) {
+                  t.next = 20;
+                  break;
+                }
+
+                return f.release(n), t.abrupt("return", !1);
+
+              case 20:
+                h = ot(this.fullMatches), t.prev = 21, h.s();
+
+              case 23:
+                if ((p = h.n()).done) {
+                  t.next = 32;
+                  break;
+                }
+
+                if (d = p.value, !c.match(d.pattern)) {
+                  t.next = 30;
+                  break;
+                }
+
+                return t.next = 29, d.action(c, n, d.pattern, u);
+
+              case 29:
+                return t.abrupt("return", t.sent);
+
+              case 30:
+                t.next = 23;
+                break;
+
+              case 32:
+                t.next = 37;
+                break;
+
+              case 34:
+                t.prev = 34, t.t0 = t.catch(21), h.e(t.t0);
+
+              case 37:
+                return t.prev = 37, h.f(), t.finish(37);
+
+              case 40:
+                return t.abrupt("return", !1);
+
+              case 41:
+              case "end":
+                return t.stop();
             }
           }
-        }
-      }
+        }, t, this, [[21, 34, 37, 40]]);
+      })), function (t) {
+        return o.apply(this, arguments);
+      })
     }, {
       key: "onRemoveElement",
       value: function value(t) {
@@ -19530,7 +19659,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50886" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57040" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
