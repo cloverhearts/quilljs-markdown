@@ -2,7 +2,7 @@ class Codeblock {
   constructor (quillJS) {
     this.quillJS = quillJS
     this.name = 'pre'
-    this.pattern = /^(```)\s/g
+    this.pattern = /^(```)/g
     this.getAction.bind(this)
   }
 
@@ -17,14 +17,25 @@ class Codeblock {
           return
         }
         const originalText = match[0] || ''
+        const [line] = this.quillJS.getLine(selection.index)
         setTimeout(() => {
-          const startIndex = selection.index - originalText.length - 1
-          this.quillJS.deleteText(startIndex, originalText.length)
+          const startIndex = this.quillJS.getIndex(line)
+          this.quillJS.deleteText(startIndex, originalText.length + 1)
           setTimeout(() => {
-            this.quillJS.insertText(startIndex, '\n')
-            const newLinePosition = startIndex + 1 + '\n'.length + 1
-            this.quillJS.insertText(newLinePosition, '\n')
-            this.quillJS.formatLine(newLinePosition - 2, 1, 'code-block', true)
+            let line = this.quillJS.getLine(startIndex)[0]
+            while (line) {
+              const lineOffset = this.quillJS.getIndex(line)
+              const _text = line.domNode.textContent
+              const offsetText = line.domNode.textContent.length
+              const isBreak = this.pattern.test(_text)
+              if (isBreak) {
+                this.quillJS.deleteText(lineOffset, _text.length)
+                resolve(true)
+                return
+              }
+              this.quillJS.formatLine(lineOffset, 0, 'code-block', true)
+              line = this.quillJS.getLine(lineOffset + offsetText + 1)[0]
+            }
             resolve(true)
           }, 0)
         }, 0)

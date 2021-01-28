@@ -1,3 +1,5 @@
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 import TagsOperators from './tags'
 
 class MarkdownActivity {
@@ -17,9 +19,52 @@ class MarkdownActivity {
     this.ignoreTags = ['PRE']
     this.tags = new TagsOperators(this.quillJS)
     this.matches = this.tags.getOperatorsAll()
+    this.fullMatches = this.tags.getFullTextOperatorsAll()
   }
 
   onTextChange (delta, oldContents, source) {
+    if (source !== 'user') return
+    const cursorOffset = (delta.ops[0] && delta.ops[0].retain) || 0
+    const inputText = delta.ops[0].insert || (delta.ops[1] && delta.ops[1].insert)
+
+    if (!inputText) return
+
+    if (inputText.length > 1) {
+      setTimeout(async () => {
+        const cursorOffsetFixed = cursorOffset
+        const tokens = inputText.split('\n')
+        let _offset = cursorOffsetFixed
+        // eslint-disable-next-line no-unused-vars
+        for (let v of tokens) {
+          const [line] = this.quillJS.getLine(_offset)
+          if (!line) {
+            return 0
+          }
+          const firstIndex = this.quillJS.getIndex(line)
+          let _targetText = ''
+          let result = await this.onFullTextExecute.bind(this)({ index: firstIndex, length: 0 })
+
+          if (result) {
+            while (result) {
+              const [line] = this.quillJS.getLine(_offset)
+              const firstIndex = this.quillJS.getIndex(line)
+              if (!line || !(line.domNode)) {
+                result = false
+                break
+              }
+
+              _targetText = line.domNode.textContent || ''
+              result = await this.onFullTextExecute.bind(this)({ index: firstIndex, length: 0 })
+            }
+          } else {
+            _targetText = line.domNode.textContent || ''
+          }
+          _offset += _targetText.length + 1
+        }
+      }, 0)
+      return
+    }
+
     delta.ops.filter(e => e.hasOwnProperty('insert')).forEach(e => {
       switch (e.insert) {
         case this.actionCharacters.whiteSpace:
@@ -55,6 +100,11 @@ class MarkdownActivity {
     const [line, offset] = this.quillJS.getLine(selection.index)
     const text = line.domNode.textContent
     const lineStart = selection.index - offset
+    const format = this.quillJS.getFormat(lineStart)
+    if (format['code-block']) {
+      // if exists text in code-block, to skip.
+      return
+    }
     if (this.isValid(text, line.domNode.tagName)) {
       for (let match of this.matches) {
         const matchedText = text.match(match.pattern)
@@ -66,11 +116,18 @@ class MarkdownActivity {
     }
   }
 
-  onFullTextExecute () {
-    let selection = this.quillJS.getSelection()
-    if (!selection) return
+  async onFullTextExecute (virtualSelection) {
+    let selection = virtualSelection || this.quillJS.getSelection()
+    if (!selection) return false
     const [line, offset] = this.quillJS.getLine(selection.index)
+
+    if (!line || offset < 0) return false
     const lineStart = selection.index - offset
+    const format = this.quillJS.getFormat(lineStart)
+    if (format['code-block']) {
+      // if exists text in code-block, to skip.
+      return false
+    }
     const beforeNode = this.quillJS.getLine(lineStart - 1)[0]
     const beforeLineText = beforeNode && beforeNode.domNode.textContent
     const text = line.domNode.textContent + ' '
@@ -78,21 +135,22 @@ class MarkdownActivity {
     if (this.isValid(text, line.domNode.tagName)) {
       // remove block rule.
       if (typeof beforeLineText === 'string' && beforeLineText.length > 0 && text === ' ') {
-        const releaseTag = this.matches.find(e => e.name === line.domNode.tagName.toLowerCase())
+        const releaseTag = this.fullMatches.find(e => e.name === line.domNode.tagName.toLowerCase())
         if (releaseTag && releaseTag.release) {
           releaseTag.release(selection)
-          return
+          return false
         }
       }
 
-      for (let match of this.matches) {
+      for (let match of this.fullMatches) {
         const matchedText = text.match(match.pattern)
         if (matchedText) {
-          match.action(text, selection, match.pattern, lineStart)
-          return
+          // eslint-disable-next-line no-return-await
+          return await match.action(text, selection, match.pattern, lineStart)
         }
       }
     }
+    return false
   }
 
   onRemoveElement (range) {

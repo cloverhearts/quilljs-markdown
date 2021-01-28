@@ -31,7 +31,7 @@ module.exports = {
   //   "/node_modules/"
   // ],
 
-  // A list of reporter names that Jest uses when writing coverage reports
+  // A listn of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
   //   "json",
   //   "text",
@@ -106,7 +106,7 @@ module.exports = {
   // The root directory that Jest should scan for tests and modules within
   // rootDir: null,
 
-  // A list of paths to directories that Jest should use to search for files in
+  // A listn of paths to directories that Jest should use to search for files in
   // roots: [
   //   "<rootDir>"
   // ],
@@ -120,7 +120,7 @@ module.exports = {
   // The path to a module that runs some code to configure or set up the testing framework before each tests
   // setupTestFrameworkScriptFile: null,
 
-  // A list of paths to snapshot serializer modules Jest should use for snapshot testing
+  // A listn of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
 
   // The tests environment that will be used for testing

@@ -15,7 +15,7 @@ class Link {
         const matchedText = text.match(pattern)[0]
         const hrefText = text.match(/(?:\[(.*?)\])/g)[0]
         const hrefLink = text.match(/(?:\((.*?)\))/g)[0]
-        const start = selection.index - matchedText.length - 1
+        const start = selection.index - 1 + startIndex
         if (startIndex !== -1) {
           setTimeout(() => {
             this.quillJS.deleteText(start, matchedText.length)

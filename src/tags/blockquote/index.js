@@ -10,9 +10,10 @@ class Blockquote {
     return {
       name: this.name,
       pattern: this.pattern,
-      action: (text, selection, pattern) => {
+      action: (text, selection, pattern) => new Promise((resolve) => {
         const match = pattern.exec(text)
         if (!match) {
+          resolve(false)
           return
         }
         const originalText = match[0] || ''
@@ -22,8 +23,9 @@ class Blockquote {
             selection.index - originalText.length,
             originalText.length
           )
+          resolve(true)
         }, 0)
-      },
+      }),
       release: () => {
         setTimeout(() => {
           const contentIndex = this.quillJS.getSelection().index

@@ -51,6 +51,10 @@ or
 <script>
 
 ```
+### Paste support for Markdown format.
+Pasting the Markdown form,
+
+Shows the corresponding Markdown result.
 
 ### Heading
 ```markdown

@@ -10,19 +10,25 @@ class Bold {
     return {
       name: this.name,
       pattern: this.pattern,
-      action: (text, selection, pattern, lineStart) => {
+      action: (text, selection, pattern, lineStart) => new Promise((resolve) => {
         let match = pattern.exec(text)
 
         const [annotatedText, , matchedText] = match
         const startIndex = lineStart + match.index
-        if (text.match(/^([*_ \n]+)$/g)) return
+        if (text.match(/^([*_ \n]+)$/g)) {
+          resolve(false)
+          return
+        }
 
         setTimeout(() => {
           this.quillJS.deleteText(startIndex, annotatedText.length)
-          this.quillJS.insertText(startIndex, matchedText, { bold: true })
-          this.quillJS.format('bold', false)
+          setTimeout(() => {
+            this.quillJS.insertText(startIndex, matchedText, { bold: true })
+            this.quillJS.format('bold', false)
+            resolve(true)
+          })
         }, 0)
-      }
+      })
     }
   }
 }

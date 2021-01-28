@@ -10,10 +10,11 @@ class Bold {
     return {
       name: this.name,
       pattern: this.pattern,
-      action: (text, selection, pattern, lineStart) => {
+      action: (text, selection, pattern, lineStart) => new Promise((resolve) => {
         let match = pattern.exec(text)
 
         if (!match) {
+          resolve(false)
           return
         }
 
@@ -22,6 +23,7 @@ class Bold {
         const secondToken = (this.quillJS.getText())[lineStart + match.index + 1]
 
         if (matchedToken === firstToken && firstToken === secondToken) {
+          resolve(false)
           // duplicated match string tag. ** or __
           return
         }
@@ -32,8 +34,9 @@ class Bold {
           this.quillJS.deleteText(startIndex, annotatedText.length)
           this.quillJS.insertText(startIndex, matchedText, { italic: true })
           this.quillJS.format('italic', false)
+          resolve(true)
         }, 0)
-      }
+      })
     }
   }
 }
