@@ -1,8 +1,8 @@
 class Link {
-  constructor (quillJS) {
+  constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'checkbox-checked'
-    this.pattern = /^(\[x\])+\s/g
+    this.pattern = options.pattern || /^(\[x\])+\s/g
     this.getAction.bind(this)
   }
 

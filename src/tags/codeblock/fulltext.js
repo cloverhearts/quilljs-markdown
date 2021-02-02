@@ -1,8 +1,8 @@
 class Codeblock {
-  constructor (quillJS) {
+  constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'pre'
-    this.pattern = /^(```)/g
+    this.pattern = options.pattern || /^(```)/g
     this.getAction.bind(this)
   }
 

@@ -1,8 +1,8 @@
 class Link {
-  constructor (quillJS) {
+  constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'list'
-    this.pattern = /^\s{0,9}(\d)+\.\s/g
+    this.pattern = options.pattern || /^\s{0,9}(\d)+\.\s/g
     this.getAction.bind(this)
   }
 

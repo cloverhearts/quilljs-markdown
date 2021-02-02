@@ -1,8 +1,8 @@
 class Blockquote {
-  constructor (quillJS) {
+  constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'blockquote'
-    this.pattern = /^(>)\s/g
+    this.pattern = options.pattern || /^(>)\s/g
     this.getAction.bind(this)
   }
 

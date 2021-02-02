@@ -1,8 +1,8 @@
 class inlineCode {
-  constructor (quillJS) {
+  constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'code'
-    this.pattern = /(`){1}(.+?)(`){1}/g
+    this.pattern = options.pattern || /(`){1}(.+?)(`){1}/g
     this.getAction.bind(this)
   }
 

@@ -1,8 +1,8 @@
 class Header {
-  constructor (quillJS) {
+  constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'header'
-    this.pattern = /^(#){1,6}\s/g
+    this.pattern = options.pattern || /^(#){1,6}\s/g
     this.getAction.bind(this)
   }
 

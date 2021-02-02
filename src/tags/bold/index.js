@@ -1,8 +1,8 @@
 class Bold {
-  constructor (quillJS) {
+  constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'bold'
-    this.pattern = /(\*|_){2}(.+?)(?:\1){2}/g
+    this.pattern = options.pattern || /(\*|_){2}(.+?)(?:\1){2}/g
     this.getAction.bind(this)
   }
 
