@@ -3,7 +3,6 @@ class Bold {
     this.quillJS = quillJS
     this.name = 'italic'
     this.pattern = options.pattern || /(\*|_){1}(.+?)(?:\1){1}/g
-    console.log('Italic', this.pattern);
     this.getAction.bind(this)
   }
 
