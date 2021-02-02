@@ -16,7 +16,6 @@ import Strikethrough from './strikethrough'
 
 class TagsOperators {
   constructor (quillJS, tags = {}) {
-    console.log('TagsOperators', tags.header)
     this.quillJS = quillJS
     this.getOperatorsAll.bind(this)
     this.tags = [
