@@ -2,7 +2,7 @@ class Bold {
   constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'strikethrough'
-    this.pattern =  options.pattern || /(?:~|_){2}(.+?)(?:~|_){2}/g
+    this.pattern = options.pattern || /(?:~|_){2}(.+?)(?:~|_){2}/g
     this.getAction.bind(this)
   }
 
