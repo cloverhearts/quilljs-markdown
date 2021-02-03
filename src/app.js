@@ -3,7 +3,7 @@ import 'regenerator-runtime/runtime'
 import TagsOperators from './tags'
 
 class MarkdownActivity {
-  constructor (quillJS, options) {
+  constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.options = options
     this.quillJS.on('text-change', this.onTextChange.bind(this))
@@ -16,8 +16,8 @@ class MarkdownActivity {
       tilde: '~',
       underscore: '_'
     }
-    this.ignoreTags = ['PRE']
-    this.tags = new TagsOperators(this.quillJS)
+    this.ignoreTags = ['PRE', ...(options.ignoreTags || [])]
+    this.tags = new TagsOperators(this.quillJS, options.tags)
     this.matches = this.tags.getOperatorsAll()
     this.fullMatches = this.tags.getFullTextOperatorsAll()
   }

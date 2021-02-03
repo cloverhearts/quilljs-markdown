@@ -15,33 +15,33 @@ import CodeblockFullText from './codeblock/fulltext'
 import Strikethrough from './strikethrough'
 
 class TagsOperators {
-  constructor (quillJS) {
+  constructor (quillJS, tags = {}) {
     this.quillJS = quillJS
     this.getOperatorsAll.bind(this)
     this.tags = [
-      new Header(this.quillJS).getAction(),
-      new Blockquote(this.quillJS).getAction(),
-      new Bold(this.quillJS).getAction(),
-      new Link(this.quillJS).getAction(),
-      new Codeblock(this.quillJS).getAction(),
-      new InlineCode(this.quillJS).getAction(),
-      new Strikethrough(this.quillJS).getAction(),
-      new Italics(this.quillJS).getAction()
+      new Header(this.quillJS, tags.header).getAction(),
+      new Blockquote(this.quillJS, tags.blockquote).getAction(),
+      new Bold(this.quillJS, tags.bold).getAction(),
+      new Link(this.quillJS, tags.link).getAction(),
+      new Codeblock(this.quillJS, tags.codeblock).getAction(),
+      new InlineCode(this.quillJS, tags.inlinecode).getAction(),
+      new Strikethrough(this.quillJS, tags.strikethrough).getAction(),
+      new Italics(this.quillJS, tags.italic).getAction()
     ]
 
     this.fullTextTags = [
-      new Header(this.quillJS).getAction(),
-      new CheckBoxChecked(this.quillJS).getAction(),
-      new CheckBoxUnchecked(this.quillJS).getAction(),
-      new ListOfNumberFulltext(this.quillJS).getAction(),
-      new ListOfBulletFulltext(this.quillJS).getAction(),
-      new BlockquoteFulltext(this.quillJS).getAction(),
-      new CodeblockFullText(this.quillJS).getAction(),
-      new Bold(this.quillJS).getAction(),
-      new LinkFullText(this.quillJS).getAction(),
-      new InlineCode(this.quillJS).getAction(),
-      new Strikethrough(this.quillJS).getAction(),
-      new Italics(this.quillJS).getAction()
+      new Header(this.quillJS, tags.header).getAction(),
+      new CheckBoxChecked(this.quillJS, tags.checkBoxChecked).getAction(),
+      new CheckBoxUnchecked(this.quillJS, tags.checkBoxUnchecked).getAction(),
+      new ListOfNumberFulltext(this.quillJS, tags.listOfNumberFulltext).getAction(),
+      new ListOfBulletFulltext(this.quillJS, tags.listOfBulletFulltext).getAction(),
+      new BlockquoteFulltext(this.quillJS, tags.blockquote).getAction(),
+      new CodeblockFullText(this.quillJS, tags.codeblock).getAction(),
+      new Bold(this.quillJS, tags.bold).getAction(),
+      new LinkFullText(this.quillJS, tags.link).getAction(),
+      new InlineCode(this.quillJS, tags.inlinecode).getAction(),
+      new Strikethrough(this.quillJS, tags.strikethrough).getAction(),
+      new Italics(this.quillJS, tags.italic).getAction()
     ]
   }
 
