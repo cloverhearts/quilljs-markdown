@@ -16,8 +16,9 @@ class MarkdownActivity {
       tilde: '~',
       underscore: '_'
     }
+    console.log('ignoreTags ', options.ignoreTags)
     this.ignoreTags = ['PRE', ...(options.ignoreTags || [])]
-    this.tags = new TagsOperators(this.quillJS, options.tags)
+    this.tags = new TagsOperators(this.quillJS, options)
     this.matches = this.tags.getOperatorsAll()
     this.fullMatches = this.tags.getFullTextOperatorsAll()
   }
@@ -87,6 +88,7 @@ class MarkdownActivity {
   }
 
   isValid (text, tagName) {
+    console.log('text ', text, tagName)
     return (
       typeof text !== 'undefined' &&
       text &&

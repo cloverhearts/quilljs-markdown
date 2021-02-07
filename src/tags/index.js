@@ -15,34 +15,37 @@ import CodeblockFullText from './codeblock/fulltext'
 import Strikethrough from './strikethrough'
 
 class TagsOperators {
-  constructor (quillJS, tags = {}) {
+  constructor (quillJS, options = { tags: {} }) {
     this.quillJS = quillJS
     this.getOperatorsAll.bind(this)
-    this.tags = [
-      new Header(this.quillJS, tags.header).getAction(),
-      new Blockquote(this.quillJS, tags.blockquote).getAction(),
-      new Bold(this.quillJS, tags.bold).getAction(),
-      new Link(this.quillJS, tags.link).getAction(),
-      new Codeblock(this.quillJS, tags.codeblock).getAction(),
-      new InlineCode(this.quillJS, tags.inlinecode).getAction(),
-      new Strikethrough(this.quillJS, tags.strikethrough).getAction(),
-      new Italics(this.quillJS, tags.italic).getAction()
+    this.supportInlineTags = [
+      new Header(this.quillJS, options).getAction(),
+      new Blockquote(this.quillJS, options).getAction(),
+      new Bold(this.quillJS, options).getAction(),
+      new Link(this.quillJS, options).getAction(),
+      new Codeblock(this.quillJS, options).getAction(),
+      new InlineCode(this.quillJS, options).getAction(),
+      new Strikethrough(this.quillJS, options).getAction(),
+      new Italics(this.quillJS, options).getAction()
     ]
 
-    this.fullTextTags = [
-      new Header(this.quillJS, tags.header).getAction(),
-      new CheckBoxChecked(this.quillJS, tags.checkBoxChecked).getAction(),
-      new CheckBoxUnchecked(this.quillJS, tags.checkBoxUnchecked).getAction(),
-      new ListOfNumberFulltext(this.quillJS, tags.listOfNumberFulltext).getAction(),
-      new ListOfBulletFulltext(this.quillJS, tags.listOfBulletFulltext).getAction(),
-      new BlockquoteFulltext(this.quillJS, tags.blockquote).getAction(),
-      new CodeblockFullText(this.quillJS, tags.codeblock).getAction(),
-      new Bold(this.quillJS, tags.bold).getAction(),
-      new LinkFullText(this.quillJS, tags.link).getAction(),
-      new InlineCode(this.quillJS, tags.inlinecode).getAction(),
-      new Strikethrough(this.quillJS, tags.strikethrough).getAction(),
-      new Italics(this.quillJS, tags.italic).getAction()
+    this.supportfullTextTags = [
+      new Header(this.quillJS, options).getAction(),
+      new CheckBoxChecked(this.quillJS, options).getAction(),
+      new CheckBoxUnchecked(this.quillJS, options).getAction(),
+      new ListOfNumberFulltext(this.quillJS, options).getAction(),
+      new ListOfBulletFulltext(this.quillJS, options).getAction(),
+      new BlockquoteFulltext(this.quillJS, options).getAction(),
+      new CodeblockFullText(this.quillJS, options).getAction(),
+      new Bold(this.quillJS, options).getAction(),
+      new LinkFullText(this.quillJS, options).getAction(),
+      new InlineCode(this.quillJS, options).getAction(),
+      new Strikethrough(this.quillJS, options).getAction(),
+      new Italics(this.quillJS, options).getAction()
     ]
+
+    this.tags = [...this.supportInlineTags]
+    this.fullTextTags = [...this.supportfullTextTags]
   }
 
   getOperatorsAll () {
