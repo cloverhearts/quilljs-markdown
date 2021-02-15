@@ -4,7 +4,7 @@ class Header {
   constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'header'
-    this.pattern = options.pattern || /^(#){1,6}\s/g // todo(cloverhearts): need to replace about structure
+    this.pattern = options.tags && options.tags.header && options.tags.header.pattern ? options.tags.header.pattern : /^(#){1,6}\s/g
     this.getAction.bind(this)
     this._meta = meta()
     this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
