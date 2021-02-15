@@ -1,9 +1,25 @@
+import meta from './meta'
+
 class Bold {
   constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'bold'
-    this.pattern = options.pattern || /(\*|_){2}(.+?)(?:\1){2}/g
+    this.pattern = options.tags && options.tags.bold && options.tags.bold.pattern ? options.tags.bold.pattern : /(\*|_){2}(.+?)(?:\1){2}/g
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
+  }
+
+  _getActiveTagsWithoutIgnore (tags, ignoreTags) {
+    if (Array.isArray(ignoreTags)) {
+      return tags.reduce((allowTags, tag) => {
+        if (!ignoreTags.includes(tag)) {
+          allowTags.push(tag.toLowerCase())
+        }
+        return allowTags
+      }, [])
+    }
+    return tags
   }
 
   getAction () {
@@ -15,7 +31,7 @@ class Bold {
 
         const [annotatedText, , matchedText] = match
         const startIndex = lineStart + match.index
-        if (text.match(/^([*_ \n]+)$/g)) {
+        if (text.match(/^([*_ \n]+)$/g) || !this.activeTags.length) {
           resolve(false)
           return
         }
