@@ -1,9 +1,25 @@
-class Link {
+import meta from './meta'
+
+class Checkbox {
   constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.name = 'checkbox-checked'
     this.pattern = options.pattern || /^(\[x\])+\s/g
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
+  }
+
+  _getActiveTagsWithoutIgnore (tags, ignoreTags) {
+    if (Array.isArray(ignoreTags)) {
+      return tags.reduce((allowTags, tag) => {
+        if (!ignoreTags.includes(tag)) {
+          allowTags.push(tag.toLowerCase())
+        }
+        return allowTags
+      }, [])
+    }
+    return tags
   }
 
   getAction () {
@@ -12,7 +28,7 @@ class Link {
       pattern: this.pattern,
       action: (text, selection, pattern) => new Promise((resolve) => {
         const match = pattern.exec(text)
-        if (!match) {
+        if (!match || !this.activeTags.length) {
           resolve(false)
           return
         }
@@ -32,4 +48,4 @@ class Link {
   }
 }
 
-export default Link
+export default Checkbox
