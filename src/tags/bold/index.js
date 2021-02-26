@@ -1,25 +1,15 @@
+import AbstractTag from '../AbstractTag'
 import meta from './meta'
 
-class Bold {
+class Bold extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'bold'
-    this.pattern = options.tags && options.tags.bold && options.tags.bold.pattern ? options.tags.bold.pattern : /(\*|_){2}(.+?)(?:\1){2}/g
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /(\*|_){2}(.+?)(?:\1){2}/g)
     this.getAction.bind(this)
     this._meta = meta()
     this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
-  }
-
-  _getActiveTagsWithoutIgnore (tags, ignoreTags) {
-    if (Array.isArray(ignoreTags)) {
-      return tags.reduce((allowTags, tag) => {
-        if (!ignoreTags.includes(tag)) {
-          allowTags.push(tag.toLowerCase())
-        }
-        return allowTags
-      }, [])
-    }
-    return tags
   }
 
   getAction () {

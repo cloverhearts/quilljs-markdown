@@ -1,25 +1,15 @@
 import meta from './meta'
+import AbstractTag from '../AbstractTag'
 
-class Header {
+class Header extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'header'
-    this.pattern = options.tags && options.tags.header && options.tags.header.pattern ? options.tags.header.pattern : /^(#){1,6}\s/g
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /^(#){1,6}\s/g)
     this.getAction.bind(this)
     this._meta = meta()
     this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
-  }
-
-  _getActiveTagsWithoutIgnore (tags, ignoreTags) {
-    if (Array.isArray(ignoreTags)) {
-      return tags.reduce((allowTags, tag) => {
-        if (!ignoreTags.includes(tag)) {
-          allowTags.push(tag.toLowerCase())
-        }
-        return allowTags
-      }, [])
-    }
-    return tags
   }
 
   getAction () {
@@ -28,7 +18,7 @@ class Header {
       pattern: this.pattern,
       action: (text, selection, pattern) => new Promise((resolve) => {
         const match = pattern.exec(text)
-        if (!match) {
+        if (!match || !this.activeTags.length || !this.activeTags.find(tag => tag === 'header')) {
           resolve(false)
           return
         }

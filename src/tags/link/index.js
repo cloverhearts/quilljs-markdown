@@ -1,9 +1,15 @@
-class Link {
+import AbstractTag from '../AbstractTag'
+import meta from './meta'
+
+class Link extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'link'
-    this.pattern = options.pattern || /(?:\[(.+?)\])(?:\((.+?)\))/g
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /(?:\[(.+?)\])(?:\((.+?)\))/g)
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
   }
 
   getAction () {
@@ -16,6 +22,12 @@ class Link {
         const hrefText = text.match(/(?:\[(.*?)\])/g)[0]
         const hrefLink = text.match(/(?:\((.*?)\))/g)[0]
         const start = selection.index - matchedText.length - 1
+
+        if (!this.activeTags.length) {
+          resolve(false)
+          return
+        }
+
         if (startIndex !== -1) {
           setTimeout(() => {
             this.quillJS.deleteText(start, matchedText.length)

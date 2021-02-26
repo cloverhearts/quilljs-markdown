@@ -1,25 +1,15 @@
+import AbstractTag from '../AbstractTag'
 import meta from './meta'
 
-class Checkbox {
+class Checkbox extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'checkbox-checked'
-    this.pattern = options.pattern || /^(\[x\])+\s/g
+    this.pattern = this._getCustomPatternOrDefault(options, 'checkbox', /^(\[x\])+\s/g)
     this.getAction.bind(this)
     this._meta = meta()
     this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
-  }
-
-  _getActiveTagsWithoutIgnore (tags, ignoreTags) {
-    if (Array.isArray(ignoreTags)) {
-      return tags.reduce((allowTags, tag) => {
-        if (!ignoreTags.includes(tag)) {
-          allowTags.push(tag.toLowerCase())
-        }
-        return allowTags
-      }, [])
-    }
-    return tags
   }
 
   getAction () {

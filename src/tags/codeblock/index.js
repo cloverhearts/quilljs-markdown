@@ -1,9 +1,15 @@
-class Codeblock {
+import AbstractTag from '../AbstractTag'
+import meta from './meta'
+
+class Codeblock extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'pre'
-    this.pattern = options.pattern || /^(```)\s/g
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /^(```)\s/g)
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
   }
 
   getAction () {
@@ -12,7 +18,7 @@ class Codeblock {
       pattern: this.pattern,
       action: (text, selection, pattern) => new Promise((resolve) => {
         const match = pattern.exec(text)
-        if (!match) {
+        if (!match || !this.activeTags.length) {
           resolve(false)
           return
         }

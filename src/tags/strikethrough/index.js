@@ -1,9 +1,15 @@
-class Bold {
+import AbstractTag from '../AbstractTag'
+import meta from './meta'
+
+class Bold extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'strikethrough'
-    this.pattern = options.pattern || /(?:~|_){2}(.+?)(?:~|_){2}/g
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /(?:~|_){2}(.+?)(?:~|_){2}/g)
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
   }
 
   getAction () {
@@ -12,6 +18,11 @@ class Bold {
       pattern: this.pattern,
       action: (text, selection, pattern, lineStart) => new Promise((resolve) => {
         let match = pattern.exec(text)
+
+        if (!this.activeTags.length) {
+          resolve(false)
+          return
+        }
 
         const annotatedText = match[0]
         const matchedText = match[1]
