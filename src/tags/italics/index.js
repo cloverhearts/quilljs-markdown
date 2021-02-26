@@ -1,9 +1,15 @@
-class Bold {
+import AbstractTag from '../AbstractTag'
+import meta from './meta'
+
+class Bold extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'italic'
-    this.pattern = options.pattern || /(\*|_){1}(.+?)(?:\1){1}/g
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /(\*|_){1}(.+?)(?:\1){1}/g)
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
   }
 
   getAction () {
@@ -13,7 +19,7 @@ class Bold {
       action: (text, selection, pattern, lineStart) => new Promise((resolve) => {
         let match = pattern.exec(text)
 
-        if (!match) {
+        if (!match || !this.activeTags.length) {
           resolve(false)
           return
         }

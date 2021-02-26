@@ -32,8 +32,19 @@
     article h2 {
       font-size: 2rem;
     }
+    article section header {
+      display: block;
+      position: relative;
+    }
     article section header h3 {
       color: #555;
+    }
+    article section header .tag-name {
+      display: inline-block;
+      position: absolute;
+      top: 25px;
+      font-size: 14px;
+      color: #aaa;
     }
 
     article section header h4 {
@@ -41,6 +52,7 @@
     }
 
     .code-line {
+      margin-top: 2rem;
       margin-left: 2rem;
       margin-bottom: 3rem;
       font-size: 0.9rem;
@@ -78,6 +90,13 @@
       <p>You can test it, here</p>
     </div>
     <article class="kotton-css">
+      <header>
+        <h2>How to use</h2>
+      </header>
+        <a href="https://github.com/cloverhearts/quilljs-markdown#how-to-use">
+          <img src="code-example.png" alt="code-sample" style="display: block; width: 80%; margin: 0 auto;" />
+        </a>
+      </section>
       <header>
         <h2>Feature</h2>
       </header>
@@ -124,6 +143,7 @@
       <section>
         <header>
           <h3>Heading</h3>
+          <div class="tag-name">header, h1, h2, h3, h4, h5, h6</div>
         </header>
         <div class="code-line">
           # MyTitle<br>
@@ -136,6 +156,7 @@
       <section>
         <header>
           <h3>Blockquote</h3>
+          <div class="tag-name">blockquote</div>
         </header>
         <div class="code-line">
           > blockquote text<br>
@@ -144,6 +165,7 @@
       <section>
         <header>
           <h3>bold</h3>
+          <div class="tag-name">bold</div>
         </header>
         <div class="code-line">
           **Bold Text**<br>
@@ -154,6 +176,7 @@
       <section>
         <header>
           <h3>Italics</h3>
+          <div class="tag-name">italics</div>
         </header>
         <div class="code-line">
           *Italics Text*<br>
@@ -164,6 +187,7 @@
       <section>
         <header>
           <h3>Link</h3>
+          <div class="tag-name">link</div>
         </header>
         <div class="code-line">
           [Go to Repository](https://github.com/cloverhearts/quilljs-markdown)
@@ -172,6 +196,7 @@
       <section>
         <header>
           <h3>inline code</h3>
+          <div class="tag-name">code</div>
         </header>
         <div class="code-line">
           `inline code block`
@@ -180,6 +205,7 @@
       <section>
         <header>
           <h3>Code block</h3>
+          <div class="tag-name">pre</div>
         </header>
         <div class="code-line">
           ```<br>
@@ -190,6 +216,7 @@
       <section>
         <header>
           <h3>List</h3>
+          <div class="tag-name">ol, ul</div>
         </header>
         <div class="code-line">
           1. one<br>
@@ -204,6 +231,7 @@
       <section>
         <header>
           <h3>Strikethrough</h3>
+          <div class="tag-name">strikethrough</div>
         </header>
         <div class="code-line">
           <div class="code-line">
@@ -214,6 +242,7 @@
       <section>
         <header>
           <h3>Checkbox</h3>
+          <div class="tag-name">checkbox</div>
         </header>
         <div class="code-line">
           <div class="code-line">

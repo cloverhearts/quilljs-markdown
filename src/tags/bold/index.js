@@ -1,9 +1,15 @@
-class Bold {
+import AbstractTag from '../AbstractTag'
+import meta from './meta'
+
+class Bold extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'bold'
-    this.pattern = options.pattern || /(\*|_){2}(.+?)(?:\1){2}/g
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /(\*|_){2}(.+?)(?:\1){2}/g)
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
   }
 
   getAction () {
@@ -15,7 +21,7 @@ class Bold {
 
         const [annotatedText, , matchedText] = match
         const startIndex = lineStart + match.index
-        if (text.match(/^([*_ \n]+)$/g)) {
+        if (text.match(/^([*_ \n]+)$/g) || !this.activeTags.length) {
           resolve(false)
           return
         }

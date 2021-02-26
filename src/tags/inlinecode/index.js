@@ -1,9 +1,15 @@
-class inlineCode {
+import AbstractTag from '../AbstractTag'
+import meta from './meta'
+
+class inlineCode extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'code'
-    this.pattern = options.pattern || /(`){1}(.+?)(`){1}/g
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /(`){1}(.+?)(`){1}/g)
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
   }
 
   getAction () {
@@ -13,7 +19,7 @@ class inlineCode {
       action: (text, selection, pattern, lineStart) => new Promise((resolve) => {
         let match = pattern.exec(text)
 
-        if (!match) {
+        if (!match || !this.activeTags.length) {
           resolve(false)
           return
         }

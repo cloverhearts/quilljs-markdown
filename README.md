@@ -26,10 +26,34 @@ or
 ## How to use
 ```javascript
 import Quill from 'quill'
-import QuillMarkdown from 'quilljs-markdown'
+import QuillMarkdown from '../src/app'
 
-const editor = new Quill('#editor', options)
-new QuillMarkdown(editor)
+const options = {
+  theme: 'snow'
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const editor = new Quill('#editor', options)
+  const markdownOptions = {
+    /**
+     ignoreTags: [ 'pre', 'strikethrough'], // @option - if you need to ignore some tags.
+     
+     tags: { // @option if you need to change for trigger pattern for some tags. 
+      blockquote: {
+        pattern: /^(\|){1,6}\s/g,
+      },
+      bold: {
+        pattern:  /^(\|){1,6}\s/g,
+      },
+      italic: {
+        pattern: /(\_){1}(.+?)(?:\1){1}/g,
+      },
+    },
+    */
+  };
+  new QuillMarkdown(editor, markdownOptions)
+})
+
 
 ```
 
@@ -46,7 +70,22 @@ or
       var quill = new Quill('#editor', {
         theme: 'snow'
       });
-      new QuillMarkdown(quill)
+      var markdownOptions = {
+        ignoreTags: [ 'strikethrough'], // @option - if you need to ignore some tags.
+    
+        tags: { // @option if you need to change for trigger pattern for some tags. 
+        blockquote: {
+          pattern: /^(\|){1,6}\s/g,
+        },
+        bold: {
+          pattern:  /^(\|){1,6}\s/g,
+        },
+        italic: {
+          pattern: /(\_){1}(.+?)(?:\1){1}/g,
+        },
+      },
+    };
+      new QuillMarkdown(editor, markdownOptions)
     })
 <script>
 
@@ -56,7 +95,7 @@ Pasting the Markdown form,
 
 Shows the corresponding Markdown result.
 
-### Heading
+### Heading (tagname : h1, h2, h3 ,h4, h5, h6, header(all))
 ```markdown
 # MyTitle
 ## MyTitle
@@ -65,41 +104,41 @@ Shows the corresponding Markdown result.
 ##### MyTitle
 ```
 
-### Blockquote
+### Blockquote (tagname : blockquote)
 ```markdown
 > blockquote text
 ```
 
-### bold
+### bold (tagname : bold)
 ```markdown
 **Bold Text**
 __Bold Text__
 ```
 
-### Italic
+### Italic (tagname : italic)
 ```markdown
 *Italics Text*
 _Italics Text_
 ```
 
-### Link
+### Link (tagname : link)
 ```markdown
 [link text](https://link_url)
 ```
 
-### inline code
+### inline code  (tagname : code)
 ```markdown
 `inline code block`
 ```
 
 
-### Code block
+### Code block  (tagname : pre)
 
 &#96;&#96;&#96;<br>
 code block<br>
 &#96;&#96;&#96;<br>
 
-### List
+### List  (tagname : ol, ul)
 
 ```markdown
 1. one
@@ -111,13 +150,13 @@ code block<br>
 * three
 ```
 
-### Strikethrough
+### Strikethrough  (tagname : strikethrough)
 
 ```markdown
 ~~Strikethrough~~
 ```
 
-### Checkbox
+### Checkbox  (tagname : checkbox)
 
 ```markdown
 [ ] checkbox

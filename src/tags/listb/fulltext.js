@@ -1,9 +1,15 @@
-class Link {
+import AbstractTag from '../AbstractTag'
+import meta from './meta'
+
+class Link extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
-    this.name = 'list'
-    this.pattern = options.pattern || /^\s{0,9}(-|\*){1}\s/
+    this.name = 'ul'
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /^\s{0,9}(-|\*){1}\s/)
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
   }
 
   getAction () {
@@ -12,7 +18,7 @@ class Link {
       pattern: this.pattern,
       action: (text, selection, pattern) => new Promise((resolve) => {
         const match = pattern.exec(text)
-        if (!match) {
+        if (!match || !this.activeTags.length) {
           resolve(false)
           return
         }

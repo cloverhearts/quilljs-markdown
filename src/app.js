@@ -17,7 +17,7 @@ class MarkdownActivity {
       underscore: '_'
     }
     this.ignoreTags = ['PRE', ...(options.ignoreTags || [])]
-    this.tags = new TagsOperators(this.quillJS, options.tags)
+    this.tags = new TagsOperators(this.quillJS, options)
     this.matches = this.tags.getOperatorsAll()
     this.fullMatches = this.tags.getFullTextOperatorsAll()
   }
@@ -86,14 +86,6 @@ class MarkdownActivity {
     })
   }
 
-  isValid (text, tagName) {
-    return (
-      typeof text !== 'undefined' &&
-      text &&
-      !this.ignoreTags.find(e => e === tagName)
-    )
-  }
-
   onInlineExecute () {
     const selection = this.quillJS.getSelection()
     if (!selection) return
@@ -105,13 +97,11 @@ class MarkdownActivity {
       // if exists text in code-block, to skip.
       return
     }
-    if (this.isValid(text, line.domNode.tagName)) {
-      for (let match of this.matches) {
-        const matchedText = text.match(match.pattern)
-        if (matchedText) {
-          match.action(text, selection, match.pattern, lineStart)
-          return
-        }
+    for (let match of this.matches) {
+      const matchedText = text.match(match.pattern)
+      if (matchedText) {
+        match.action(text, selection, match.pattern, lineStart)
+        return
       }
     }
   }
@@ -132,22 +122,20 @@ class MarkdownActivity {
     const beforeLineText = beforeNode && beforeNode.domNode.textContent
     const text = line.domNode.textContent + ' '
     selection.length = selection.index++
-    if (this.isValid(text, line.domNode.tagName)) {
-      // remove block rule.
-      if (typeof beforeLineText === 'string' && beforeLineText.length > 0 && text === ' ') {
-        const releaseTag = this.fullMatches.find(e => e.name === line.domNode.tagName.toLowerCase())
-        if (releaseTag && releaseTag.release) {
-          releaseTag.release(selection)
-          return false
-        }
+    // remove block rule.
+    if (typeof beforeLineText === 'string' && beforeLineText.length > 0 && text === ' ') {
+      const releaseTag = this.fullMatches.find(e => e.name === line.domNode.tagName.toLowerCase())
+      if (releaseTag && releaseTag.release) {
+        releaseTag.release(selection)
+        return false
       }
+    }
 
-      for (let match of this.fullMatches) {
-        const matchedText = text.match(match.pattern)
-        if (matchedText) {
-          // eslint-disable-next-line no-return-await
-          return await match.action(text, selection, match.pattern, lineStart)
-        }
+    for (let match of this.fullMatches) {
+      const matchedText = text.match(match.pattern)
+      if (matchedText) {
+        // eslint-disable-next-line no-return-await
+        return await match.action(text, selection, match.pattern, lineStart)
       }
     }
     return false

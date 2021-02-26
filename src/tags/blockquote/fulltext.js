@@ -1,9 +1,15 @@
-class Blockquote {
+import AbstractTag from '../AbstractTag'
+import meta from './meta'
+
+class Blockquote extends AbstractTag {
   constructor (quillJS, options = {}) {
+    super()
     this.quillJS = quillJS
     this.name = 'blockquote'
-    this.pattern = options.pattern || /^\s{0,99}(>)\s/g
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /^\s{0,99}(>)\s/g)
     this.getAction.bind(this)
+    this._meta = meta()
+    this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
   }
 
   getAction () {
@@ -12,7 +18,7 @@ class Blockquote {
       pattern: this.pattern,
       action: (text, selection, pattern) => new Promise((resolve) => {
         const match = pattern.exec(text)
-        if (!match) {
+        if (!match || !this.activeTags.length) {
           resolve(false)
           return
         }
