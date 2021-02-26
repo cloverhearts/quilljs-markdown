@@ -16,7 +16,6 @@ class MarkdownActivity {
       tilde: '~',
       underscore: '_'
     }
-    console.log('ignoreTags ', options.ignoreTags)
     this.ignoreTags = ['PRE', ...(options.ignoreTags || [])]
     this.tags = new TagsOperators(this.quillJS, options)
     this.matches = this.tags.getOperatorsAll()
