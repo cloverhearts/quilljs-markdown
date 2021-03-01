@@ -1,0 +1,59 @@
+
+.ql-container .ql-editor {
+  ul {
+    padding-left: 1rem;
+    li:not(.ql-direction-rtl) {
+      position: relative;
+      margin: 0;
+      padding-left: 0.8rem;
+      &:before {
+        display: list-item;
+        position: absolute;
+        list-style: disc;
+        width: 0;
+        top: -0.25em;
+        left: 1rem;
+        content: '';
+        margin-left: 0;
+        font-size: 1.5em;
+      }
+
+      @for $index from 1 through 100 {
+        &.ql-indent-#{$index} {
+          padding-left: #{ 1 + $index }rem;
+          &:before {
+            left: #{($index * 1.05) + 1}rem;
+            list-style: square;
+          }
+        }
+      }
+      &.ql-indent-1 {
+        &:before {
+          list-style: circle;
+        }
+      }
+    }
+  }
+
+  ol {
+    padding-left: 1rem;
+    li:not(.ql-direction-rtl) {
+      position: relative;
+      margin: 0;
+      padding-left: 0.8rem;
+      &:before {
+        width: 0;
+        top: -0.25em;
+        margin-right: 1.1em;
+      }
+      @for $index from 1 through 100 {
+        &.ql-indent-#{$index} {
+          padding-left: #{ 1 + $index }rem;
+          &:before {
+            margin-right: 1.1em;
+          }
+        }
+      }
+    }
+  }
+}

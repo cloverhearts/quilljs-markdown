@@ -26,7 +26,8 @@ or
 ## How to use
 ```javascript
 import Quill from 'quill'
-import QuillMarkdown from '../src/app'
+import QuillMarkdown from 'quilljs-markdown'
+import 'quilljs-markdown/dist/quilljs-markdown-common-style.css' // recommend import css, @option improve common style
 
 const options = {
   theme: 'snow'
@@ -64,6 +65,7 @@ or
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown.js"><script>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown-common-style.css" rel="stylesheet" >
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
