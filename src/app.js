@@ -70,8 +70,8 @@ class MarkdownActivity {
         case this.actionCharacters.whiteSpace:
           this.onInlineExecute.bind(this)()
           break
-        case this.actionCharacters.asterisk:
         case this.actionCharacters.rightParenthesis:
+        case this.actionCharacters.asterisk:
         case this.actionCharacters.grave:
         case this.actionCharacters.newLine:
         case this.actionCharacters.tilde:
