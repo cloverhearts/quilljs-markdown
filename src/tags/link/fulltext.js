@@ -30,8 +30,10 @@ class Link extends AbstractTag {
 
         if (startIndex !== -1) {
           setTimeout(() => {
-            this.quillJS.deleteText(start, matchedText.length)
-            this.quillJS.insertText(start, hrefText.slice(1, hrefText.length - 1),
+            const inlineModeText = this.quillJS.getText(start - matchedText.length, matchedText.length)
+            const beginOffset = inlineModeText === matchedText ? start - matchedText.length : start
+            this.quillJS.deleteText(beginOffset, matchedText.length)
+            this.quillJS.insertText(beginOffset, hrefText.slice(1, hrefText.length - 1),
               'link', hrefLink.slice(1, hrefLink.length - 1))
             resolve(true)
           }, 0)

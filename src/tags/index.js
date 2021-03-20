@@ -6,7 +6,6 @@ import CheckBoxChecked from './checkbox/fulltext-checked'
 import CheckBoxUnchecked from './checkbox/fulltext-unchecked'
 import InlineCode from './inlinecode'
 import Italics from './italics'
-import Link from './link'
 import LinkFullText from './link/fulltext'
 import ListOfNumberFulltext from './listn/fulltext'
 import ListOfBulletFulltext from './listb/fulltext'
@@ -22,7 +21,6 @@ class TagsOperators {
       new Header(this.quillJS, options).getAction(),
       new Blockquote(this.quillJS, options).getAction(),
       new Bold(this.quillJS, options).getAction(),
-      new Link(this.quillJS, options).getAction(),
       new Codeblock(this.quillJS, options).getAction(),
       new InlineCode(this.quillJS, options).getAction(),
       new Strikethrough(this.quillJS, options).getAction(),
