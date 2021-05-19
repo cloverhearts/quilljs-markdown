@@ -6,7 +6,7 @@ class Codeblock extends AbstractTag {
     super()
     this.quillJS = quillJS
     this.name = 'pre'
-    this.pattern = this._getCustomPatternOrDefault(options, this.name, /^(```)\s/g)
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /^(```).*/g)
     this.getAction.bind(this)
     this._meta = meta()
     this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
@@ -22,9 +22,10 @@ class Codeblock extends AbstractTag {
           resolve(false)
           return
         }
+
         const originalText = match[0] || ''
         setTimeout(() => {
-          const startIndex = selection.index - originalText.length - 1
+          const startIndex = selection.index - originalText.length
           this.quillJS.deleteText(startIndex, originalText.length)
           setTimeout(() => {
             this.quillJS.insertText(startIndex, '\n')

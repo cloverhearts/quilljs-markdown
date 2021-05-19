@@ -26,10 +26,12 @@ class MarkdownActivity {
     if (source !== 'user') return
     const cursorOffset = (delta.ops[0] && delta.ops[0].retain) || 0
     const inputText = delta.ops[0].insert || (delta.ops[1] && delta.ops[1].insert)
-
     if (!inputText) return
 
+    const isPastedText = !!delta.ops.find(e => e.insert && e.insert.length > 1)
+
     if (inputText.length > 1) {
+      console.log('full')
       setTimeout(async () => {
         const cursorOffsetFixed = cursorOffset
         const tokens = inputText.split('\n')
@@ -63,20 +65,20 @@ class MarkdownActivity {
         }
       }, 0)
       return
+    } else {
+      console.log('inline')
     }
 
     delta.ops.filter(e => e.hasOwnProperty('insert')).forEach(e => {
       switch (e.insert) {
         case this.actionCharacters.whiteSpace:
-          this.onInlineExecute.bind(this)()
-          break
         case this.actionCharacters.rightParenthesis:
         case this.actionCharacters.asterisk:
         case this.actionCharacters.grave:
         case this.actionCharacters.newLine:
         case this.actionCharacters.tilde:
         case this.actionCharacters.underscore:
-          this.onFullTextExecute.bind(this)()
+          this.onInlineExecute.bind(this)()
           break
       }
     })
@@ -98,8 +100,9 @@ class MarkdownActivity {
       return
     }
     for (let match of this.matches) {
-      const matchedText = text.match(match.pattern)
+      const matchedText = typeof match.pattern === 'function' ? match.pattern(text) : text.match(match.pattern)
       if (matchedText) {
+        console.log(match)
         match.action(text, selection, match.pattern, lineStart)
         return
       }
@@ -132,7 +135,7 @@ class MarkdownActivity {
     }
 
     for (let match of this.fullMatches) {
-      const matchedText = text.match(match.pattern)
+      const matchedText = typeof match.pattern === 'function' ? match.pattern(text) : text.match(match.pattern)
       if (matchedText) {
         // eslint-disable-next-line no-return-await
         return await match.action(text, selection, match.pattern, lineStart)
