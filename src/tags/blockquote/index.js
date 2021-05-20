@@ -24,7 +24,7 @@ class Blockquote extends AbstractTag {
         }
         const originalText = match[0] || ''
         setTimeout(() => {
-          this.quillJS.formatText(selection.index, 1, 'blockquote', true)
+          this.quillJS.formatText(selection.index, match.input.length - 1, 'blockquote', true)
           this.quillJS.deleteText(
             selection.index - originalText.length,
             originalText.length
