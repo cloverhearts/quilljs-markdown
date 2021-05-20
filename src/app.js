@@ -26,12 +26,18 @@ class MarkdownActivity {
     if (source !== 'user') return
     const cursorOffset = (delta.ops[0] && delta.ops[0].retain) || 0
     const inputText = delta.ops[0].insert || (delta.ops[1] && delta.ops[1].insert)
+    const [removeLine] = this.quillJS.getLine(cursorOffset)
+    const isRemoveCommand = delta.ops[1].delete || delta.ops[1].insert === '\n'
+    if (isRemoveCommand && removeLine.domNode.textContent.length <= 1) {
+      const rangeElements = ['PRE', 'BLOCKQUOTE']
+      if (rangeElements.includes(removeLine.domNode.tagName)) {
+        this.onRemoveElement({ delete: 1 })
+      }
+    }
+
     if (!inputText) return
 
-    const isPastedText = !!delta.ops.find(e => e.insert && e.insert.length > 1)
-
     if (inputText.length > 1) {
-      console.log('full')
       setTimeout(async () => {
         const cursorOffsetFixed = cursorOffset
         const tokens = inputText.split('\n')
@@ -65,8 +71,6 @@ class MarkdownActivity {
         }
       }, 0)
       return
-    } else {
-      console.log('inline')
     }
 
     delta.ops.filter(e => e.hasOwnProperty('insert')).forEach(e => {
@@ -102,7 +106,6 @@ class MarkdownActivity {
     for (let match of this.matches) {
       const matchedText = typeof match.pattern === 'function' ? match.pattern(text) : text.match(match.pattern)
       if (matchedText) {
-        console.log(match)
         match.action(text, selection, match.pattern, lineStart)
         return
       }
