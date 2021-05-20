@@ -27,7 +27,8 @@ class MarkdownActivity {
     const cursorOffset = (delta.ops[0] && delta.ops[0].retain) || 0
     const inputText = delta.ops[0].insert || (delta.ops[1] && delta.ops[1].insert)
     const [removeLine] = this.quillJS.getLine(cursorOffset)
-    const isRemoveCommand = delta.ops[1].delete || delta.ops[1].insert === '\n'
+    const insertDelta = delta.ops.find(e => e.hasOwnProperty('insert')) || {}
+    const isRemoveCommand = delta.ops.find(e => e.hasOwnProperty('delete')) || insertDelta.insert === '\n'
     if (isRemoveCommand && removeLine.domNode.textContent.length <= 1) {
       const rangeElements = ['PRE', 'BLOCKQUOTE']
       if (rangeElements.includes(removeLine.domNode.tagName)) {
