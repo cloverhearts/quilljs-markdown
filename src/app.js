@@ -26,6 +26,15 @@ class MarkdownActivity {
     if (source !== 'user') return
     const cursorOffset = (delta.ops[0] && delta.ops[0].retain) || 0
     const inputText = delta.ops[0].insert || (delta.ops[1] && delta.ops[1].insert)
+    const [removeLine] = this.quillJS.getLine(cursorOffset)
+    const insertDelta = delta.ops.find(e => e.hasOwnProperty('insert')) || {}
+    const isRemoveCommand = delta.ops.find(e => e.hasOwnProperty('delete')) || insertDelta.insert === '\n'
+    if (isRemoveCommand && removeLine.domNode.textContent.length <= 1) {
+      const rangeElements = ['PRE', 'BLOCKQUOTE']
+      if (rangeElements.includes(removeLine.domNode.tagName)) {
+        this.onRemoveElement({ delete: 1 })
+      }
+    }
 
     if (!inputText) return
 
@@ -68,15 +77,13 @@ class MarkdownActivity {
     delta.ops.filter(e => e.hasOwnProperty('insert')).forEach(e => {
       switch (e.insert) {
         case this.actionCharacters.whiteSpace:
-          this.onInlineExecute.bind(this)()
-          break
         case this.actionCharacters.rightParenthesis:
         case this.actionCharacters.asterisk:
         case this.actionCharacters.grave:
         case this.actionCharacters.newLine:
         case this.actionCharacters.tilde:
         case this.actionCharacters.underscore:
-          this.onFullTextExecute.bind(this)()
+          this.onInlineExecute.bind(this)()
           break
       }
     })
@@ -98,7 +105,7 @@ class MarkdownActivity {
       return
     }
     for (let match of this.matches) {
-      const matchedText = text.match(match.pattern)
+      const matchedText = typeof match.pattern === 'function' ? match.pattern(text) : text.match(match.pattern)
       if (matchedText) {
         match.action(text, selection, match.pattern, lineStart)
         return
@@ -132,7 +139,7 @@ class MarkdownActivity {
     }
 
     for (let match of this.fullMatches) {
-      const matchedText = text.match(match.pattern)
+      const matchedText = typeof match.pattern === 'function' ? match.pattern(text) : text.match(match.pattern)
       if (matchedText) {
         // eslint-disable-next-line no-return-await
         return await match.action(text, selection, match.pattern, lineStart)

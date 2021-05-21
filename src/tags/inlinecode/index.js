@@ -6,7 +6,7 @@ class inlineCode extends AbstractTag {
     super()
     this.quillJS = quillJS
     this.name = 'code'
-    this.pattern = this._getCustomPatternOrDefault(options, this.name, /(`){1}(.+?)(`){1}/g)
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, (value) => { return /(`){1}(.+)(`){1}/g.test(value) && !(/```.*/.test(value)) ? value : null })
     this.getAction.bind(this)
     this._meta = meta()
     this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
@@ -17,8 +17,7 @@ class inlineCode extends AbstractTag {
       name: this.name,
       pattern: this.pattern,
       action: (text, selection, pattern, lineStart) => new Promise((resolve) => {
-        let match = pattern.exec(text)
-
+        let match = /(`){1}(.+)(`){1}/g.exec(text)
         if (!match || !this.activeTags.length) {
           resolve(false)
           return
@@ -31,7 +30,7 @@ class inlineCode extends AbstractTag {
           setTimeout(() => {
             const message = annotatedText.replace(/`/g, '')
             this.quillJS.insertText(startIndex, message, { code: true })
-            this.quillJS.insertText(startIndex + message.length, '', { code: false })
+            this.quillJS.insertText(startIndex + message.length, ' ', { code: false })
             resolve(true)
           }, 0)
         }, 0)
