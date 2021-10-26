@@ -100,7 +100,7 @@ class MarkdownActivity {
     const text = line.domNode.textContent
     const lineStart = selection.index - offset
     const format = this.quillJS.getFormat(lineStart)
-    if (format['code-block']) {
+    if (format['code-block'] || format['code']) {
       // if exists text in code-block, to skip.
       return
     }
@@ -121,7 +121,7 @@ class MarkdownActivity {
     if (!line || offset < 0) return false
     const lineStart = selection.index - offset
     const format = this.quillJS.getFormat(lineStart)
-    if (format['code-block']) {
+    if (format['code-block'] || format['code']) {
       // if exists text in code-block, to skip.
       return false
     }
