@@ -1,11 +1,11 @@
 {
   "name": "quilljs-markdown",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Markdown for Quill Editor",
   "main": "index.js",
   "scripts": {
     "clean": "node_modules/.bin/rimraf ./dist",
-    "watch": "parcel ./docs/index.html",
+    "watch": "parcel serve ./docs/index.html",
     "build": "npm-run-all clean fix:checkstyle build:* docs-build:*",
     "build:module": "webpack --config webpack.config.js",
     "build:css": "parcel build ./quilljs-markdown-common-style.scss",
