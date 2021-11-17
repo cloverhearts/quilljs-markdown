@@ -37,7 +37,6 @@ class MarkdownActivity {
     }
 
     if (!inputText) return
-
     if (inputText.length > 1) {
       setTimeout(async () => {
         const cursorOffsetFixed = cursorOffset
@@ -51,7 +50,7 @@ class MarkdownActivity {
           }
           const firstIndex = this.quillJS.getIndex(line)
           let _targetText = ''
-          let result = await this.onFullTextExecute.bind(this)({ index: firstIndex, length: 0 })
+          let result = await this.onFullTextExecute.bind(this)({ index: firstIndex, delta, length: 0 })
 
           if (result) {
             while (result) {
@@ -63,7 +62,7 @@ class MarkdownActivity {
               }
 
               _targetText = line.domNode.textContent || ''
-              result = await this.onFullTextExecute.bind(this)({ index: firstIndex, length: 0 })
+              result = await this.onFullTextExecute.bind(this)({ index: firstIndex, delta, length: 0 })
             }
           } else {
             _targetText = line.domNode.textContent || ''
@@ -115,14 +114,25 @@ class MarkdownActivity {
 
   async onFullTextExecute (virtualSelection) {
     let selection = virtualSelection || this.quillJS.getSelection()
+    const delta = virtualSelection.delta
     if (!selection) return false
     const [line, offset] = this.quillJS.getLine(selection.index)
 
     if (!line || offset < 0) return false
+    const retain = (delta && delta.ops && delta.ops[0].retain) || 0
     const lineStart = selection.index - offset
-    const format = this.quillJS.getFormat(lineStart)
+    const formatLineStart = retain ? retain - 1 : lineStart
+    const format = this.quillJS.getFormat(formatLineStart)
     if (format['code-block'] || format['code']) {
       // if exists text in code-block, to skip.
+
+      if (format['code']) {
+        // ignore all styles when copied text in code block.
+        const copiedTexts = delta.ops.filter(d => d.insert).map(d => d.insert).join('')
+        this.quillJS.deleteText(retain, copiedTexts.length)
+        this.quillJS.insertText(retain, copiedTexts.replace(/\n/g, ''), { code: true })
+        this.quillJS.format('code', false)
+      }
       return false
     }
     const beforeNode = this.quillJS.getLine(lineStart - 1)[0]
