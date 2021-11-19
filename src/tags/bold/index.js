@@ -18,7 +18,6 @@ class Bold extends AbstractTag {
       pattern: this.pattern,
       action: (text, selection, pattern, lineStart) => new Promise((resolve) => {
         let match = pattern.exec(text)
-
         const [annotatedText, , matchedText] = match
         const startIndex = lineStart + match.index
         if (text.match(/^([*_ \n]+)$/g) || !this.activeTags.length) {
