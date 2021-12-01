@@ -3,85 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>quilljs-markdown</title>
-  <meta name="keywords" content="quill, markdown, quilljs, editor, simple"/>
-  <meta name="description" content="markdown extension for quill editor"/>
+  <meta name="keywords" content="quill, markdown, quilljs, editor, simple">
+  <meta name="description" content="markdown extension for quill editor">
   <meta name="subject" content="quilljs-markdown">
-  <meta name="copyright"content="MIT">
+  <meta name="copyright" content="MIT">
   <meta name="language" content="en">
   <meta name="summary" content="open source, markdown extension for quill editor">
-  <meta name="google-site-verification" content="lNpyIBBVvsIatDauJyTfU6q2VtxEMP8npAGigr3gj4Q" />
+  <meta name="google-site-verification" content="lNpyIBBVvsIatDauJyTfU6q2VtxEMP8npAGigr3gj4Q">
   <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
-  <script src="./bundle/demojs.js"></script>
+  <script src="/demojs.62ca54a7.js"></script>
 <!--  <script src="./demo.js"></script>-->
   <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kotton-css@1.0.1/dist/kotton-style.min.css">
-  <link rel="stylesheet" href="../quilljs-markdown-common-style.scss" />
+  <link rel="stylesheet" href="/quilljs-markdown-common-style.c041a5ac.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/codemirror.min.js" integrity="sha512-M1DpFDDFHNgGdgVsSkTP1sjfWC7mQFJM3obQo8gyKHbZmbmr95Kl9wPYa5T70BFQBi0+/TlcG6IZDLowJCbKBQ==" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/theme/duotone-light.min.css" integrity="sha512-xf8h6rqzUr4ZJBR/GKic+RSPJUHjPF1cFe6kGi5vgrTbcqIaRd4VaeniV/d8oM7ln5tSIV7KrQ5DxdeYO6zeCg==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/theme/duotone-light.min.css" integrity="sha512-xf8h6rqzUr4ZJBR/GKic+RSPJUHjPF1cFe6kGi5vgrTbcqIaRd4VaeniV/d8oM7ln5tSIV7KrQ5DxdeYO6zeCg==" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/mode/javascript/javascript.min.js" integrity="sha512-+tn2IYnLwD2J9p6Nrn/Dl7ag9lluHA0GAblT/vnMiJV8DU/iDsldgf+9XbEqZUee2ThyDtfmSDb+IDZ9u7jrSA==" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/mode/xml/xml.min.js" integrity="sha512-XPih7uxiYsO+igRn/NA2A56REKF3igCp5t0W1yYhddwHsk70rN1bbbMzYkxrvjQ6uk+W3m+qExHIJlFzE6m5eg==" crossorigin="anonymous"></script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      CodeMirror(document.querySelector('#samplecode-js'), {
-        value: `
-import Quill from 'quill'
-import QuillMarkdown from 'quilljs-markdown'
-import 'quilljs-markdown/dist/quilljs-markdown-common-style.css' // recommend import css, @option improve common style
-
-const options = {
-  theme: 'snow'
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const editor = new Quill('#editor', options)
-  const markdownOptions = {
-    /**
-     ignoreTags: [ 'pre', 'strikethrough'], // @option - if you need to ignore some tags.
-
-     tags: { // @option if you need to change for trigger pattern for some tags.
-      blockquote: {
-        pattern: /^(\\|){1,6}\\s/g,
-      },
-      bold: {
-        pattern:  /^(\\|){1,6}\\s/g,
-      },
-      italic: {
-        pattern: /(\\_){1}(.+?)(?:\\1){1}/g,
-      },
-    },
-    */
-  };
-  new QuillMarkdown(editor, markdownOptions)
-})
-        `,
-        mode:  "javascript",
-        theme: "duotone-light"
-      });
-
-
-      CodeMirror(document.querySelector('#samplecode-html'), {
-        value: `
-<script src="https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown.js"><script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown-common-style.css" />
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    var quill = new Quill('#editor', {
-    theme: 'snow'
+  <script>document.addEventListener('DOMContentLoaded', function () {
+  CodeMirror(document.querySelector('#samplecode-js'), {
+    value: "\nimport Quill from 'quill'\nimport QuillMarkdown from 'quilljs-markdown'\nimport 'quilljs-markdown/dist/quilljs-markdown-common-style.css' // recommend import css, @option improve common style\n\nconst options = {\n  theme: 'snow'\n}\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const editor = new Quill('#editor', options)\n  const markdownOptions = {\n    /**\n     ignoreTags: [ 'pre', 'strikethrough'], // @option - if you need to ignore some tags.\n\n     tags: { // @option if you need to change for trigger pattern for some tags.\n      blockquote: {\n        pattern: /^(\\|){1,6}\\s/g,\n      },\n      bold: {\n        pattern:  /^(\\|){1,6}\\s/g,\n      },\n      italic: {\n        pattern: /(\\_){1}(.+?)(?:\\1){1}/g,\n      },\n    },\n    */\n  };\n  new QuillMarkdown(editor, markdownOptions)\n})\n        ",
+    mode: "javascript",
+    theme: "duotone-light"
   });
-  new QuillMarkdown(editor)
-})
-<script>
-        `,
-        mode:  "xml",
-        theme: "duotone-light"
-      })
-    })
-  </script>
+  CodeMirror(document.querySelector('#samplecode-html'), {
+    value: "\n<script src=\"https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown.js\"><script>\n<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown-common-style.css\" />\n<script>\n  document.addEventListener('DOMContentLoaded', () => {\n    var quill = new Quill('#editor', {\n    theme: 'snow'\n  });\n  new QuillMarkdown(editor)\n})\n<script>\n        ",
+    mode: "xml",
+    theme: "duotone-light"
+  });
+});</script>
 
-  <style>
-    main {
+  <style>main {
       display: block;
       max-width: 80%;
       margin: 0 auto;
@@ -130,10 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
       margin-left: 2rem;
       margin-bottom: 3rem;
       font-size: 0.9rem;
-    }
-
-  </style>
-</head>
+    }</style>
+<script src="/quilljs-markdown-common-style.c041a5ac.js"></script></head>
 <body>
 <!-- Create the editor container -->
   <main>
@@ -176,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>HTML</h3>
       </div>
       <div id="samplecode-html"></div>
-      </section>
+      
       <header>
         <h2>Feature</h2>
       </header>

@@ -6,7 +6,7 @@ class Bold extends AbstractTag {
     super()
     this.quillJS = quillJS
     this.name = 'italic'
-    this.pattern = this._getCustomPatternOrDefault(options, this.name, /(?:^|(?<=\s))(?:(\*|_)\s*(?<text1>[^*_]+)\s*?\1|(\*|_){3}\s*(?<text3>[^*_]*)\s*\1{3})(?:$|(?=\s))/g)
+    this.pattern = this._getCustomPatternOrDefault(options, this.name, /(?:^|\s)(?:(\*|_)\s*(?<text1>[^*_]+)\s*?\1|(\*|_){3}\s*(?<text3>[^*_]*)\s*\1{3})(?:$|(?=\s))/g)
     this.getAction.bind(this)
     this._meta = meta()
     this.activeTags = this._getActiveTagsWithoutIgnore(this._meta.applyHtmlTags, options.ignoreTags)
@@ -36,8 +36,11 @@ class Bold extends AbstractTag {
         const startIndex = lineStart + match.index
 
         setTimeout(() => {
-          this.quillJS.deleteText(startIndex, annotatedText.length)
-          this.quillJS.insertText(startIndex, matchedText, { italic: true })
+          const isFirstLine = !match.index
+          const adjustPosition = isFirstLine ? startIndex : startIndex + 1
+          const deleteEndOffset = isFirstLine ? annotatedText.length : annotatedText.length - 1
+          this.quillJS.deleteText(adjustPosition, deleteEndOffset)
+          this.quillJS.insertText(adjustPosition, matchedText, { italic: true })
           this.quillJS.format('italic', false)
           resolve(true)
         }, 0)
