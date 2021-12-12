@@ -52,7 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     */
   };
-  new QuillMarkdown(editor, markdownOptions)
+  
+  // markdown is enabled
+  const quillMarkdown = new QuillMarkdown(editor, markdownOptions)
+  
+  // markdown is now disabled  
+  // quillMarkdown.destroy()
+  
 })
 
 
@@ -92,6 +98,22 @@ or
 <script>
 
 ```
+
+## destroy
+Call `destroy()` to remove the event listener and disable markdown support:
+
+```
+const quillMarkdown = new QuillMarkdown(editor, markdownOptions)
+// markdown is enabled
+
+quillMarkdown.destroy()
+// markdown is now disabled
+
+```
+
+To re-enable support, create a new instance.
+
+
 ### Paste support for Markdown format.
 Pasting the Markdown form,
 

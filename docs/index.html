@@ -53,7 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     */
   };
-  new QuillMarkdown(editor, markdownOptions)
+
+  // markdown is enabled
+  const quillMarkdown = new QuillMarkdown(editor, markdownOptions)
+
+  // markdown is now disabled
+  // quillMarkdown.destroy()
 })
         `,
         mode:  "javascript",
@@ -77,6 +82,19 @@ document.addEventListener('DOMContentLoaded', () => {
         mode:  "xml",
         theme: "duotone-light"
       })
+
+      CodeMirror(document.querySelector('#samplecode-destroy'), {
+        value: `
+const editor = new Quill('#editor', options)
+const quillMarkdown = new QuillMarkdown(editor, markdownOptions)
+// markdown is enabled
+
+quillMarkdown.destroy()
+// markdown is now disabled
+        `,
+        mode:  "javascript",
+        theme: "duotone-light"
+      })
     })
   </script>
 
@@ -85,6 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
       display: block;
       max-width: 80%;
       margin: 0 auto;
+    }
+
+    p em {
+      background: rgba(225, 105, 180, .2);
+      font-weight: 600;
     }
 
     main > h1, .description, .badges  {
@@ -96,9 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     #samplecode-js .CodeMirror {
-      height: 500px;
+      height: 550px;
     }
 
+    #samplecode-destroy .CodeMirror {
+      height: 150px;
+    }
     #samplecode-html .CodeMirror {
       height: 200px;
     }
@@ -171,6 +197,17 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>Javascript</h3>
       </div>
       <div id="samplecode-js"></div>
+
+      <div>
+        <h4>Destroy</h4>
+      </div>
+      <div>
+        <p>Call <em>destroy()</em> to remove the event listener and disable markdown support:</p>
+        <div id="samplecode-destroy"></div>
+        <p>
+          To re-enable support, create a new instance.
+        </p>
+      </div>
 
       <div>
         <h3>HTML</h3>
