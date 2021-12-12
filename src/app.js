@@ -6,7 +6,8 @@ class MarkdownActivity {
   constructor (quillJS, options = {}) {
     this.quillJS = quillJS
     this.options = options
-    this.quillJS.on('text-change', this.onTextChange.bind(this))
+    this.onTextChangeBound = this.onTextChange.bind(this)
+    this.quillJS.on('text-change', this.onTextChangeBound)
     this.actionCharacters = {
       whiteSpace: ' ',
       newLine: '\n',
@@ -20,6 +21,10 @@ class MarkdownActivity {
     this.tags = new TagsOperators(this.quillJS, options)
     this.matches = this.tags.getOperatorsAll()
     this.fullMatches = this.tags.getFullTextOperatorsAll()
+  }
+
+  destroy () {
+    this.quillJS.off('text-change', this.onTextChangeBound)
   }
 
   onTextChange (delta, oldContents, source) {
