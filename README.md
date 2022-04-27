@@ -19,7 +19,7 @@ or
 
 ### CDN
 ```
-<script src="https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown.js"><script>
+<script src="https://cdn.jsdelivr.net/npm/quilljs-markdown@latest/dist/quilljs-markdown.js"></script>
 ```
 
 
