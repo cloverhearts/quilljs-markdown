@@ -1,5 +1,5 @@
-import AbstractTag from '../AbstractTag'
-import meta from './meta'
+import AbstractTag from '../AbstractTag.js'
+import meta from './meta.js'
 
 class Bold extends AbstractTag {
   constructor (quillJS, options = {}) {
