@@ -12,7 +12,7 @@
   <meta name="google-site-verification" content="lNpyIBBVvsIatDauJyTfU6q2VtxEMP8npAGigr3gj4Q" />
   <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
   <script src="./bundle/demojs.js"></script>
-<!--  <script src="./demo.js"></script>-->
+ <!-- <script src="./demo.js"></script> -->
   <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kotton-css@1.0.1/dist/kotton-style.min.css">
   <link rel="stylesheet" href="../quilljs-markdown-common-style.scss" />
@@ -60,6 +60,39 @@ document.addEventListener('DOMContentLoaded', () => {
   // markdown is now disabled
   // quillMarkdown.destroy()
 })
+        `,
+        mode:  "javascript",
+        theme: "duotone-light"
+      });
+
+      
+
+      CodeMirror(document.querySelector('#samplecode-standard'), {
+        value: `
+import Quill from 'quill'
+import QuillMarkdown from '../src/app'
+
+const toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],
+  [ 'link', 'image'],          // add's image support
+];
+
+const options = {
+  theme: 'snow',
+  modules: {
+    toolbar: toolbarOptions,
+    QuillMarkdown: { /** option **/ }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('HOHO')
+
+  Quill.register('modules/QuillMarkdown', QuillMarkdown, true)
+
+  new Quill('#editor', options)
+})
+
         `,
         mode:  "javascript",
         theme: "duotone-light"
@@ -197,6 +230,13 @@ quillMarkdown.destroy()
         <h3>Javascript</h3>
       </div>
       <div id="samplecode-js"></div>
+
+      <div>
+        <h4>Javascript 2 (Enable to Standard style for Quilljs)</h4>
+      </div>
+      <div>
+        <div id="samplecode-standard"></div>
+      </div>
 
       <div>
         <h4>Destroy</h4>
