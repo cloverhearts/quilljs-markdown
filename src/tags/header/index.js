@@ -1,5 +1,5 @@
-import meta from './meta'
-import AbstractTag from '../AbstractTag'
+import meta from './meta.js'
+import AbstractTag from '../AbstractTag.js'
 
 class Header extends AbstractTag {
   constructor (quillJS, options = {}) {

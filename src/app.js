@@ -1,6 +1,6 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
-import TagsOperators from './tags'
+import TagsOperators from './tags/index.js'
 
 class MarkdownActivity {
   constructor (quillJS, options = {}) {
