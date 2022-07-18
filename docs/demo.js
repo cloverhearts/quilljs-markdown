@@ -12,7 +12,6 @@ const options = {
     toolbar: toolbarOptions,
     QuillMarkdown: {
        ignoreTags: [ 'pre', 'strikethrough'], // @option - if you need to ignore some tags.
-       
        tags: { // @option if you need to change for trigger pattern for some tags. 
         blockquote: {
           pattern: /^(\|){1,6}\s/g,
@@ -29,7 +28,6 @@ const options = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('HOHO')
 
   Quill.register('modules/QuillMarkdown', QuillMarkdown, true)
 

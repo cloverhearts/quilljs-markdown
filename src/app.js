@@ -1,3 +1,5 @@
+import 'regenerator-runtime'
+
 import TagsOperators from './tags/index.js'
 
 class MarkdownActivity {
