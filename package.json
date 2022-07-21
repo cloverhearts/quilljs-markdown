@@ -1,6 +1,6 @@
 {
   "name": "quilljs-markdown",
-  "version": "1.1.11",
+  "version": "1.2.0",
   "description": "Markdown for Quill Editor",
   "main": "index.js",
   "type": "module",
